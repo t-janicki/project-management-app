@@ -7,6 +7,7 @@ import reorder, {reorderQuoteMap} from './reorder';
 import * as Actions from './index';
 import ListModel from '../../model/ListModel';
 import CardModel from '../../model/CardModel';
+import {GET_BOARD_API, NEW_BOARD_LIST, BOARD_API} from "../../../../../apiURL";
 
 export const GET_BOARD = '[SCRUMBOARD APP] GET BOARD';
 export const DELETE_BOARD = '[SCRUMBOARD APP] DELETE BOARD';
@@ -22,23 +23,25 @@ export const ADD_LABEL = '[SCRUMBOARD APP] ADD LABEL';
 export const RENAME_LIST = '[SCRUMBOARD APP] RENAME LIST';
 export const REMOVE_LIST = '[SCRUMBOARD APP] REMOVE LIST';
 
-export function getBoard(params)
-{
-    const request = axios.get('/api/scrumboard-app/board', {params});
+export function getBoard(params) {
+
+    const {boardId} = params;
+// GET_BOARD_API + boardId
+    const request = axios.get(GET_BOARD_API + boardId);
 
     return (dispatch) =>
         request.then(
             (response) =>
                 dispatch({
-                    type   : GET_BOARD,
+                    type: GET_BOARD,
                     payload: response.data
                 }),
             (error) => {
                 dispatch(showMessage({
-                    message         : error.response.data,
+                    message: error.response.data,
                     autoHideDuration: 2000,
-                    anchorOrigin    : {
-                        vertical  : 'top',
+                    anchorOrigin: {
+                        vertical: 'top',
                         horizontal: 'right'
                     }
                 }));
@@ -48,15 +51,13 @@ export function getBoard(params)
             });
 }
 
-export function resetBoard()
-{
+export function resetBoard() {
     return {
         type: RESET_BOARD
     };
 }
 
-export function reorderList(result)
-{
+export function reorderList(result) {
     return (dispatch, getState) => {
 
         const {board} = getState().scrumboardApp;
@@ -71,30 +72,29 @@ export function reorderList(result)
         const request = axios.post('/api/scrumboard-app/list/order',
             {
                 boardId: board.id,
-                lists  : ordered
+                lists: ordered
             }
         );
 
         request.then((response) => {
             dispatch(showMessage({
-                message         : 'List Order Saved',
+                message: 'List Order Saved',
                 autoHideDuration: 2000,
-                anchorOrigin    : {
-                    vertical  : 'top',
+                anchorOrigin: {
+                    vertical: 'top',
                     horizontal: 'right'
                 }
             }));
         });
 
         return dispatch({
-            type   : ORDER_LIST,
+            type: ORDER_LIST,
             payload: ordered
         });
     }
 }
 
-export function reorderCard(result)
-{
+export function reorderCard(result) {
     return (dispatch, getState) => {
 
         const {board} = getState().scrumboardApp;
@@ -109,74 +109,63 @@ export function reorderCard(result)
         const request = axios.post('/api/scrumboard-app/card/order',
             {
                 boardId: board.id,
-                lists  : ordered
+                lists: ordered
             }
         );
 
         request.then((response) => {
             dispatch(showMessage({
-                message         : 'Card Order Saved',
+                message: 'Card Order Saved',
                 autoHideDuration: 2000,
-                anchorOrigin    : {
-                    vertical  : 'top',
+                anchorOrigin: {
+                    vertical: 'top',
                     horizontal: 'right'
                 }
             }));
         });
 
         return dispatch({
-            type   : ORDER_CARD,
+            type: ORDER_CARD,
             payload: ordered
         });
     }
 }
 
-export function newCard(boardId, listId, cardTitle)
-{
-    const data = new CardModel({name: cardTitle});
+export function newCard(boardId, listId, cardTitle) {
+    return (dispatch, getState) => {
 
-    const request = axios.post('/api/scrumboard-app/card/new',
-        {
-            boardId,
-            listId,
-            data
-        }
-    );
-    return (dispatch) =>
-        new Promise((resolve, reject) => {
+        const {routeParams} = getState().scrumboardApp.board;
+
+        const request = axios.post(`${BOARD_API}/${boardId}/list/${listId}/cardTitle=${cardTitle}`, {routeParams});
+
+        return new Promise((resolve, reject) => {
             request.then((response) => {
                 resolve(response.data);
+                console.log(response);
                 return dispatch({
-                    type   : ADD_CARD,
+                    type: ADD_CARD,
                     payload: response.data
                 });
-            });
-        });
+            })
+        })
+    }
 }
 
 
-export function newList(boardId, listTitle)
-{
-    const data = new ListModel({name: listTitle});
+export function newList(boardId, listTitle) {
 
-    const request = axios.post('/api/scrumboard-app/list/new',
-        {
-            boardId,
-            data
-        }
-    );
+    const request = axios.post(NEW_BOARD_LIST + boardId + '/list/' + listTitle);
 
     return (dispatch) =>
         request.then((response) =>
             dispatch({
-                type   : ADD_LIST,
+                type: ADD_LIST,
                 payload: response.data
             })
         );
 }
 
-export function renameList(boardId, listId, listTitle)
-{
+export function renameList(boardId, listId, listTitle) {
     const request = axios.post('/api/scrumboard-app/list/rename',
         {
             boardId,
@@ -195,8 +184,7 @@ export function renameList(boardId, listId, listTitle)
         );
 }
 
-export function removeList(boardId, listId)
-{
+export function removeList(boardId, listId) {
     const request = axios.post('/api/scrumboard-app/list/remove',
         {
             boardId,
@@ -213,18 +201,16 @@ export function removeList(boardId, listId)
         );
 }
 
-export function addLabel(label)
-{
+export function addLabel(label) {
     return (dispatch) => {
         return dispatch({
-            type   : ADD_LABEL,
+            type: ADD_LABEL,
             payload: label
         })
     }
 }
 
-export function changeBoardSettings(newSettings)
-{
+export function changeBoardSettings(newSettings) {
     return (dispatch, getState) => {
         const {board} = getState().scrumboardApp;
         const settings = _.merge(board.settings, newSettings);
@@ -237,15 +223,14 @@ export function changeBoardSettings(newSettings)
 
         return request.then((response) =>
             dispatch({
-                type   : CHANGE_BOARD_SETTINGS,
+                type: CHANGE_BOARD_SETTINGS,
                 payload: response.data
             })
         );
     }
 }
 
-export function deleteBoard(boardId)
-{
+export function deleteBoard(boardId) {
     const request = axios.post('/api/scrumboard-app/board/delete',
         {
             boardId
@@ -265,12 +250,11 @@ export function deleteBoard(boardId)
         })
 }
 
-export function copyBoard(board)
-{
+export function copyBoard(board) {
     const newBoard = _.merge(board, {
-        id  : FuseUtils.generateGUID(),
+        id: FuseUtils.generateGUID(),
         name: board.name + ' (Copied)',
-        uri : board.uri + '-copied'
+        uri: board.uri + '-copied'
     });
     return (dispatch) => {
         dispatch(Actions.newBoard());
@@ -278,8 +262,7 @@ export function copyBoard(board)
     }
 }
 
-export function renameBoard(boardId, boardTitle)
-{
+export function renameBoard(boardId, boardTitle) {
     const request = axios.post('/api/scrumboard-app/board/rename',
         {
             boardId,

@@ -4,8 +4,7 @@ import * as Actions from '../store/actions';
 import {useForm} from '@fuse/hooks';
 import {useDispatch, useSelector} from 'react-redux';
 
-function BoardAddCard(props)
-{
+function BoardAddCard(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
 
@@ -15,24 +14,20 @@ function BoardAddCard(props)
     });
 
     useEffect(() => {
-        if ( !formOpen )
-        {
+        if (!formOpen) {
             resetForm();
         }
     }, [formOpen, resetForm]);
 
-    function handleOpenForm()
-    {
+    function handleOpenForm() {
         setFormOpen(true);
     }
 
-    function handleCloseForm()
-    {
+    function handleCloseForm() {
         setFormOpen(false);
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
         dispatch(Actions.newCard(board.id, props.listId, form.title))
             .then(() => {
@@ -41,8 +36,7 @@ function BoardAddCard(props)
         handleCloseForm();
     }
 
-    function isFormInvalid()
-    {
+    function isFormInvalid() {
         return form.title.length === 0;
     }
 
@@ -90,7 +84,7 @@ function BoardAddCard(props)
                 <Button
                     onClick={handleOpenForm}
                     classes={{
-                        root : "normal-case font-600 w-full rounded-none h-48",
+                        root: "normal-case font-600 w-full rounded-none h-48",
                         label: "justify-start"
                     }}
                 >

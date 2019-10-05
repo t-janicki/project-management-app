@@ -20,10 +20,13 @@ function BoardCard(props)
 {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
-
+    console.log(board)
     const classes = useStyles(props);
     const {cardId, index} = props;
-    const card = _.find(board.cards, {id: cardId});
+    // const card = _.find(board.cards, {id: id});
+    const card = board.cards.find(x => x.id == cardId);
+    // console.log(board.cards.find(x => x.id === cardId))
+    console.log(card);
     const checkItemsChecked = getCheckItemsChecked(card);
     const checkItems = getCheckItems(card);
     const commentsCount = getCommentsCount(card);

@@ -10,20 +10,18 @@ import BoardListHeader from './BoardListHeader';
 
 const useStyles = makeStyles(theme => ({
     list: {
-        backgroundColor         : darken(theme.palette.background.default, theme.palette.type === 'light' ? 0.02 : .4),
-        transitionProperty      : 'box-shadow',
-        transitionDuration      : theme.transitions.duration.short,
+        backgroundColor: darken(theme.palette.background.default, theme.palette.type === 'light' ? 0.02 : .4),
+        transitionProperty: 'box-shadow',
+        transitionDuration: theme.transitions.duration.short,
         transitionTimingFunction: theme.transitions.easing.easeInOut
     }
 }));
 
-function BoardList(props)
-{
+function BoardList(props) {
     const classes = useStyles(props);
     const contentScrollEl = useRef(null);
 
-    function handleCardAdded()
-    {
+    function handleCardAdded() {
         contentScrollEl.current.scrollTop = contentScrollEl.current.scrollHeight;
     }
 
@@ -47,7 +45,8 @@ function BoardList(props)
                         />
 
                         <RootRef rootRef={contentScrollEl}>
-                            <CardContent className="flex flex-col flex-1 flex-auto h-full min-h-0 w-full p-0 overflow-auto">
+                            <CardContent
+                                className="flex flex-col flex-1 flex-auto h-full min-h-0 w-full p-0 overflow-auto">
                                 <Droppable
                                     droppableId={props.list.id}
                                     type="card"
