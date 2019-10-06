@@ -227,11 +227,12 @@ function BoardCardForm(props)
                                 className={cardForm.idMembers.length > 0 && 'sm:mr-8'}
                                 value={
                                     cardForm.idLabels.map(labelId => {
-                                        const label = _.find(board.labels, {id: labelId});
+                                        // const label = _.find(board.labels, {id: labelId});
+                                        const label = board.labels.find(v => v.id == labelId);
                                         return label && {
                                             value: labelId,
                                             label: label.name,
-                                            class: label.class
+                                            class: label.className
                                         }
                                     })
                                 }
@@ -245,7 +246,7 @@ function BoardCardForm(props)
                                     {
                                         value: label.id,
                                         label: label.name,
-                                        class: label.class
+                                        class: label.className
                                     }
                                 ))}
                                 onCreateOption={(name) => {

@@ -6,8 +6,9 @@ class LabelModel {
         const label = data ? data : {};
 
         // this.id = label.id || FuseUtils.generateGUID();
+        this.id = label.id;
         this.name = label.name || '';
-        this.class = label.class || 'bg-blue text-white';
+        this.className = label.className;
     }
 }
 

@@ -73,10 +73,12 @@ function BoardCard(props)
                             {card.idLabels.length > 0 && (
                                 <div className="flex flex-wrap mb-8">
                                     {card.idLabels.map(id => {
-                                        const label = _.find(board.labels, {id});
+                                        // const label = _.find(board.labels, {id});
+                                        const label = board.labels.find(v => v.id == id);
+
                                         return (
                                             <Tooltip title={label.name} key={id}>
-                                                <div className={clsx(label.class, "w-32  h-6 rounded-6 mr-6 mb-6")}/>
+                                                <div className={clsx(label.className, "w-32  h-6 rounded-6 mr-6 mb-6")}/>
                                             </Tooltip>
                                         );
                                     })}

@@ -6,6 +6,7 @@ class CardModel {
         const card = data ? data : {};
 
         // this.id = card.id || FuseUtils.generateGUID();
+        this.id = card.id;
         this.name = card.name || '';
         this.description = card.description || '';
         this.idAttachmentCover = card.idAttachmentCover || '';
