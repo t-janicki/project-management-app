@@ -53,7 +53,7 @@ class BoardModel {
 
         this.name = board.name || 'Untitled Board';
         this.uri = board.uri || 'untitled-board';
-        this.id = board.id || FuseUtils.generateGUID();
+        // this.id = board.id || FuseUtils.generateGUID();
         this.settings = board.settings || {
             color          : '',
             subscribed     : true,

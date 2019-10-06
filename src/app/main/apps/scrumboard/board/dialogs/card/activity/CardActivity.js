@@ -3,6 +3,7 @@ import {Avatar, ListItem, Typography} from '@material-ui/core';
 import clsx from 'clsx';
 import _ from '@lodash';
 import {makeStyles} from '@material-ui/styles';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     commentBubble: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 function CardActivity(props)
 {
     const classes = useStyles(props);
-    const user = _.find(props.members, {id: props.item.idMember});
+    const user = useSelector(({auth}) => auth.user.userInfo);
 
     switch ( props.item.type )
     {

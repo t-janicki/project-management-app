@@ -322,6 +322,7 @@ function BoardCardForm(props)
                 )}
 
                 {cardForm.checklists.map((checklist, index) => (
+                    console.log(checklist),
                     <CardChecklist
                         key={checklist.id}
                         checklist={checklist}

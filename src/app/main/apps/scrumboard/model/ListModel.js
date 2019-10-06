@@ -5,7 +5,7 @@ class ListModel {
     {
         const list = data ? data : {};
 
-        this.id = list.id || FuseUtils.generateGUID();
+        // this.id = list.id || FuseUtils.generateGUID();
         this.name = list.name || '';
         this.idCards = [];
     }

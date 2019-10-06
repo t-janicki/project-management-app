@@ -5,7 +5,7 @@ class ChecklistModel {
     {
         const item = data ? data : {};
 
-        this.id = item.id || FuseUtils.generateGUID();
+        // this.id = item.id || FuseUtils.generateGUID();
         this.name = item.name || '';
         this.checkItems = item.checkItems || [];
     }

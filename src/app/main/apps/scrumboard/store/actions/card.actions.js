@@ -1,54 +1,62 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions/fuse';
+import {BOARD_API} from "../../../../../apiURL";
 
 export const OPEN_CARD_DIALOG = '[SCRUMBOARD APP] OPEN CARD DIALOG';
 export const CLOSE_CARD_DIALOG = '[SCRUMBOARD APP] CLOSE CARD DIALOG';
 export const UPDATE_CARD = '[SCRUMBOARD APP] UPDATE CARD';
 export const REMOVE_CARD = '[SCRUMBOARD APP] REMOVE CARD';
 
-export function openCardDialog(data)
-{
+export function openCardDialog(data) {
     return {
-        type   : OPEN_CARD_DIALOG,
+        type: OPEN_CARD_DIALOG,
         payload: data
     }
 }
 
-export function closeCardDialog()
-{
+export function closeCardDialog() {
     return {
         type: CLOSE_CARD_DIALOG
     }
 }
 
-export function updateCard(boardId, card)
-{
+export function updateCard(boardId, card) {
     return (dispatch) => {
-        const request = axios.post('/api/scrumboard-app/card/update', {
-            boardId,
-            card
-        });
 
+        const {
+            id, name, description, dueDate, idAttachmentCover,
+            idMembers, idLabels, subscribed, attachments,
+            checklists, activities
+        } = card;
+
+        // const {routeParams} = getState().scrumboardApp.board;
+
+        console.log(card)
+        const request = axios.post(BOARD_API + '/test', {
+            id, name, description, dueDate, idAttachmentCover,
+            idMembers, idLabels, subscribed, attachments,
+            checklists, activities
+        });
+        console.log(request)
         return request.then((response) => {
             dispatch(showMessage({
-                message         : 'Card Saved',
+                message: 'Card Saved',
                 autoHideDuration: 2000,
-                anchorOrigin    : {
-                    vertical  : 'top',
+                anchorOrigin: {
+                    vertical: 'top',
                     horizontal: 'right'
                 }
             }));
 
             return dispatch({
-                type   : UPDATE_CARD,
+                type: UPDATE_CARD,
                 payload: card
             })
         });
     }
 }
 
-export function removeCard(boardId, cardId)
-{
+export function removeCard(boardId, cardId) {
     return (dispatch) => {
         const request = axios.post('/api/scrumboard-app/card/remove', {
             boardId,

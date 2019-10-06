@@ -23,7 +23,7 @@ function CardAddChecklistItem(props)
         {
             return;
         }
-        props.onListItemAdd(new ChecklistItemModel(form));
+        // props.onListItemAdd(new ChecklistItemModel(form));
         resetForm();
     }
 
