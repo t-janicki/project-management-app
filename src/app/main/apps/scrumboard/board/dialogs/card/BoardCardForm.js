@@ -27,7 +27,7 @@ function BoardCardForm(props)
     const updateCard = useDebounce((boardId, newCard) => {
         dispatch(Actions.updateCard(boardId, {...newCard}));
     }, 600);
-    const dueDate = cardForm && cardForm.due ? moment(cardForm.due).format(moment.HTML5_FMT.DATE) : "";
+    const dueDate = cardForm && cardForm.dueDate ? moment(cardForm.dueDate).format(moment.HTML5_FMT.DATE) : "";
 
     useUpdateEffect(() => {
         updateCard(board.id, cardForm);
@@ -35,7 +35,7 @@ function BoardCardForm(props)
 
     function removeDue()
     {
-        setInForm('due', null);
+        setInForm('dueDate', null);
     }
 
     function toggleLabel(labelId)
@@ -108,7 +108,7 @@ function BoardCardForm(props)
                             <DueMenu
                                 onDueChange={handleChange}
                                 onRemoveDue={removeDue}
-                                due={dueDate}
+                                dueDate={dueDate}
                             />
 
                             <LabelsMenu
@@ -157,11 +157,11 @@ function BoardCardForm(props)
                         }, [board, card])}
                     </div>
 
-                    {cardForm.due && (
+                    {cardForm.dueDate && (
                         <TextField
                             label="Due date"
                             type="date"
-                            name="due"
+                            name="dueDate"
                             value={dueDate}
                             onChange={handleChange}
                             placeholder=" Choose a due date"

@@ -85,13 +85,13 @@ function BoardCard(props)
 
                             <Typography className="font-600 mb-12">{card.name}</Typography>
 
-                            {(card.due || checkItems > 0) && (
+                            {(card.dueDate || checkItems > 0) && (
                                 <div className="flex items-center mb-12">
-                                    {card.due && (
+                                    {card.dueDate && (
                                         <div
-                                            className={clsx("flex items-center px-8 py-4 mr-8 rounded-sm", moment() > moment(card.due) ? "bg-red text-white" : "bg-green text-white")}>
+                                            className={clsx("flex items-center px-8 py-4 mr-8 rounded-sm", moment() > moment(card.dueDate) ? "bg-red text-white" : "bg-green text-white")}>
                                             <Icon className="text-16 mr-4">access_time</Icon>
-                                            <span>{moment(card.due).format("MMM Do YY")}</span>
+                                            <span>{moment(card.dueDate).format("MMM Do YY")}</span>
                                         </div>
                                     )}
 

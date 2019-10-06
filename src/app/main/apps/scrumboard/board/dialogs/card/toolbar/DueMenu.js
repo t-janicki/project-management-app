@@ -6,7 +6,7 @@ import moment from 'moment';
 function DueMenu(props)
 {
     const [anchorEl, setAnchorEl] = useState(null);
-    const dueDate = props.due ? moment(props.due).format(moment.HTML5_FMT.DATE) : "";
+    const dueDate = props.dueDate ? moment(props.dueDate).format(moment.HTML5_FMT.DATE) : "";
 
     function handleMenuOpen(event)
     {
@@ -24,7 +24,7 @@ function DueMenu(props)
                 <Icon>today</Icon>
             </IconButton>
             <ToolbarMenu state={anchorEl} onClose={handleMenuClose}>
-                {props.due ? (
+                {props.dueDate ? (
                     <MenuItem
                         onClick={(ev) => {
                             props.onRemoveDue();
@@ -38,7 +38,7 @@ function DueMenu(props)
                         <TextField
                             label="Due date"
                             type="date"
-                            name="due"
+                            name="dueDate"
                             value={dueDate}
                             onChange={(ev) => {
                                 props.onDueChange(ev);
