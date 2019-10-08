@@ -1,13 +1,22 @@
 import React, {useState, useRef, useCallback} from 'react';
-import {Icon, Typography, Menu, MenuItem, LinearProgress, List, ListItemText, ListItemIcon, IconButton} from '@material-ui/core';
+import {
+    Icon,
+    Typography,
+    Menu,
+    MenuItem,
+    LinearProgress,
+    List,
+    ListItemText,
+    ListItemIcon,
+    IconButton
+} from '@material-ui/core';
 import CardChecklistItem from './CardChecklistItem';
 import CardAddChecklistItem from './CardAddChecklistItem';
 import _ from '@lodash';
 import {useForm, useUpdateEffect} from '@fuse/hooks';
 import CardChecklistName from './CardChecklistName';
 
-function CardChecklist(props)
-{
+function CardChecklist(props) {
     const {onCheckListChange, checklist, index} = props;
     const [anchorEl, setAnchorEl] = useState(null);
     const {form, setInForm} = useForm(checklist);
@@ -17,24 +26,20 @@ function CardChecklist(props)
         onCheckListChange(form, index);
     }, [form, index, onCheckListChange]);
 
-    function handleOpenNameForm()
-    {
+    function handleOpenNameForm() {
         handleMenuClose();
         checkListNameRef.current.openForm()
     }
 
-    function handleMenuOpen(event)
-    {
+    function handleMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
 
-    function handleMenuClose()
-    {
+    function handleMenuClose() {
         setAnchorEl(null);
     }
 
-    function handleNameChange(name)
-    {
+    function handleNameChange(name) {
         setInForm("name", name);
     }
 
@@ -42,23 +47,20 @@ function CardChecklist(props)
         setInForm(`checkItems[${index}]`, item);
     }, [setInForm]);
 
-    function handleListItemRemove(id)
-    {
+    function handleListItemRemove(id) {
         setInForm('checkItems', _.reject(form.checkItems, {id}));
     }
 
-    function checkItemsChecked()
-    {
+    function checkItemsChecked() {
         return _.sum(form.checkItems.map(x => (x.checked ? 1 : 0)));
     }
 
-    function handleListItemAdd(item)
-    {
+    function handleListItemAdd(item) {
+        console.log(item)
         setInForm('checkItems', [...form.checkItems, item]);
     }
 
-    if ( !form )
-    {
+    if (!form) {
         return null;
     }
     return (

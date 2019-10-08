@@ -1,5 +1,18 @@
 import React, {useCallback} from 'react';
-import {TextField, DialogContent, DialogTitle, Icon, IconButton, Typography, Toolbar, AppBar, Avatar, InputAdornment, Tooltip, List} from '@material-ui/core';
+import {
+    TextField,
+    DialogContent,
+    DialogTitle,
+    Icon,
+    IconButton,
+    Typography,
+    Toolbar,
+    AppBar,
+    Avatar,
+    InputAdornment,
+    Tooltip,
+    List
+} from '@material-ui/core';
 import {FuseChipSelect} from '@fuse';
 import {useForm, useDebounce, useUpdateEffect} from '@fuse/hooks';
 import _ from '@lodash';
@@ -17,8 +30,7 @@ import CardChecklist from './checklist/CardChecklist';
 import CardActivity from './activity/CardActivity';
 import CardComment from './comment/CardComment';
 
-function BoardCardForm(props)
-{
+function BoardCardForm(props) {
     const dispatch = useDispatch();
     const card = useSelector(({scrumboardApp}) => scrumboardApp.card.data);
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
@@ -33,52 +45,44 @@ function BoardCardForm(props)
         updateCard(board.id, cardForm);
     }, [dispatch, board.id, cardForm, updateCard]);
 
-    function removeDue()
-    {
+    function removeDue() {
         setInForm('dueDate', null);
     }
 
-    function toggleLabel(labelId)
-    {
+    function toggleLabel(labelId) {
         setInForm('idLabels', _.xor(cardForm.idLabels, [labelId]));
     }
 
-    function toggleMember(memberId)
-    {
+    function toggleMember(memberId) {
         setInForm('idMembers', _.xor(cardForm.idMembers, [memberId]));
     }
 
-    function addCheckList(newList)
-    {
+    function addCheckList(newList) {
+        console.log(newList)
         setInForm('checklists', [...cardForm.checklists, newList]);
     }
 
-    function chipChange(name, value)
-    {
+    function chipChange(name, value) {
         setInForm(name, value.map(item => item.value));
     }
 
-    function addNewChip(name, value)
-    {
+    function addNewChip(name, value) {
         setInForm(name, [...cardForm[name], value]);
     }
 
-    function makeCover(attachmentId)
-    {
+    function makeCover(attachmentId) {
         setInForm('idAttachmentCover', attachmentId);
     }
 
-    function removeCover()
-    {
+    function removeCover() {
         setInForm('idAttachmentCover', '');
     }
 
-    function removeAttachment(attachmentId)
-    {
+    function removeAttachment(attachmentId) {
         setForm(
             {
                 ...cardForm,
-                attachments      : _.reject(cardForm.attachments, {id: attachmentId}),
+                attachments: _.reject(cardForm.attachments, {id: attachmentId}),
                 idAttachmentCover: cardForm.idAttachmentCover === attachmentId ? '' : cardForm.idAttachmentCover
             }
         );
@@ -88,13 +92,11 @@ function BoardCardForm(props)
         setInForm(`checklists[${index}]`, item);
     }, [setInForm]);
 
-    function removeCheckList(id)
-    {
+    function removeCheckList(id) {
         setInForm('checklists', _.reject(cardForm.checklists, {id: id}));
     }
 
-    function commentAdd(comment)
-    {
+    function commentAdd(comment) {
         return setInForm('activities', [comment, ...cardForm.activities]);
     }
 
@@ -129,6 +131,7 @@ function BoardCardForm(props)
 
                             <CheckListMenu
                                 onAddCheckList={addCheckList}
+                                // onAddCheckList={() => dispatch(Actions.newCheckList(addCheckList))}
                             />
 
                             <OptionsMenu
@@ -278,7 +281,8 @@ function BoardCardForm(props)
                                         const member = _.find(board.members, {id: memberId});
                                         return member && {
                                             value: member.id,
-                                            label: (<Tooltip title={member.name}><Avatar className="-ml-12 w-32 h-32" src={member.avatar}/></Tooltip>)
+                                            label: (<Tooltip title={member.name}><Avatar className="-ml-12 w-32 h-32"
+                                                                                         src={member.avatar}/></Tooltip>)
                                         }
                                     })
                                 }
@@ -291,7 +295,8 @@ function BoardCardForm(props)
                                 options={board.members.map((member) => (
                                     {
                                         value: member.id,
-                                        label: (<span className="flex items-center"><Avatar className="w-32 h-32 mr-8" src={member.avatar}/>{member.name}</span>)
+                                        label: (<span className="flex items-center"><Avatar className="w-32 h-32 mr-8"
+                                                                                            src={member.avatar}/>{member.name}</span>)
                                     }
                                 ))}
                                 variant="fixed"
@@ -323,14 +328,14 @@ function BoardCardForm(props)
                 )}
 
                 {cardForm.checklists.map((checklist, index) => (
-                    console.log(checklist),
-                    <CardChecklist
-                        key={checklist.id}
-                        checklist={checklist}
-                        index={index}
-                        onCheckListChange={handleCheckListChange}
-                        onRemoveCheckList={() => removeCheckList(checklist.id)}
-                    />
+                    console.log(cardForm),
+                        <CardChecklist
+                            key={checklist.id}
+                            checklist={checklist}
+                            index={index}
+                            onCheckListChange={handleCheckListChange}
+                            onRemoveCheckList={() => removeCheckList(checklist.id)}
+                        />
                 ))}
 
                 <div className="mb-24">

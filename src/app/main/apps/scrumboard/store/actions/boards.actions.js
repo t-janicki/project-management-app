@@ -1,6 +1,5 @@
 import axios from 'axios';
 import history from '@history';
-import BoardModel from '../../model/BoardModel';
 import {CREATE_EMPTY_BOARD, GET_BOARDS_API} from "../../../../../apiURL";
 
 export const GET_BOARDS = '[SCRUMBOARD APP] GET BOARDS';

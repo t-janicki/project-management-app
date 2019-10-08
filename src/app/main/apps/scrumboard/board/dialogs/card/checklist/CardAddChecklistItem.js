@@ -2,28 +2,31 @@ import React from 'react';
 import {Icon, ListItem, TextField, Fab} from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
 import ChecklistItemModel from '../../../../../../../../app/main/apps/scrumboard/model/ChecklistItemModel';
+import {useDispatch} from "react-redux";
+import * as Actions from './../../../../store/actions';
 
-function CardAddChecklistItem(props)
-{
-    const {form, handleChange, resetForm} = useForm(
-        {
-            name: ""
-        }
-    );
+function CardAddChecklistItem(props) {
+    const {form, handleChange, resetForm} = useForm({
+        name: ""
+    });
 
-    function isFormInValid()
-    {
+    const dispatch = useDispatch();
+
+    function isFormInValid() {
         return form.name === '';
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
-        if ( isFormInValid() )
-        {
+        if (isFormInValid()) {
             return;
         }
-        props.onListItemAdd(new ChecklistItemModel(form));
+
+        dispatch(Actions.newCheckItem(form)).then((data) => {
+            props.onListItemAdd(data);
+            console.log(data)
+        });
+
         resetForm();
     }
 

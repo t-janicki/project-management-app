@@ -4,47 +4,39 @@ import _ from '@lodash';
 const initialState = null;
 
 const boardReducer = function (state = initialState, action) {
-    switch ( action.type )
-    {
-        case Actions.GET_BOARD:
-        {
+    switch (action.type) {
+        case Actions.GET_BOARD: {
             return {
                 ...action.payload
             };
         }
-        case Actions.RESET_BOARD:
-        {
+        case Actions.RESET_BOARD: {
             return initialState;
         }
-        case Actions.ORDER_LIST:
-        {
+        case Actions.ORDER_LIST: {
             return {
                 ...state,
                 lists: action.payload
             };
         }
-        case Actions.ORDER_CARD:
-        {
+        case Actions.ORDER_CARD: {
             return {
                 ...state,
                 lists: action.payload
             };
         }
-        case Actions.ADD_LIST:
-        {
+        case Actions.ADD_LIST: {
             return {
                 ...state,
                 lists: action.payload
             };
         }
-        case Actions.ADD_CARD:
-        {
+        case Actions.ADD_CARD: {
             return {
                 ...action.payload
             };
         }
-        case Actions.ADD_LABEL:
-        {
+        case Actions.ADD_LABEL: {
             return {
                 ...state,
                 labels: [
@@ -53,21 +45,19 @@ const boardReducer = function (state = initialState, action) {
                 ]
             };
         }
-        case Actions.UPDATE_CARD:
-        {
+        case Actions.UPDATE_CARD: {
             return {
                 ...state,
                 cards: state.cards.map((_card) => {
-                    if ( _card.id === action.payload.id )
-                    {
+                    if (_card.id === action.payload.id) {
+                        console.log(action.payload);
                         return action.payload;
                     }
                     return _card;
                 })
             };
         }
-        case Actions.REMOVE_CARD:
-        {
+        case Actions.REMOVE_CARD: {
             return {
                 ...state,
                 cards: _.reject(state.cards, {id: action.cardId}),
@@ -77,39 +67,33 @@ const boardReducer = function (state = initialState, action) {
                 })
             };
         }
-        case Actions.RENAME_LIST:
-        {
+        case Actions.RENAME_LIST: {
             return {
                 ...state,
                 lists: state.lists.map(list => {
-                    if ( list.id === action.listId )
-                    {
+                    if (list.id === action.listId) {
                         list.name = action.listTitle
                     }
                     return list;
                 })
             };
         }
-        case Actions.REMOVE_LIST:
-        {
+        case Actions.REMOVE_LIST: {
             return {
                 ...state,
                 lists: _.reject(state.lists, {id: action.listId})
             };
         }
-        case Actions.CHANGE_BOARD_SETTINGS:
-        {
+        case Actions.CHANGE_BOARD_SETTINGS: {
             return {
                 ...state,
                 settings: action.payload
             };
         }
-        case Actions.DELETE_BOARD:
-        {
+        case Actions.DELETE_BOARD: {
             return initialState;
         }
-        case Actions.RENAME_BOARD:
-        {
+        case Actions.RENAME_BOARD: {
             return {
                 ...state,
                 name: action.boardTitle

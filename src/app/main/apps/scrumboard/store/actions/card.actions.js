@@ -6,6 +6,7 @@ export const OPEN_CARD_DIALOG = '[SCRUMBOARD APP] OPEN CARD DIALOG';
 export const CLOSE_CARD_DIALOG = '[SCRUMBOARD APP] CLOSE CARD DIALOG';
 export const UPDATE_CARD = '[SCRUMBOARD APP] UPDATE CARD';
 export const REMOVE_CARD = '[SCRUMBOARD APP] REMOVE CARD';
+export const NEW_CHECKLIST = '[SCRUMBOARD APP] NEW CHECKLIST';
 
 export function openCardDialog(data) {
     return {
@@ -29,8 +30,6 @@ export function updateCard(boardId, card) {
             checklists, activities
         } = card;
 
-        // const {routeParams} = getState().scrumboardApp.board;
-
         console.log(card)
         const request = axios.post(BOARD_API + '/test', {
             id, name, description, dueDate, idAttachmentCover,
@@ -38,7 +37,7 @@ export function updateCard(boardId, card) {
             checklists, activities
         });
         console.log(request)
-        return request.then((response) => {
+        return request.then(() => {
             dispatch(showMessage({
                 message: 'Card Saved',
                 autoHideDuration: 2000,
@@ -53,6 +52,42 @@ export function updateCard(boardId, card) {
                 payload: card
             })
         });
+    }
+}
+
+export function newCheckList({name}) {
+    return () => {
+        const request = axios.post(BOARD_API + '/card/newCheckList/' + name, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                resolve(response.data);
+
+                reject(response.data.error)
+            })
+        })
+    }
+}
+
+export function newCheckItem({name}) {
+    return () => {
+        const request = axios.post(BOARD_API + '/card/newCheckItem/' + name, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                resolve(response.data);
+
+                reject(response.data.error);
+            })
+        })
     }
 }
 

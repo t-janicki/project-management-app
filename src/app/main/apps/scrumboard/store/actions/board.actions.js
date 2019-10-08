@@ -5,8 +5,6 @@ import _ from '@lodash';
 import {showMessage} from 'app/store/actions/fuse';
 import reorder, {reorderQuoteMap} from './reorder';
 import * as Actions from './index';
-import ListModel from '../../model/ListModel';
-import CardModel from '../../model/CardModel';
 import {GET_BOARD_API, NEW_BOARD_LIST, BOARD_API} from "../../../../../apiURL";
 
 export const GET_BOARD = '[SCRUMBOARD APP] GET BOARD';

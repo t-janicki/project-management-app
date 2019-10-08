@@ -2,45 +2,49 @@ import React, {useEffect, useState} from 'react';
 import {Icon, IconButton, Button, TextField} from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
 import ToolbarMenu from './ToolbarMenu';
-import ChecklistModel from '../../../../../../../../app/main/apps/scrumboard/model/ChecklistModel';
+import * as Actions from './../../../../store/actions';
+import {useDispatch} from 'react-redux';
 
-function CheckListMenu(props)
-{
+
+function CheckListMenu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const {form, handleChange, resetForm} = useForm({
         name: ''
     });
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        if ( !anchorEl )
-        {
+        if (!anchorEl) {
             resetForm();
         }
     }, [anchorEl, resetForm]);
 
-    function handleMenuOpen(event)
-    {
+    function handleMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
 
-    function handleMenuClose()
-    {
+    function handleMenuClose() {
         setAnchorEl(null);
     }
 
-    function isFormInvalid()
-    {
+    function isFormInvalid() {
         return form.name === '';
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
-        if ( isFormInvalid() )
-        {
+        if (isFormInvalid()) {
             return;
         }
-        props.onAddCheckList(new ChecklistModel(form));
+
+        dispatch(Actions.newCheckList(form)).then((data) => {
+            props.onAddCheckList(data);
+            console.log(data)
+        });
+
+        // props.onAddCheckList(form);
+        // props.onAddCheckList(dispatch(Actions.newCheckList(form)));
         handleMenuClose();
     }
 
