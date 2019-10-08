@@ -25,12 +25,6 @@ const cardReducer = function (state = initialState, action) {
         case Actions.CLOSE_CARD_DIALOG: {
             return initialState;
         }
-        case Actions.NEW_CHECKLIST: {
-            return {
-                ...state,
-                data: action.payload
-            }
-        }
         default:
             return state;
     }

@@ -29,7 +29,7 @@ function Marker(props) {
 function Customer(props) {
     const dispatch = useDispatch();
     const customer = useSelector(({eCommerceApp}) => eCommerceApp.customer.data);
-    console.log(customer)
+    
     const [tabValue, setTabValue] = useState(0);
 
     useEffect(() => {

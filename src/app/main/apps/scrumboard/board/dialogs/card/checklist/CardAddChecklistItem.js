@@ -24,7 +24,6 @@ function CardAddChecklistItem(props) {
 
         dispatch(Actions.newCheckItem(form)).then((data) => {
             props.onListItemAdd(data);
-            console.log(data)
         });
 
         resetForm();

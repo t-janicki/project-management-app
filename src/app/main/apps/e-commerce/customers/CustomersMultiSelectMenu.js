@@ -39,9 +39,7 @@ function CustomersMultiSelectMenu(props)
                 <MenuList>
                     <MenuItem
                         onClick={() => {
-                            const test = dispatch(Actions.removeCustomers(selectedCustomerIds));
-                            console.log(test);
-                            console.log(selectedCustomerIds)
+                            dispatch(Actions.removeCustomers(selectedCustomerIds));
                             closeSelectedCustomersMenu();
                         }}
                     >

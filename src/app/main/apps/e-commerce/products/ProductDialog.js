@@ -36,7 +36,6 @@ function ProductDialog(props) {
     const productDialog = useSelector(({eCommerceApp}) => eCommerceApp.products.productDialog);
     const {form, setForm, handleChange} = useForm(defaultFormState);
 
-    console.log(form)
     const initDialog = useCallback(
         () => {
 

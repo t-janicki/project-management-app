@@ -40,11 +40,8 @@ function CheckListMenu(props) {
 
         dispatch(Actions.newCheckList(form)).then((data) => {
             props.onAddCheckList(data);
-            console.log(data)
         });
 
-        // props.onAddCheckList(form);
-        // props.onAddCheckList(dispatch(Actions.newCheckList(form)));
         handleMenuClose();
     }
 

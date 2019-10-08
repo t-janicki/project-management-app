@@ -13,8 +13,7 @@ import BoardCardDialog from './dialogs/card/BoardCardDialog';
 import BoardSettingsSidebar from './sidebars/settings/BoardSettingsSidebar';
 import {useDispatch, useSelector} from 'react-redux';
 
-function Board(props)
-{
+function Board(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
     console.log(board)
@@ -28,13 +27,11 @@ function Board(props)
         }
     }, [dispatch, props.match.params]);
 
-    function onDragEnd(result)
-    {
+    function onDragEnd(result) {
         const {source, destination} = result;
 
         // dropped nowhere
-        if ( !destination )
-        {
+        if (!destination) {
             return;
         }
 
@@ -42,31 +39,26 @@ function Board(props)
         if (
             source.droppableId === destination.droppableId &&
             source.index === destination.index
-        )
-        {
+        ) {
             return;
         }
 
         // reordering list
-        if ( result.type === 'list' )
-        {
+        if (result.type === 'list') {
             dispatch(Actions.reorderList(result));
         }
 
         // reordering card
-        if ( result.type === 'card' )
-        {
+        if (result.type === 'card') {
             dispatch(Actions.reorderCard(result));
         }
     }
 
-    function toggleSettingsDrawer(state)
-    {
+    function toggleSettingsDrawer(state) {
         setSettingsDrawerOpen((state === undefined) ? !settingsDrawerOpen : state);
     }
 
-    if ( !board )
-    {
+    if (!board) {
         return null;
     }
 

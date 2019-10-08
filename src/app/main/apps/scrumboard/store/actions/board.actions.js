@@ -60,13 +60,20 @@ export function reorderList(result) {
 
         const {board} = getState().scrumboardApp;
         const {lists} = board;
-
+        console.log('board')
+        console.log(board)
+        console.log('lists')
+        console.log(lists)
         const ordered = reorder(
             lists,
             result.source.index,
             result.destination.index
         );
 
+        console.log('ordered')
+        console.log(ordered)
+        console.log('before')
+        console.log(lists)
         const request = axios.post('/api/scrumboard-app/list/order',
             {
                 boardId: board.id,

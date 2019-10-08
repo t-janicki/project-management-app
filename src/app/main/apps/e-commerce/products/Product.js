@@ -15,7 +15,6 @@ import reducer from '../store/reducers';
 function Product(props) {
     const dispatch = useDispatch();
     const product = useSelector(({eCommerceApp}) => eCommerceApp.product.data);
-    console.log(product)
     const [tabValue, setTabValue] = useState(0);
 
     useEffect(() => {

@@ -58,7 +58,6 @@ function BoardCardForm(props) {
     }
 
     function addCheckList(newList) {
-        console.log(newList)
         setInForm('checklists', [...cardForm.checklists, newList]);
     }
 
@@ -328,7 +327,6 @@ function BoardCardForm(props) {
                 )}
 
                 {cardForm.checklists.map((checklist, index) => (
-                    console.log(cardForm),
                         <CardChecklist
                             key={checklist.id}
                             checklist={checklist}

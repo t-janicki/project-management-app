@@ -6,7 +6,6 @@ export const OPEN_CARD_DIALOG = '[SCRUMBOARD APP] OPEN CARD DIALOG';
 export const CLOSE_CARD_DIALOG = '[SCRUMBOARD APP] CLOSE CARD DIALOG';
 export const UPDATE_CARD = '[SCRUMBOARD APP] UPDATE CARD';
 export const REMOVE_CARD = '[SCRUMBOARD APP] REMOVE CARD';
-export const NEW_CHECKLIST = '[SCRUMBOARD APP] NEW CHECKLIST';
 
 export function openCardDialog(data) {
     return {
