@@ -74,7 +74,9 @@ function BoardCard(props)
                                 <div className="flex flex-wrap mb-8">
                                     {card.idLabels.map(id => {
                                         // const label = _.find(board.labels, {id});
-                                        const label = board.labels.find(v => v.id == id);
+                                        // let label = board.labels.find(v => v.id == id);
+
+                                        // const label = board.labels.filter(v => v.id == id).map(x => x.label);
 
                                         return (
                                             <Tooltip title={label.name} key={id}>
