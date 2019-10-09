@@ -24,7 +24,6 @@ export const REMOVE_LIST = '[SCRUMBOARD APP] REMOVE LIST';
 export function getBoard(params) {
 
     const {boardId} = params;
-// GET_BOARD_API + boardId
     const request = axios.get(GET_BOARD_API + boardId);
 
     return (dispatch) =>
@@ -59,25 +58,17 @@ export function reorderList(result) {
     return (dispatch, getState) => {
 
         const {board} = getState().scrumboardApp;
-        const {lists} = board;
-        console.log('board')
-        console.log(board)
-        console.log('lists')
-        console.log(lists)
+        let {lists} = board;
+
         const ordered = reorder(
             lists,
             result.source.index,
             result.destination.index
         );
 
-        console.log('ordered')
-        console.log(ordered)
-        console.log('before')
-        console.log(lists)
-        const request = axios.post('/api/scrumboard-app/list/order',
-            {
-                boardId: board.id,
-                lists: ordered
+        lists = ordered;
+        const request = axios.post(BOARD_API + `/lists/reorder`, {
+            lists
             }
         );
 

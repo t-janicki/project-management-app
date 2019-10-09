@@ -29,13 +29,13 @@ export function updateCard(boardId, card) {
             checklists, activities
         } = card;
 
-        console.log(card)
-        const request = axios.post(BOARD_API + '/test', {
+        // console.log(card)
+        const request = axios.post(BOARD_API + '/card/update', {
             id, name, description, dueDate, idAttachmentCover,
             idMembers, idLabels, subscribed, attachments,
             checklists, activities
         });
-        console.log(request)
+        // console.log(request)
         return request.then(() => {
             dispatch(showMessage({
                 message: 'Card Saved',
