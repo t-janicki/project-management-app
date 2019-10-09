@@ -67,7 +67,7 @@ export function reorderList(result) {
         );
 
         lists = ordered;
-        const request = axios.post(BOARD_API + `/lists/reorder`, {
+        const request = axios.put(BOARD_API + `/lists/reorder`, {
             lists
             }
         );
@@ -162,11 +162,11 @@ export function newList(boardId, listTitle) {
 }
 
 export function renameList(boardId, listId, listTitle) {
-    const request = axios.post('/api/scrumboard-app/list/rename',
+
+    const request = axios.put(`${BOARD_API}/${boardId}/list/${listId}/listTitle=${listTitle}`,
         {
             boardId,
-            listId,
-            listTitle
+            listId
         }
     );
 
@@ -181,7 +181,7 @@ export function renameList(boardId, listId, listTitle) {
 }
 
 export function removeList(boardId, listId) {
-    const request = axios.post('/api/scrumboard-app/list/remove',
+    const request = axios.put('/api/scrumboard-app/list/remove',
         {
             boardId,
             listId
