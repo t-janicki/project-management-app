@@ -2,17 +2,14 @@ import React, {useState} from 'react';
 import {Icon, IconButton, MenuItem} from '@material-ui/core';
 import ToolbarMenu from './ToolbarMenu';
 
-function OptionsMenu(props)
-{
+function CardOptionsMenu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
 
-    function handleMenuOpen(event)
-    {
+    function handleMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
 
-    function handleMenuClose()
-    {
+    function handleMenuClose() {
         setAnchorEl(null);
     }
 
@@ -30,4 +27,4 @@ function OptionsMenu(props)
     );
 }
 
-export default OptionsMenu;
+export default CardOptionsMenu;

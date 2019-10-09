@@ -25,7 +25,7 @@ import DueMenu from './toolbar/DueMenu';
 import LabelsMenu from './toolbar/LabelsMenu';
 import MembersMenu from './toolbar/MembersMenu';
 import CheckListMenu from './toolbar/CheckListMenu';
-import OptionsMenu from './toolbar/OptionsMenu';
+import CardOptionsMenu from './toolbar/CardOptionsMenu';
 import CardChecklist from './checklist/CardChecklist';
 import CardActivity from './activity/CardActivity';
 import CardComment from './comment/CardComment';
@@ -130,10 +130,9 @@ function BoardCardForm(props) {
 
                             <CheckListMenu
                                 onAddCheckList={addCheckList}
-                                // onAddCheckList={() => dispatch(Actions.newCheckList(addCheckList))}
                             />
 
-                            <OptionsMenu
+                            <CardOptionsMenu
                                 onRemoveCard={() => dispatch(Actions.removeCard(board.id, cardForm.id))}
                             />
 

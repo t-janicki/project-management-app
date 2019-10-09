@@ -169,7 +169,6 @@ export function renameList(boardId, listId, listTitle) {
             listId
         }
     );
-
     return (dispatch) =>
         request.then((response) =>
             dispatch({
@@ -181,12 +180,14 @@ export function renameList(boardId, listId, listTitle) {
 }
 
 export function removeList(boardId, listId) {
-    const request = axios.put('/api/scrumboard-app/list/remove',
+    console.log(boardId, listId)
+    const request = axios.put(`${BOARD_API}/${boardId}/list/${listId}/delete`,
         {
             boardId,
             listId
         }
     );
+    console.log(request)
 
     return (dispatch) =>
         request.then((response) =>

@@ -1,11 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {ClickAwayListener, Icon, IconButton, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, TextField, Typography} from '@material-ui/core';
+import {
+    ClickAwayListener,
+    Icon,
+    IconButton,
+    InputAdornment,
+    ListItemIcon,
+    ListItemText,
+    Menu,
+    MenuItem,
+    TextField,
+    Typography
+} from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
+import ToolbarMenu from './dialogs/card/toolbar/ToolbarMenu';
+import ListOptionsMenu from "./ListOptionsMenu";
 
-function BoardListHeader(props)
-{
+
+function BoardListHeader(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
 
@@ -16,12 +29,10 @@ function BoardListHeader(props)
     });
 
     useEffect(() => {
-        if ( !formOpen )
-        {
+        if (!formOpen) {
             resetForm();
         }
-        if ( anchorEl )
-        {
+        if (anchorEl) {
             setAnchorEl(null);
         }
 
@@ -31,36 +42,29 @@ function BoardListHeader(props)
         setForm({title: props.list.name});
     }, [props.list.name, setForm]);
 
-    function handleMenuClick(event)
-    {
+    function handleMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
 
-    function handleMenuClose()
-    {
+    function handleMenuClose() {
         setAnchorEl(null);
     }
 
-    function handleOpenForm()
-    {
+    function handleOpenForm() {
         setFormOpen(true);
     }
 
-    function handleCloseForm()
-    {
+    function handleCloseForm() {
         setFormOpen(false);
     }
 
-    function isFormInvalid()
-    {
+    function isFormInvalid() {
         return form.title !== '';
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
-        if ( !isFormInvalid() )
-        {
+        if (!isFormInvalid()) {
             return;
         }
         dispatch(Actions.renameList(board.id, props.list.id, form.title));
@@ -106,37 +110,11 @@ function BoardListHeader(props)
                     )}
 
                 </div>
-                <div className="">
-                    <IconButton
-                        aria-owns={anchorEl ? 'actions-menu' : null}
-                        aria-haspopup="true"
-                        onClick={handleMenuClick}
-                        variant="outlined"
-                        size="small"
-                    >
-                        <Icon className="text-20">more_vert</Icon>
-                    </IconButton>
-                    <Menu
-                        id="actions-menu"
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={handleMenuClose}
-                    >
-                        <MenuItem onClick={() => {
-                            dispatch(Actions.removeList(board.id, props.list.id));
-                        }}>
-                            <ListItemIcon className="min-w-40">
-                                <Icon>delete</Icon>
-                            </ListItemIcon>
-                            <ListItemText primary="Remove List"/>
-                        </MenuItem>
-                        <MenuItem onClick={() => handleOpenForm()}>
-                            <ListItemIcon className="min-w-40">
-                                <Icon>edit</Icon>
-                            </ListItemIcon>
-                            <ListItemText primary="Rename List"/>
-                        </MenuItem>
-                    </Menu>
+                <div>
+                    <ListOptionsMenu
+                        onRemoveList={() => dispatch(Actions.removeList(board.id, props.list.id))}
+                        onRenameList={() => handleOpenForm()}
+                    />
                 </div>
             </div>
 
