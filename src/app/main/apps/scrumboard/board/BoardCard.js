@@ -76,8 +76,6 @@ function BoardCard(props)
                                         // const label = _.find(board.labels, {id});
                                         const label = board.labels.find(v => v.id == id);
 
-                                        // const label = board.labels.filter(v => v.id == id).map(x => x.label);
-
                                         return (
                                             <Tooltip title={label.name} key={id}>
                                                 <div className={clsx(label.className, "w-32  h-6 rounded-6 mr-6 mb-6")}/>

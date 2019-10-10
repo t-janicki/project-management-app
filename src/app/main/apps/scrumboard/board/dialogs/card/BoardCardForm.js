@@ -41,6 +41,16 @@ function BoardCardForm(props) {
     }, 600);
     const dueDate = cardForm && cardForm.dueDate ? moment(cardForm.dueDate).format(moment.HTML5_FMT.DATE) : "";
 
+    const labelsIds = cardForm.idLabels.map(labelId => parseInt(labelId));
+    const boardLabelsIds = board.labels.map(label => label.id);
+
+    let filteredIds = boardLabelsIds.filter(id => !labelsIds.includes(id));
+    let availableLabels = [];
+    filteredIds.forEach(id => {
+       const label =  board.labels.find(v => v.id === id);
+       availableLabels.push(label);
+    });
+
     useUpdateEffect(() => {
         updateCard(board.id, cardForm);
     }, [dispatch, board.id, cardForm, updateCard]);
@@ -49,9 +59,9 @@ function BoardCardForm(props) {
         setInForm('dueDate', null);
     }
 
-    function toggleLabel(labelId) {
-        setInForm('idLabels', _.xor(cardForm.idLabels, [labelId]));
-    }
+    // function toggleLabel(labelId) {
+    //     setInForm('idLabels', _.xor(cardForm.idLabels, [labelId]));
+    // }
 
     function toggleMember(memberId) {
         setInForm('idMembers', _.xor(cardForm.idMembers, [memberId]));
@@ -112,11 +122,11 @@ function BoardCardForm(props) {
                                 dueDate={dueDate}
                             />
 
-                            <LabelsMenu
-                                onToggleLabel={toggleLabel}
-                                labels={board.labels}
-                                idLabels={cardForm.idLabels}
-                            />
+                            {/*<LabelsMenu*/}
+                            {/*    onToggleLabel={toggleLabel}*/}
+                            {/*    labels={board.labels}*/}
+                            {/*    idLabels={cardForm.idLabels}*/}
+                            {/*/>*/}
 
                             <MembersMenu
                                 onToggleMember={toggleMember}
@@ -218,7 +228,7 @@ function BoardCardForm(props) {
                 </div>
 
                 <div className="flex flex-col sm:flex-row">
-                    {cardForm.idLabels.length > 0 && (
+                    {/*{cardForm.idLabels.length > 0 && (*/}
                         <div className="flex-1 mb-24">
                             <div className="flex items-center mt-16 mb-12">
                                 <Icon className="text-20 mr-8" color="inherit">label</Icon>
@@ -228,6 +238,8 @@ function BoardCardForm(props) {
                                 className={cardForm.idMembers.length > 0 && 'sm:mr-8'}
                                 value={
                                     cardForm.idLabels.map(labelId => {
+                                        console.log('cardForm')
+                                        console.log(cardForm)
                                         // const label = _.find(board.labels, {id: labelId});
                                         const label = board.labels.find(v => v.id == labelId);
                                         return label && {
@@ -243,28 +255,30 @@ function BoardCardForm(props) {
                                 textFieldProps={{
                                     variant: "outlined"
                                 }}
-                                options={board.labels.map((label) => (
+                                // const label = board.labels.filter(v => v.id == id).map(x => x.label);
+                                options={availableLabels.map((label) => (
                                     {
                                         value: label.id,
                                         label: label.name,
                                         class: label.className
                                     }
                                 ))}
-                                onCreateOption={(name) => {
-                                    // Create New Label
-                                    const newLabel = new LabelModel({name});
-
-                                    // Ad new Label to board(redux store and server)
-                                    dispatch(Actions.addLabel(newLabel));
-
-                                    // Trigger handle chip change
-                                    addNewChip('idLabels', newLabel.id);
-
-                                    return newLabel.id;
-                                }}
+                                //ToImplement -> add create label in backend API
+                                // onCreateOption={(name) => {
+                                //     // Create New Label
+                                //     const newLabel = new LabelModel({name});
+                                //
+                                //     // Ad new Label to board(redux store and server)
+                                //     dispatch(Actions.addLabel(newLabel));
+                                //
+                                //     // Trigger handle chip change
+                                //     addNewChip('idLabels', newLabel.id);
+                                //
+                                //     return newLabel.id;
+                                // }}
                             />
                         </div>
-                    )}
+                    {/*)}*/}
 
                     {cardForm.idMembers.length > 0 && (
                         <div className="flex-1 mb-24">
@@ -326,13 +340,13 @@ function BoardCardForm(props) {
                 )}
 
                 {cardForm.checklists.map((checklist, index) => (
-                        <CardChecklist
-                            key={checklist.id}
-                            checklist={checklist}
-                            index={index}
-                            onCheckListChange={handleCheckListChange}
-                            onRemoveCheckList={() => removeCheckList(checklist.id)}
-                        />
+                    <CardChecklist
+                        key={checklist.id}
+                        checklist={checklist}
+                        index={index}
+                        onCheckListChange={handleCheckListChange}
+                        onRemoveCheckList={() => removeCheckList(checklist.id)}
+                    />
                 ))}
 
                 <div className="mb-24">
