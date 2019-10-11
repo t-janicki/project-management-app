@@ -68,7 +68,7 @@ export function reorderList(result) {
 
         lists = ordered;
         const request = axios.put(BOARD_API + `/lists/reorder`, {
-            lists
+                lists
             }
         );
 
@@ -147,7 +147,6 @@ export function newCard(boardId, listId, cardTitle) {
     }
 }
 
-
 export function newList(boardId, listTitle) {
 
     const request = axios.post(NEW_BOARD_LIST + boardId + '/list/' + listTitle);
@@ -180,14 +179,12 @@ export function renameList(boardId, listId, listTitle) {
 }
 
 export function removeList(boardId, listId) {
-    console.log(boardId, listId)
     const request = axios.put(`${BOARD_API}/${boardId}/list/${listId}/delete`,
         {
             boardId,
             listId
         }
     );
-    console.log(request)
 
     return (dispatch) =>
         request.then((response) =>
@@ -196,16 +193,6 @@ export function removeList(boardId, listId) {
                 listId
             })
         );
-}
-
-export function addLabel(label) {
-    return (dispatch) => {
-        console.log(label)
-        return dispatch({
-            type: ADD_LABEL,
-            payload: label
-        })
-    }
 }
 
 export function changeBoardSettings(newSettings) {
@@ -261,10 +248,10 @@ export function copyBoard(board) {
 }
 
 export function renameBoard(boardId, boardTitle) {
-    const request = axios.post('/api/scrumboard-app/board/rename',
-        {
-            boardId,
-            boardTitle
+    const request = axios.put(`${BOARD_API}/${boardId}/name=${boardTitle}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }
     );
 
