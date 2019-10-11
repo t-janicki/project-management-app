@@ -200,6 +200,7 @@ export function removeList(boardId, listId) {
 
 export function addLabel(label) {
     return (dispatch) => {
+        console.log(label)
         return dispatch({
             type: ADD_LABEL,
             payload: label

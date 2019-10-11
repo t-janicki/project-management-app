@@ -228,7 +228,6 @@ function BoardCardForm(props) {
                 </div>
 
                 <div className="flex flex-col sm:flex-row">
-                    {/*{cardForm.idLabels.length > 0 && (*/}
                         <div className="flex-1 mb-24">
                             <div className="flex items-center mt-16 mb-12">
                                 <Icon className="text-20 mr-8" color="inherit">label</Icon>
@@ -263,22 +262,19 @@ function BoardCardForm(props) {
                                         class: label.className
                                     }
                                 ))}
-                                //ToImplement -> add create label in backend API
-                                // onCreateOption={(name) => {
-                                //     // Create New Label
-                                //     const newLabel = new LabelModel({name});
-                                //
-                                //     // Ad new Label to board(redux store and server)
-                                //     dispatch(Actions.addLabel(newLabel));
-                                //
-                                //     // Trigger handle chip change
-                                //     addNewChip('idLabels', newLabel.id);
-                                //
-                                //     return newLabel.id;
-                                // }}
+                                onCreateOption={(name) => {
+
+                                    const boardId = board.id;
+                                    dispatch(Actions.newLabel({name, boardId})).then((data) => {
+                                        console.log(data)
+                                        addNewChip('idLabels', data.id);
+
+                                        return data.id;
+                                    });
+
+                                }}
                             />
                         </div>
-                    {/*)}*/}
 
                     {cardForm.idMembers.length > 0 && (
                         <div className="flex-1 mb-24">

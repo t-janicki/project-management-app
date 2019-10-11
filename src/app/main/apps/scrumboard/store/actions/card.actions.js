@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions/fuse';
 import {BOARD_API} from "../../../../../apiURL";
+import {ADD_LABEL} from "./board.actions";
 
 export const OPEN_CARD_DIALOG = '[SCRUMBOARD APP] OPEN CARD DIALOG';
 export const CLOSE_CARD_DIALOG = '[SCRUMBOARD APP] CLOSE CARD DIALOG';
@@ -56,7 +57,7 @@ export function updateCard(boardId, card) {
 
 export function newCheckList({name}) {
     return () => {
-        const request = axios.post(BOARD_API + '/card/newCheckList/' + name, {
+        const request = axios.post(BOARD_API + '/card/newCheckList/name=' + name, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -67,6 +68,31 @@ export function newCheckList({name}) {
                 resolve(response.data);
 
                 reject(response.data.error)
+            })
+        })
+    }
+}
+
+export function newLabel({name, boardId}) {
+    return (dispatch) => {
+        const request = axios.post(BOARD_API + `/${boardId}/card/newLabel/name=${name}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.data) {
+
+                    resolve(response.data);
+
+                    return dispatch({
+                        type: ADD_LABEL,
+                        payload: response.data
+                    });
+                }
+                reject(response.data.error);
             })
         })
     }
