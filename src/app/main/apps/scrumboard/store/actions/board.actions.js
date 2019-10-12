@@ -198,9 +198,9 @@ export function changeBoardSettings(newSettings) {
     return (dispatch, getState) => {
         const {board} = getState().scrumboardApp;
         const settings = _.merge(board.settings, newSettings);
-        const request = axios.post('/api/scrumboard-app/board/settings/update',
+        const boardId = board.id;
+        const request = axios.put(`${BOARD_API}/${boardId}/settings`,
             {
-                boardId: board.id,
                 settings
             }
         );
