@@ -135,18 +135,20 @@ export function newActivity({message}, cardId) {
 
 export function removeCard(boardId, cardId) {
     return (dispatch) => {
-        const request = axios.delete(`${BOARD_API}/${boardId}/card/${cardId}`, {
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },
-        });
+        const request = axios.delete(`${BOARD_API}/${boardId}/card/${cardId}`);
 
-        return request.then((response) =>
-            dispatch({
-                type: REMOVE_CARD,
-                boardId,
-                cardId
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.data) {
+                    resolve(response.data);
+                    return dispatch({
+                        type: REMOVE_CARD,
+                        cardId,
+                        boardId
+                    });
+                }
+                reject(response.data.error)
             })
-        );
+        })
     };
 }

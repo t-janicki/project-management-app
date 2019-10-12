@@ -50,7 +50,6 @@ const boardReducer = function (state = initialState, action) {
                 ...state,
                 cards: state.cards.map((_card) => {
                     if (_card.id === action.payload.id) {
-                        console.log(action.payload);
                         return action.payload;
                     }
                     return _card;
@@ -62,7 +61,7 @@ const boardReducer = function (state = initialState, action) {
                 ...state,
                 cards: _.reject(state.cards, {id: action.cardId}),
                 lists: state.lists.map(list => {
-                    _.set(list, 'idCards', _.reject(list.idCards, (id) => id === action.cardId));
+                    _.set(list, 'idCards', _.reject(list.idCards, (id) => id == action.cardId));
                     return list;
                 })
             };

@@ -7,7 +7,7 @@ export const ScrumboardAppConfig = {
     },
     routes  : [
         {
-            path     : '/apps/scrumboard/boards/:boardId/:boardUri?',
+            path     : '/apps/scrumboard/boards/:boardId/:uri?',
             component: React.lazy(() => import('./board/Board'))
         },
         {

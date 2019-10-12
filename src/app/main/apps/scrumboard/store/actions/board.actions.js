@@ -215,11 +215,7 @@ export function changeBoardSettings(newSettings) {
 }
 
 export function deleteBoard(boardId) {
-    const request = axios.post('/api/scrumboard-app/board/delete',
-        {
-            boardId
-        }
-    );
+    const request = axios.delete(`${BOARD_API}/${boardId}`);
 
     return (dispatch) =>
         request.then((response) => {

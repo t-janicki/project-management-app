@@ -28,14 +28,14 @@ export function resetBoards()
     }
 }
 
-export function newBoard(board)
+export function newBoard()
 {
     const request = axios.post(BOARD_API);
     return (dispatch) =>
         request.then((response) => {
-                const board = response.data;
+            const board = response.data;
                 history.push({
-                    pathname: '/apps/scrumboard/boards/' + board.id + '/' + board.handle
+                    pathname: '/apps/scrumboard/boards/' + board.id + '/' + board.uri
                 });
                 return dispatch({
                     type: NEW_BOARD,
