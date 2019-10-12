@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from '@history';
-import {CREATE_EMPTY_BOARD, GET_BOARDS_API} from "../../../../../apiURL";
+import {BOARD_API} from "../../../../../apiURL";
 
 export const GET_BOARDS = '[SCRUMBOARD APP] GET BOARDS';
 export const RESET_BOARDS = '[SCRUMBOARD APP] RESET BOARDS';
@@ -8,8 +8,7 @@ export const NEW_BOARD = '[SCRUMBOARD APP] NEW BOARD';
 
 export function getBoards()
 {
-    const request = axios.get(GET_BOARDS_API);
-    // GET_BOARDS_API
+    const request = axios.get(BOARD_API);
     return (dispatch) =>
         request.then((response) =>
             {
@@ -31,8 +30,7 @@ export function resetBoards()
 
 export function newBoard(board)
 {
-    const request = axios.post(CREATE_EMPTY_BOARD);
-    console.log(board);
+    const request = axios.post(BOARD_API);
     return (dispatch) =>
         request.then((response) => {
                 const board = response.data;

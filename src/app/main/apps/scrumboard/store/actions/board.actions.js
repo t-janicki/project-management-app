@@ -5,7 +5,7 @@ import _ from '@lodash';
 import {showMessage} from 'app/store/actions/fuse';
 import reorder, {reorderQuoteMap} from './reorder';
 import * as Actions from './index';
-import {GET_BOARD_API, NEW_BOARD_LIST, BOARD_API} from "../../../../../apiURL";
+import {BOARD_API} from "../../../../../apiURL";
 
 export const GET_BOARD = '[SCRUMBOARD APP] GET BOARD';
 export const DELETE_BOARD = '[SCRUMBOARD APP] DELETE BOARD';
@@ -24,7 +24,7 @@ export const REMOVE_LIST = '[SCRUMBOARD APP] REMOVE LIST';
 export function getBoard(params) {
 
     const {boardId} = params;
-    const request = axios.get(GET_BOARD_API + boardId);
+    const request = axios.get(BOARD_API + `/${boardId}`);
 
     return (dispatch) =>
         request.then(
@@ -137,7 +137,6 @@ export function newCard(boardId, listId, cardTitle) {
         return new Promise((resolve, reject) => {
             request.then((response) => {
                 resolve(response.data);
-                console.log(response);
                 return dispatch({
                     type: ADD_CARD,
                     payload: response.data
@@ -149,7 +148,7 @@ export function newCard(boardId, listId, cardTitle) {
 
 export function newList(boardId, listTitle) {
 
-    const request = axios.post(NEW_BOARD_LIST + boardId + '/list/' + listTitle);
+    const request = axios.post(BOARD_API + `/${boardId}/list/${listTitle}`);
 
     return (dispatch) =>
         request.then((response) =>

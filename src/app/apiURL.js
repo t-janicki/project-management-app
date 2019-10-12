@@ -47,8 +47,4 @@ export const DELETE_PERSON_API = BASE_URL + '/personnel/';
 export const DELETE_ALL_PERSONNEL_API = BASE_URL + '/personnel/delete/';
 
 //BOARD APP
-export const CREATE_EMPTY_BOARD = BASE_URL + '/boards';
-export const GET_BOARDS_API = BASE_URL + '/boards';
-export const GET_BOARD_API = BASE_URL + '/boards/';
-export const NEW_BOARD_LIST = BASE_URL + '/boards/';
 export const BOARD_API = BASE_URL + '/boards';
