@@ -1,18 +1,20 @@
 import React from 'react';
 import {TextField, Button, Avatar} from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
-import CommentModel from '../../../../../../../../app/main/apps/scrumboard/model/CommentModel';
-import _ from '@lodash';
+import * as Actions from '../../../../../../../../app/main/apps/scrumboard/store/actions';
+import {useDispatch, useSelector} from "react-redux";
 
 function CardComment(props)
 {
     const {form, handleChange, resetForm} = useForm(
         {
-            idMember: '36027j1930450d8bf7b10158',
             message : ''
         }
     );
-    const user = _.find(props.members, {id: form.idMember});
+
+    const dispatch = useDispatch();
+
+    const user = useSelector(({auth}) => auth.user.userInfo);
 
     function isFormInvalid()
     {
@@ -26,13 +28,17 @@ function CardComment(props)
         {
             return;
         }
-        props.onCommentAdd(new CommentModel(form));
+
+        dispatch(Actions.newActivity(form, props.cardId)).then((data) => {
+            props.onCommentAdd((data));
+        });
+
         resetForm();
     }
 
     return (
         <form onSubmit={handleSubmit} className="flex">
-            {/*<Avatar className="w-32 h-32" alt={user.name} src={user.avatar}/>*/}
+            <Avatar className="w-32 h-32" alt={user.name} src={user.imageUrl}/>
             <div className="flex flex-col items-start flex-1 pr-0 pl-16">
                 <TextField
                     className="flex flex-1"
@@ -47,14 +53,14 @@ function CardComment(props)
                 />
                 <Button
                     className="mt-16"
-                    aria-label="save"
+                    aria-label="send"
                     variant="contained"
                     color="secondary"
                     type="submit"
                     size="small"
                     disabled={isFormInvalid()}
                 >
-                    Save
+                    Send
                 </Button>
             </div>
         </form>

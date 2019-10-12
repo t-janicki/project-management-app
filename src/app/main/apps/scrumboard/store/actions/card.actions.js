@@ -116,11 +116,33 @@ export function newCheckItem({name}) {
     }
 }
 
+export function newActivity({message}, cardId) {
+    console.log(cardId)
+    return () => {
+        const request = axios.post(BOARD_API + `/card/${cardId}/newActivity/message=${message} `, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log(request)
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                resolve(response.data);
+
+                reject(response.data.error);
+            })
+        })
+    }
+}
+
 export function removeCard(boardId, cardId) {
     return (dispatch) => {
-        const request = axios.post('/api/scrumboard-app/card/remove', {
-            boardId,
-            cardId
+        const request = axios.delete(`${BOARD_API}/${boardId}/card/${cardId}`, {
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
         });
 
         return request.then((response) =>

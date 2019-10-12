@@ -7,7 +7,7 @@ class CommentModel {
         const item = data ? data : {};
 
         // this.id = item.id || FuseUtils.generateGUID();
-        this.id = item.id;
+        // this.id = item.id;
         this.type = 'comment';
         this.idMember = item.idMember || null;
         this.message = item.message || '';

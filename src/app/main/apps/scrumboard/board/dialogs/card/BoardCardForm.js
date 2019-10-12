@@ -41,6 +41,12 @@ function BoardCardForm(props) {
     }, 600);
     const dueDate = cardForm && cardForm.dueDate ? moment(cardForm.dueDate).format(moment.HTML5_FMT.DATE) : "";
 
+    const cardId = card === null ? '' : card.id;
+    // if (card === null) {
+    //     cardId = '';
+    // } else {
+    //     cardId = card.id;
+    // }
     const labelsIds = cardForm.idLabels.map(labelId => parseInt(labelId));
     const boardLabelsIds = board.labels.map(label => label.id);
 
@@ -352,6 +358,7 @@ function BoardCardForm(props) {
                     </div>
                     <div>
                         <CardComment
+                            cardId={cardId}
                             members={board.members}
                             onCommentAdd={commentAdd}
                         />

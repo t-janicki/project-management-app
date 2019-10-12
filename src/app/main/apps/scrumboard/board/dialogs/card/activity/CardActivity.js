@@ -17,13 +17,15 @@ function CardActivity(props)
     const classes = useStyles(props);
     const user = useSelector(({auth}) => auth.user.userInfo);
 
+    // HERE ADD LATER MEMBER NAME AND URL
+
     switch ( props.item.type )
     {
         case 'comment':
         {
             return (
                 <ListItem dense className="px-0">
-                    <Avatar alt={user.name} src={user.avatar} className="w-32 h-32"/>
+                    <Avatar alt={user.name} src={user.imageUrl} className="w-32 h-32"/>
                     <div className={clsx(classes.commentBubble, "flex flex-col ml-16 p-12")}>
                         <div className="flex items-center">
                             <Typography>{user.name}</Typography>
@@ -38,7 +40,7 @@ function CardActivity(props)
         {
             return (
                 <ListItem dense className="px-0">
-                    <Avatar alt={user.name} src={user.avatar} className="w-32 h-32"/>
+                    <Avatar alt={user.name} src={user.imageUrl} className="w-32 h-32"/>
                     <div className="flex items-center ml-16">
                         <Typography>{user.name},</Typography>
                         <Typography className="ml-8">{props.item.message}</Typography>
