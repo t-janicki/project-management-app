@@ -110,21 +110,6 @@ export function reorderCard(result) {
                 lists
             }
         );
-        // request.then((response) => {
-        //     dispatch(showMessage({
-        //         message: 'Card Order Saved',
-        //         autoHideDuration: 2000,
-        //         anchorOrigin: {
-        //             vertical: 'top',
-        //             horizontal: 'right'
-        //         }
-        //     }));
-        // });
-        //
-        // return dispatch({
-        //     type: ORDER_CARD,
-        //     payload: ordered
-        // });
 
         return new Promise((resolve, reject) => {
             request.then((response) => {

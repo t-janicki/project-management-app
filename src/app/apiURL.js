@@ -1,6 +1,6 @@
 // const BASE_URL = 'https://vps701667.ovh.net:8888/api';
 const BASE_URL = 'http://localhost:8080/api';
-// const BASE_URL = 'https://shielded-brook-69228.herokuapp.com/api';
+// const BASE_URL = 'https://task-management-api.herokuapp.com/api';
 
 //ACCOUNT & COMPANY
 export const USER_SIGN_IN = BASE_URL + '/auth/login';
@@ -11,7 +11,11 @@ export const UPDATE_USER = BASE_URL + '/users/me';
 // export const GET_USER = BASE_URL + '/accounts';
 export const NEW_PASSWORD_REQUEST = BASE_URL + '/users/me/reset-password';
 
+// LOCAL URL
 export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+
+// REMOTE URL
+// export const OAUTH2_REDIRECT_URI = 'https://stoic-neumann-df94d0.netlify.com/oauth2/redirect';
 
 export const GOOGLE_AUTH_URL = BASE_URL + '/oauth2/authorize/google?redirect_uri=' + OAUTH2_REDIRECT_URI;
 export const FACEBOOK_AUTH_URL = BASE_URL + '/oauth2/authorize/facebook?redirect_uri=' + OAUTH2_REDIRECT_URI;

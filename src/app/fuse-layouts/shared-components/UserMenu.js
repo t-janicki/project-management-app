@@ -23,9 +23,9 @@ function UserMenu(props)
         <React.Fragment>
 
             <Button className="h-64" onClick={userMenuClick}>
-                {user.userInfo.imageUrl ?
+                {user.userInfo.avatarUrl ?
                     (
-                        <Avatar className="" alt="user photo" src={user.userInfo.imageUrl}/>
+                        <Avatar className="" alt="user photo" src={user.userInfo.avatarUrl}/>
                     )
                     :
                     (

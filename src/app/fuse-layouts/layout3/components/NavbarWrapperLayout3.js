@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Drawer, Hidden} from '@material-ui/core';
 import {ThemeProvider, makeStyles} from '@material-ui/styles';
-import * as Actions from 'app/store/actions';
+import * as Actions from './../../../../app/store/actions';
 import clsx from 'clsx';
 import NavbarMobileLayout3 from './NavbarMobileLayout3';
 import NavbarLayout3 from './NavbarLayout3';

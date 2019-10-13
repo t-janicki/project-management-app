@@ -54,7 +54,7 @@ function UserNavbarHeader(props)
             <Avatar
                 className={clsx(classes.avatar, "avatar")}
                 alt="user photo"
-                src={user.imageUrl && user.imageUrl !== '' ? user.imageUrl : "assets/images/avatars/profile.jpg"}
+                src={user.avatarUrl && user.avatarUrl !== '' ? user.avatarUrl : "assets/images/avatars/profile.jpg"}
             />
         </AppBar>
     );

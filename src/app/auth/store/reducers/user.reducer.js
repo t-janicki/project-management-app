@@ -5,7 +5,7 @@ const initialState = {
         'role': [],
         'name': '',
         'lastName': '',
-        'imageUrl': '',
+        'avatarUrl': '',
         'email': '',
     },
     shortcuts: [],

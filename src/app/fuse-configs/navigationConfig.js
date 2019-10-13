@@ -26,38 +26,38 @@ const navigationConfig = [
             //         }
             //     ]
             // },
-            {
-                'id'   : 'e-commerce-personnel',
-                'title': 'Personnel',
-                'type' : 'item',
-                'icon' : 'person',
-                'url'  : '/personnel',
-                'exact': true
-            },
-            {
-                'id'   : 'e-commerce-customers',
-                'title': 'Customers',
-                'type' : 'item',
-                'icon' : 'people',
-                'url'  : '/customers',
-                'exact': true
-            },
-            {
-                'id'   : 'e-commerce-products',
-                'title': 'Products',
-                'type' : 'item',
-                'icon' : 'store_mall_directory',
-                'url'  : '/products',
-                'exact': true
-            },
-            {
-                'id'   : 'e-commerce-orders',
-                'title': 'Orders',
-                'type' : 'item',
-                'icon' : 'local_dining',
-                'url'  : '/orders',
-                'exact': true
-            },
+            // {
+            //     'id'   : 'e-commerce-personnel',
+            //     'title': 'Personnel',
+            //     'type' : 'item',
+            //     'icon' : 'person',
+            //     'url'  : '/personnel',
+            //     'exact': true
+            // },
+            // {
+            //     'id'   : 'e-commerce-customers',
+            //     'title': 'Customers',
+            //     'type' : 'item',
+            //     'icon' : 'people',
+            //     'url'  : '/customers',
+            //     'exact': true
+            // },
+            // {
+            //     'id'   : 'e-commerce-products',
+            //     'title': 'Products',
+            //     'type' : 'item',
+            //     'icon' : 'store_mall_directory',
+            //     'url'  : '/products',
+            //     'exact': true
+            // },
+            // {
+            //     'id'   : 'e-commerce-orders',
+            //     'title': 'Orders',
+            //     'type' : 'item',
+            //     'icon' : 'local_dining',
+            //     'url'  : '/orders',
+            //     'exact': true
+            // },
         ]
     },
     {

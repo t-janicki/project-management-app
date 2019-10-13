@@ -10,43 +10,38 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        transitionProperty      : 'box-shadow',
-        transitionDuration      : theme.transitions.duration.short,
+        transitionProperty: 'box-shadow',
+        transitionDuration: theme.transitions.duration.short,
         transitionTimingFunction: theme.transitions.easing.easeInOut
     }
 }));
 
-function BoardCard(props)
-{
+function BoardCard(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
     // console.log(board)
     const classes = useStyles(props);
     const {cardId, index} = props;
     const card = board.cards.find(x => x.id == cardId);
-    // console.log(card);
+    console.log(card);
     const checkItemsChecked = getCheckItemsChecked(card);
     const checkItems = getCheckItems(card);
     const commentsCount = getCommentsCount(card);
 
-    function handleCardClick(ev, card)
-    {
+    function handleCardClick(ev, card) {
         ev.preventDefault();
         dispatch(Actions.openCardDialog(card));
     }
 
-    function getCheckItemsChecked(card)
-    {
+    function getCheckItemsChecked(card) {
         return _.sum(card.checklists.map(list => _.sum(list.checkItems.map(x => (x.checked ? 1 : 0)))));
     }
 
-    function getCheckItems(card)
-    {
+    function getCheckItems(card) {
         return _.sum(card.checklists.map(x => x.checkItems.length));
     }
 
-    function getCommentsCount(card)
-    {
+    function getCommentsCount(card) {
         return _.sum(card.activities.map(x => (x.type === 'comment' ? 1 : 0)));
     }
 
@@ -65,7 +60,8 @@ function BoardCard(props)
                     >
 
                         {board.settings.cardCoverImages && card.idAttachmentCover !== '' && (
-                            <img className="block" src={_.find(card.attachments, {id: card.idAttachmentCover}).src} alt="card cover"/>
+                            <img className="block" src={_.find(card.attachments, {id: card.idAttachmentCover}).src}
+                                 alt="card cover"/>
                         )}
 
                         <div className="p-16 pb-0">
@@ -77,7 +73,8 @@ function BoardCard(props)
                                         const label = board.labels.find(v => v.id == id);
                                         return (
                                             <Tooltip title={label.name} key={id}>
-                                                <div className={clsx(label.className, "w-32  h-6 rounded-6 mr-6 mb-6")}/>
+                                                <div
+                                                    className={clsx(label.className, "w-32  h-6 rounded-6 mr-6 mb-6")}/>
                                             </Tooltip>
                                         );
                                     })}
@@ -113,10 +110,12 @@ function BoardCard(props)
                             {card.idMembers.length > 0 && (
                                 <div className="flex flex-wrap mb-12">
                                     {card.idMembers.map(id => {
-                                        const member = _.find(board.members, {id});
+                                        // const member = _.find(board.members, {id});
+                                        const member = board.members.find(member => member.id == id);
+
                                         return (
                                             <Tooltip title={member.name} key={id}>
-                                                <Avatar className="mr-8 w-32 h-32" src={member.avatar}/>
+                                                <Avatar className="mr-8 w-32 h-32" src={member.avatarUrl}/>
                                             </Tooltip>
                                         )
                                     })}

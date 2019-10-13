@@ -19,10 +19,8 @@ import _ from '@lodash';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 import * as Actions from '../../../../../../../app/main/apps/scrumboard/store/actions/index';
-import LabelModel from '../../../../../../../app/main/apps/scrumboard/model/LabelModel';
 import CardAttachment from './attachment/CardAttachment';
 import DueMenu from './toolbar/DueMenu';
-import LabelsMenu from './toolbar/LabelsMenu';
 import MembersMenu from './toolbar/MembersMenu';
 import CheckListMenu from './toolbar/CheckListMenu';
 import CardOptionsMenu from './toolbar/CardOptionsMenu';
@@ -42,11 +40,7 @@ function BoardCardForm(props) {
     const dueDate = cardForm && cardForm.dueDate ? moment(cardForm.dueDate).format(moment.HTML5_FMT.DATE) : "";
 
     const cardId = card === null ? '' : card.id;
-    // if (card === null) {
-    //     cardId = '';
-    // } else {
-    //     cardId = card.id;
-    // }
+
     const labelsIds = cardForm.idLabels.map(labelId => parseInt(labelId));
     const boardLabelsIds = board.labels.map(label => label.id);
 
@@ -127,12 +121,6 @@ function BoardCardForm(props) {
                                 onRemoveDue={removeDue}
                                 dueDate={dueDate}
                             />
-
-                            {/*<LabelsMenu*/}
-                            {/*    onToggleLabel={toggleLabel}*/}
-                            {/*    labels={board.labels}*/}
-                            {/*    idLabels={cardForm.idLabels}*/}
-                            {/*/>*/}
 
                             <MembersMenu
                                 onToggleMember={toggleMember}
@@ -272,7 +260,6 @@ function BoardCardForm(props) {
 
                                     const boardId = board.id;
                                     dispatch(Actions.newLabel({name, boardId})).then((data) => {
-                                        console.log(data)
                                         addNewChip('idLabels', data.id);
 
                                         return data.id;
@@ -292,11 +279,12 @@ function BoardCardForm(props) {
                                 className={cardForm.idLabels.length > 0 && 'sm:ml-8'}
                                 value={
                                     cardForm.idMembers.map(memberId => {
-                                        const member = _.find(board.members, {id: memberId});
+                                        // const member = _.find(board.members, {id: memberId});
+                                        const member = board.members.find(member => member.id == memberId);
                                         return member && {
                                             value: member.id,
                                             label: (<Tooltip title={member.name}><Avatar className="-ml-12 w-32 h-32"
-                                                                                         src={member.avatar}/></Tooltip>)
+                                                                                         src={member.avatarUrl}/></Tooltip>)
                                         }
                                     })
                                 }
@@ -310,7 +298,7 @@ function BoardCardForm(props) {
                                     {
                                         value: member.id,
                                         label: (<span className="flex items-center"><Avatar className="w-32 h-32 mr-8"
-                                                                                            src={member.avatar}/>{member.name}</span>)
+                                                                                            src={member.avatarUrl}/>{member.name}</span>)
                                     }
                                 ))}
                                 variant="fixed"
@@ -373,7 +361,7 @@ function BoardCardForm(props) {
                         </div>
                         <List className="">
                             {cardForm.activities.map(item => (
-                                    <CardActivity
+                                <CardActivity
                                         item={item}
                                         key={item.id}
                                         members={board.members}

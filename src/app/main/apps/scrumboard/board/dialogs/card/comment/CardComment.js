@@ -4,28 +4,26 @@ import {useForm} from '@fuse/hooks';
 import * as Actions from '../../../../../../../../app/main/apps/scrumboard/store/actions';
 import {useDispatch, useSelector} from "react-redux";
 
-function CardComment(props)
-{
+function CardComment(props) {
     const {form, handleChange, resetForm} = useForm(
         {
-            message : ''
+            message: ''
         }
     );
 
     const dispatch = useDispatch();
 
-    const user = useSelector(({auth}) => auth.user.userInfo);
+    const userId = useSelector(({auth}) => auth.user.userInfo.id);
+    console.log(userId)
+    const user = props.members.find(member => member.userId === userId);
 
-    function isFormInvalid()
-    {
+    function isFormInvalid() {
         return form.message === '';
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
-        if ( isFormInvalid() )
-        {
+        if (isFormInvalid()) {
             return;
         }
 
@@ -38,7 +36,7 @@ function CardComment(props)
 
     return (
         <form onSubmit={handleSubmit} className="flex">
-            <Avatar className="w-32 h-32" alt={user.name} src={user.imageUrl}/>
+            <Avatar className="w-32 h-32" alt={user.name} src={user.avatarUrl}/>
             <div className="flex flex-col items-start flex-1 pr-0 pl-16">
                 <TextField
                     className="flex flex-1"

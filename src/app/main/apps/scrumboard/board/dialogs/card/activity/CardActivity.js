@@ -1,31 +1,29 @@
 import React from 'react';
 import {Avatar, ListItem, Typography} from '@material-ui/core';
 import clsx from 'clsx';
-import _ from '@lodash';
 import {makeStyles} from '@material-ui/styles';
-import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     commentBubble: {
         borderRadius: '5px 20px 20px 5px',
-        border      : '1px solid ' + theme.palette.divider
+        border: '1px solid ' + theme.palette.divider
     }
 }));
 
-function CardActivity(props)
-{
+function CardActivity(props) {
     const classes = useStyles(props);
-    const user = useSelector(({auth}) => auth.user.userInfo);
 
-    // HERE ADD LATER MEMBER NAME AND URL
+    console.log(props)
 
-    switch ( props.item.type )
-    {
-        case 'comment':
-        {
+    console.log(props.members.find(m => m.userId == props.item.userId));
+    const user = props.members.find(m => m.userId == props.item.userId);
+    console.log(user)
+
+    switch (props.item.type) {
+        case 'comment': {
             return (
                 <ListItem dense className="px-0">
-                    <Avatar alt={user.name} src={user.imageUrl} className="w-32 h-32"/>
+                    <Avatar alt={user.name} src={user.avatarUrl} className="w-32 h-32"/>
                     <div className={clsx(classes.commentBubble, "flex flex-col ml-16 p-12")}>
                         <div className="flex items-center">
                             <Typography>{user.name}</Typography>
@@ -36,11 +34,10 @@ function CardActivity(props)
                 </ListItem>
             )
         }
-        case 'attachment':
-        {
+        case 'attachment': {
             return (
                 <ListItem dense className="px-0">
-                    <Avatar alt={user.name} src={user.imageUrl} className="w-32 h-32"/>
+                    <Avatar alt={user.name} src={user.avatar} className="w-32 h-32"/>
                     <div className="flex items-center ml-16">
                         <Typography>{user.name},</Typography>
                         <Typography className="ml-8">{props.item.message}</Typography>
@@ -49,8 +46,7 @@ function CardActivity(props)
                 </ListItem>
             )
         }
-        default:
-        {
+        default: {
             return null;
         }
     }
