@@ -94,7 +94,7 @@ export function reorderCard(result) {
     return (dispatch, getState) => {
 
         const {board} = getState().scrumboardApp;
-        const {lists} = board;
+        let {lists} = board;
 
         const ordered = reorderQuoteMap(
             lists,
@@ -102,28 +102,53 @@ export function reorderCard(result) {
             result.destination
         );
 
-        const request = axios.post('/api/scrumboard-app/card/order',
+        const id = board.id;
+        lists = ordered;
+        const request = axios.put(`${BOARD_API}/cards/reorder`,
             {
-                boardId: board.id,
-                lists: ordered
+                id,
+                lists
             }
         );
+        // request.then((response) => {
+        //     dispatch(showMessage({
+        //         message: 'Card Order Saved',
+        //         autoHideDuration: 2000,
+        //         anchorOrigin: {
+        //             vertical: 'top',
+        //             horizontal: 'right'
+        //         }
+        //     }));
+        // });
+        //
+        // return dispatch({
+        //     type: ORDER_CARD,
+        //     payload: ordered
+        // });
 
-        request.then((response) => {
-            dispatch(showMessage({
-                message: 'Card Order Saved',
-                autoHideDuration: 2000,
-                anchorOrigin: {
-                    vertical: 'top',
-                    horizontal: 'right'
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.data) {
+                    resolve(response.data);
+
+                    dispatch(showMessage({
+                                message: 'Card Order Saved',
+                                autoHideDuration: 2000,
+                                anchorOrigin: {
+                                    vertical: 'top',
+                                    horizontal: 'right'
+                                }
+                            }));
+
+                    return dispatch({
+                            type: ORDER_CARD,
+                            payload: ordered
+                        });
                 }
-            }));
-        });
+                reject(response.data)
+            });
 
-        return dispatch({
-            type: ORDER_CARD,
-            payload: ordered
-        });
+        })
     }
 }
 

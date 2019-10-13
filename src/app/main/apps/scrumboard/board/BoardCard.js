@@ -20,11 +20,11 @@ function BoardCard(props)
 {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
-    console.log(board)
+    // console.log(board)
     const classes = useStyles(props);
     const {cardId, index} = props;
     const card = board.cards.find(x => x.id == cardId);
-    console.log(card);
+    // console.log(card);
     const checkItemsChecked = getCheckItemsChecked(card);
     const checkItems = getCheckItems(card);
     const commentsCount = getCommentsCount(card);
@@ -75,7 +75,6 @@ function BoardCard(props)
                                     {card.idLabels.map(id => {
                                         // const label = _.find(board.labels, {id});
                                         const label = board.labels.find(v => v.id == id);
-
                                         return (
                                             <Tooltip title={label.name} key={id}>
                                                 <div className={clsx(label.className, "w-32  h-6 rounded-6 mr-6 mb-6")}/>
