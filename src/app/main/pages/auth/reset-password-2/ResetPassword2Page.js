@@ -48,7 +48,7 @@ function ResetPasswordPage2()
 
                 <FuseAnimate animation="transition.slideUpIn" delay={300}>
                     <Typography variant="h3" color="inherit" className="font-light">
-                        Welcome to the order management!
+                        Welcome to the task management!
                     </Typography>
                 </FuseAnimate>
 

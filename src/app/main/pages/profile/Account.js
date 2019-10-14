@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 function Account(props) {
     const dispatch = useDispatch();
     const account = useSelector(({account}) => account.account.data);
-
+    console.log(account)
     const classes = useStyles();
     const [selectedTab, setSelectedTab] = useState(0);
 
@@ -48,7 +48,7 @@ function Account(props) {
                         <div
                             className="flex flex-1 flex-col items-center justify-center md:flex-row md:items-center md:justify-start">
                             <FuseAnimate animation="transition.expandIn" delay={300}>
-                                <Avatar className="w-96 h-96" src="assets/images/avatars/profile.jpg"/>
+                                <Avatar className="w-96 h-96" src={account.avatarUrl}/>
                             </FuseAnimate>
                             <FuseAnimate animation="transition.slideLeftIn" delay={300}>
                                 <Typography className="md:ml-24" variant="h4" color="inherit">

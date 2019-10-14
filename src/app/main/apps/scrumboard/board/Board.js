@@ -70,7 +70,7 @@ function Board(props) {
             <AppBar position="static" color="primary">
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
                     <Hidden xsDown>
-                        <Button to="/apps/scrumboard/boards/" component={Link} variant="contained">
+                        <Button to="/apps/boards/" component={Link} variant="contained">
                             <Icon className="mr-8">assessment</Icon>
                             Boards
                         </Button>

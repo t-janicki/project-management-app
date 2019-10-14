@@ -28,7 +28,7 @@ function Register()
 
                 <FuseAnimate animation="transition.slideUpIn" delay={300}>
                     <Typography variant="h3" color="inherit" className="font-light">
-                        Welcome Order management!
+                        Welcome Task management!
                     </Typography>
                 </FuseAnimate>
 

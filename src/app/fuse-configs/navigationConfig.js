@@ -1,65 +1,65 @@
 
 const navigationConfig = [
-    {
-        'id'      : 'applications',
-        'title'   : 'E-Commerce',
-        'type'    : 'group',
-        'icon'    : 'shopping_cart',
-        'children': [
-            // {
-            //     'id'      : 'dashboards',
-            //     'title'   : 'Dashboards',
-            //     'type'    : 'collapse',
-            //     'icon'    : 'dashboard',
-            //     'children': [
-            //         {
-            //             'id'   : 'analytics-dashboard',
-            //             'title': 'Analytics',
-            //             'type' : 'item',
-            //             'url'  : '/apps/dashboards/analytics'
-            //         },
-            //         {
-            //             'id'   : 'project-dashboard',
-            //             'title': 'Project',
-            //             'type' : 'item',
-            //             'url'  : '/apps/dashboards/project'
-            //         }
-            //     ]
-            // },
-            // {
-            //     'id'   : 'e-commerce-personnel',
-            //     'title': 'Personnel',
-            //     'type' : 'item',
-            //     'icon' : 'person',
-            //     'url'  : '/personnel',
-            //     'exact': true
-            // },
-            // {
-            //     'id'   : 'e-commerce-customers',
-            //     'title': 'Customers',
-            //     'type' : 'item',
-            //     'icon' : 'people',
-            //     'url'  : '/customers',
-            //     'exact': true
-            // },
-            // {
-            //     'id'   : 'e-commerce-products',
-            //     'title': 'Products',
-            //     'type' : 'item',
-            //     'icon' : 'store_mall_directory',
-            //     'url'  : '/products',
-            //     'exact': true
-            // },
-            // {
-            //     'id'   : 'e-commerce-orders',
-            //     'title': 'Orders',
-            //     'type' : 'item',
-            //     'icon' : 'local_dining',
-            //     'url'  : '/orders',
-            //     'exact': true
-            // },
-        ]
-    },
+    // {
+    //     'id'      : 'applications',
+    //     'title'   : 'E-Commerce',
+    //     'type'    : 'group',
+    //     'icon'    : 'shopping_cart',
+    //     'children': [
+    //         {
+    //             'id'      : 'dashboards',
+    //             'title'   : 'Dashboards',
+    //             'type'    : 'collapse',
+    //             'icon'    : 'dashboard',
+    //             'children': [
+    //                 {
+    //                     'id'   : 'analytics-dashboard',
+    //                     'title': 'Analytics',
+    //                     'type' : 'item',
+    //                     'url'  : '/apps/dashboards/analytics'
+    //                 },
+    //                 {
+    //                     'id'   : 'project-dashboard',
+    //                     'title': 'Project',
+    //                     'type' : 'item',
+    //                     'url'  : '/apps/dashboards/project'
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             'id'   : 'e-commerce-personnel',
+    //             'title': 'Personnel',
+    //             'type' : 'item',
+    //             'icon' : 'person',
+    //             'url'  : '/personnel',
+    //             'exact': true
+    //         },
+    //         {
+    //             'id'   : 'e-commerce-customers',
+    //             'title': 'Customers',
+    //             'type' : 'item',
+    //             'icon' : 'people',
+    //             'url'  : '/customers',
+    //             'exact': true
+    //         },
+    //         {
+    //             'id'   : 'e-commerce-products',
+    //             'title': 'Products',
+    //             'type' : 'item',
+    //             'icon' : 'store_mall_directory',
+    //             'url'  : '/products',
+    //             'exact': true
+    //         },
+    //         {
+    //             'id'   : 'e-commerce-orders',
+    //             'title': 'Orders',
+    //             'type' : 'item',
+    //             'icon' : 'local_dining',
+    //             'url'  : '/orders',
+    //             'exact': true
+    //         },
+    //     ]
+    // },
     {
         'id'   : 'todo',
         'title': 'To-Do-App',
@@ -77,11 +77,11 @@ const navigationConfig = [
         'url'  : '/coming-soon',
     },
     {
-        'id'   : 'scrumboard',
-        'title': 'Scrumboard',
+        'id'   : 'boards',
+        'title': 'Boards',
         'type' : 'item',
         'icon' : 'assessment',
-        'url'  : '/apps/scrumboard'
+        'url'  : '/apps/boards'
         // 'url'  : '/coming-soon',
     },
     // {

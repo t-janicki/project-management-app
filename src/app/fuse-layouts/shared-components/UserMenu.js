@@ -39,8 +39,8 @@ function UserMenu(props)
                     <Typography component="span" className="normal-case font-600 flex">
                         {user.userInfo.name} {user.userInfo.lastName}
                     </Typography>
-                    <Typography className="text-11 capitalize" color="textSecondary">
-                        {user.userInfo.role.toString()}
+                    <Typography className="text-10 ">
+                        {user.userInfo.email.toLowerCase()}
                     </Typography>
                 </div>
 

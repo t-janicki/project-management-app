@@ -122,11 +122,11 @@ function BoardCardForm(props) {
                                 dueDate={dueDate}
                             />
 
-                            <MembersMenu
-                                onToggleMember={toggleMember}
-                                members={board.members}
-                                idMembers={cardForm.idMembers}
-                            />
+                            {/*<MembersMenu*/}
+                            {/*    onToggleMember={toggleMember}*/}
+                            {/*    members={board.members}*/}
+                            {/*    idMembers={cardForm.idMembers}*/}
+                            {/*/>*/}
 
                             <IconButton color="inherit">
                                 <Icon>attachment</Icon>
@@ -221,7 +221,7 @@ function BoardCardForm(props) {
                     />
                 </div>
 
-                <div className="flex flex-col sm:flex-row">
+                <div className="w-full mb-24">
                         <div className="flex-1 mb-24">
                             <div className="flex items-center mt-16 mb-12">
                                 <Icon className="text-20 mr-8" color="inherit">label</Icon>
@@ -269,8 +269,8 @@ function BoardCardForm(props) {
                             />
                         </div>
 
-                    {cardForm.idMembers.length > 0 && (
-                        <div className="flex-1 mb-24">
+                    {/*{cardForm.idMembers.length > 0 && (*/}
+                        <div className="w-full mb-24">
                             <div className="flex items-center mt-16 mb-12">
                                 <Icon className="text-20 mr-8" color="inherit">supervisor_account</Icon>
                                 <Typography className="font-600 text-16">Members</Typography>
@@ -304,7 +304,7 @@ function BoardCardForm(props) {
                                 variant="fixed"
                             />
                         </div>
-                    )}
+                    {/*)}*/}
                 </div>
 
                 {cardForm.attachments.length > 0 && (

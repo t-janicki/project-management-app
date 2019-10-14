@@ -43,7 +43,7 @@ export function getBoard(params) {
                     }
                 }));
                 history.push({
-                    pathname: '/apps/scrumboard/boards'
+                    pathname: '/apps/boards'
                 });
             });
 }

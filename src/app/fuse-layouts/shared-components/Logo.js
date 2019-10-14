@@ -32,7 +32,7 @@ function Logo()
 
     return (
         <div className={clsx(classes.root, "flex items-center")}>
-            <Typography className="text-16 ml-12 font-light logo-text" color="textPrimary">ORDER MANAGEMENT</Typography>
+            <Typography className="text-16 ml-12 font-light logo-text" color="textPrimary">TASK MANAGEMENT</Typography>
         </div>
     );
 }
