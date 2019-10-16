@@ -1,7 +1,6 @@
 import React from 'react';
 import {Icon, ListItem, TextField, Fab} from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
-import ChecklistItemModel from '../../../../../../../../app/main/apps/scrumboard/model/ChecklistItemModel';
 import {useDispatch} from "react-redux";
 import * as Actions from './../../../../store/actions';
 

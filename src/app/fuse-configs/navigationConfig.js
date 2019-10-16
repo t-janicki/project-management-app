@@ -81,7 +81,8 @@ const navigationConfig = [
         'title': 'Boards',
         'type' : 'item',
         'icon' : 'assessment',
-        'url'  : '/apps/boards'
+        'url'  : '/apps/boards',
+        'exact': true
         // 'url'  : '/coming-soon',
     },
     // {

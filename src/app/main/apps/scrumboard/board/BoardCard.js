@@ -28,6 +28,8 @@ function BoardCard(props) {
     const checkItems = getCheckItems(card);
     const commentsCount = getCommentsCount(card);
 
+    const boardType = 'PERSONAL';
+
     function handleCardClick(ev, card) {
         ev.preventDefault();
         dispatch(Actions.openCardDialog(card));
@@ -107,7 +109,7 @@ function BoardCard(props) {
                                 </div>
                             )}
 
-                            {card.idMembers.length > 0 && (
+                            {card.idMembers.length > 0 && boardType === 'TEAM' && (
                                 <div className="flex flex-wrap mb-12">
                                     {card.idMembers.map(id => {
                                         // const member = _.find(board.members, {id});

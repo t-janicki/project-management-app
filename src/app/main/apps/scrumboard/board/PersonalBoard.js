@@ -13,12 +13,13 @@ import BoardCardDialog from './dialogs/card/BoardCardDialog';
 import BoardSettingsSidebar from './sidebars/settings/BoardSettingsSidebar';
 import {useDispatch, useSelector} from 'react-redux';
 
-function Board(props) {
+function PersonalBoard(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
     console.log(board)
     const containerRef = useRef(null);
     const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
+
 
     useEffect(() => {
         dispatch(Actions.getBoard(props.match.params));
@@ -69,15 +70,16 @@ function Board(props) {
         >
             <AppBar position="static" color="primary">
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
+
                     <Hidden xsDown>
-                        <Button to="/apps/boards/" component={Link} variant="contained">
+                        <Button to="/apps/boards/personal" component={Link} variant="contained">
                             <Icon className="mr-8">assessment</Icon>
-                            Boards
+                            Personal Boards
                         </Button>
                     </Hidden>
 
                     <Hidden smUp>
-                        <IconButton color="inherit" to="/apps/scrumboard/boards/" component={Link}>
+                        <IconButton color="inherit" to="/apps/boards/personal" component={Link}>
                             <Icon>assessment</Icon>
                         </IconButton>
                     </Hidden>
@@ -145,4 +147,4 @@ function Board(props) {
     );
 }
 
-export default withReducer('scrumboardApp', reducer)(withRouter(Board));
+export default withReducer('scrumboardApp', reducer)(withRouter(PersonalBoard));

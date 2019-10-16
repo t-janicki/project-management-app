@@ -231,7 +231,7 @@ export function deleteBoard(boardId) {
         request.then((response) => {
 
             history.push({
-                pathname: '/apps/scrumboard/boards'
+                pathname: '/apps/boards'
             });
 
             return dispatch({
@@ -247,7 +247,7 @@ export function copyBoard(board) {
         uri: board.uri + '-copied'
     });
     return (dispatch) => {
-        dispatch(Actions.newBoard());
+        dispatch(Actions.newPersonalBoard());
         return {type: COPY_BOARD};
     }
 }

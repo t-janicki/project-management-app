@@ -52,3 +52,5 @@ export const DELETE_ALL_PERSONNEL_API = BASE_URL + '/personnel/delete/';
 
 //BOARD APP
 export const BOARD_API = BASE_URL + '/boards';
+
+export const TEAM_API = BASE_URL + '/teams';

@@ -3,7 +3,6 @@ import {ProjectDashboardAppConfig} from './dashboards/project/ProjectDashboardAp
 import {TodoAppConfig} from './todo/TodoAppConfig';
 import {CustomersAppConfig} from './e-commerce/customers/CustomersAppConfig';
 import {CalendarAppConfig} from './calendar/CalendarAppConfig';
-// import {ECommerceAppConfig} from './e-commerce/ECommerceAppConfig';
 import {ScrumboardAppConfig} from './scrumboard/ScrumboardAppConfig';
 import {NotesAppConfig} from './notes/NotesAppConfig';
 import {ProductsAppConfig} from './e-commerce/products/ProductsAppConfig';

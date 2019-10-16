@@ -19,9 +19,7 @@ import _ from '@lodash';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 import * as Actions from '../../../../../../../app/main/apps/scrumboard/store/actions/index';
-import CardAttachment from './attachment/CardAttachment';
 import DueMenu from './toolbar/DueMenu';
-import MembersMenu from './toolbar/MembersMenu';
 import CheckListMenu from './toolbar/CheckListMenu';
 import CardOptionsMenu from './toolbar/CardOptionsMenu';
 import CardChecklist from './checklist/CardChecklist';
@@ -32,6 +30,8 @@ function BoardCardForm(props) {
     const dispatch = useDispatch();
     const card = useSelector(({scrumboardApp}) => scrumboardApp.card.data);
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
+
+    const boardType = 'PERSONAL';
 
     const {form: cardForm, handleChange, setForm, setInForm} = useForm(card);
     const updateCard = useDebounce((boardId, newCard) => {
@@ -269,7 +269,7 @@ function BoardCardForm(props) {
                             />
                         </div>
 
-                    {/*{cardForm.idMembers.length > 0 && (*/}
+                    {boardType === 'TEAM' && (
                         <div className="w-full mb-24">
                             <div className="flex items-center mt-16 mb-12">
                                 <Icon className="text-20 mr-8" color="inherit">supervisor_account</Icon>
@@ -294,7 +294,7 @@ function BoardCardForm(props) {
                                 textFieldProps={{
                                     variant: "outlined"
                                 }}
-                                options={board.members.map((member) => (
+                                options={board.team.members.map((member) => (
                                     {
                                         value: member.id,
                                         label: (<span className="flex items-center"><Avatar className="w-32 h-32 mr-8"
@@ -304,30 +304,30 @@ function BoardCardForm(props) {
                                 variant="fixed"
                             />
                         </div>
-                    {/*)}*/}
+                    )}
                 </div>
 
-                {cardForm.attachments.length > 0 && (
-                    <div className="mb-24">
-                        <div className="flex items-center mt-16 mb-12">
-                            <Icon className="text-20 mr-8" color="inherit">attachment</Icon>
-                            <Typography className="font-600 text-16">Attachments</Typography>
-                        </div>
-                        <div className="flex flex-col sm:flex-row flex-wrap">
-                            {cardForm.attachments.map(item => (
-                                    <CardAttachment
-                                        item={item}
-                                        card={cardForm}
-                                        makeCover={makeCover}
-                                        removeCover={removeCover}
-                                        removeAttachment={removeAttachment}
-                                        key={item.id}
-                                    />
-                                )
-                            )}
-                        </div>
-                    </div>
-                )}
+                {/*{cardForm.attachments.length > 0 && (*/}
+                {/*    <div className="mb-24">*/}
+                {/*        <div className="flex items-center mt-16 mb-12">*/}
+                {/*            <Icon className="text-20 mr-8" color="inherit">attachment</Icon>*/}
+                {/*            <Typography className="font-600 text-16">Attachments</Typography>*/}
+                {/*        </div>*/}
+                {/*        <div className="flex flex-col sm:flex-row flex-wrap">*/}
+                {/*            {cardForm.attachments.map(item => (*/}
+                {/*                    <CardAttachment*/}
+                {/*                        item={item}*/}
+                {/*                        card={cardForm}*/}
+                {/*                        makeCover={makeCover}*/}
+                {/*                        removeCover={removeCover}*/}
+                {/*                        removeAttachment={removeAttachment}*/}
+                {/*                        key={item.id}*/}
+                {/*                    />*/}
+                {/*                )*/}
+                {/*            )}*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*)}*/}
 
                 {cardForm.checklists.map((checklist, index) => (
                     <CardChecklist
@@ -339,19 +339,21 @@ function BoardCardForm(props) {
                     />
                 ))}
 
-                <div className="mb-24">
-                    <div className="flex items-center mt-16 mb-12">
-                        <Icon className="text-20 mr-8" color="inherit">comment</Icon>
-                        <Typography className="font-600 text-16">Comment</Typography>
+                {/*{boardType === 'TEAM' && (*/}
+                    <div className="mb-24">
+                        <div className="flex items-center mt-16 mb-12">
+                            <Icon className="text-20 mr-8" color="inherit">comment</Icon>
+                            <Typography className="font-600 text-16">Comment</Typography>
+                        </div>
+                        <div>
+                            <CardComment
+                                cardId={cardId}
+                                members={board.members}
+                                onCommentAdd={commentAdd}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <CardComment
-                            cardId={cardId}
-                            members={board.members}
-                            onCommentAdd={commentAdd}
-                        />
-                    </div>
-                </div>
+                {/*)}*/}
 
                 {cardForm.activities.length > 0 && (
                     <div className="mb-24">

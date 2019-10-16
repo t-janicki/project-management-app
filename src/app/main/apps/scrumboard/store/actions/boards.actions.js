@@ -6,36 +6,32 @@ export const GET_BOARDS = '[SCRUMBOARD APP] GET BOARDS';
 export const RESET_BOARDS = '[SCRUMBOARD APP] RESET BOARDS';
 export const NEW_BOARD = '[SCRUMBOARD APP] NEW BOARD';
 
-export function getBoards()
-{
+export function getBoards() {
     const request = axios.get(BOARD_API);
     return (dispatch) =>
-        request.then((response) =>
-            {
+        request.then((response) => {
                 console.log(response)
                 dispatch({
-                    type   : GET_BOARDS,
+                    type: GET_BOARDS,
                     payload: response.data
                 })
             }
         );
 }
 
-export function resetBoards()
-{
+export function resetBoards() {
     return {
         type: RESET_BOARDS
     }
 }
 
-export function newBoard()
-{
+export function newPersonalBoard() {
     const request = axios.post(BOARD_API);
     return (dispatch) =>
         request.then((response) => {
-            const board = response.data;
+                const board = response.data;
                 history.push({
-                    pathname: '/apps/scrumboard/boards/' + board.id + '/' + board.uri
+                    pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
                 });
                 return dispatch({
                     type: NEW_BOARD,
