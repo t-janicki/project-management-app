@@ -117,18 +117,18 @@ export function reorderCard(result) {
                     resolve(response.data);
 
                     dispatch(showMessage({
-                                message: 'Card Order Saved',
-                                autoHideDuration: 2000,
-                                anchorOrigin: {
-                                    vertical: 'top',
-                                    horizontal: 'right'
-                                }
-                            }));
+                        message: 'Card Order Saved',
+                        autoHideDuration: 2000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right'
+                        }
+                    }));
 
                     return dispatch({
-                            type: ORDER_CARD,
-                            payload: ordered
-                        });
+                        type: ORDER_CARD,
+                        payload: ordered
+                    });
                 }
                 reject(response.data)
             });
@@ -140,9 +140,13 @@ export function reorderCard(result) {
 export function newCard(boardId, listId, cardTitle) {
     return (dispatch, getState) => {
 
-        const {routeParams} = getState().scrumboardApp.board;
+        // const {routeParams} = getState().scrumboardApp.board;
 
-        const request = axios.post(`${BOARD_API}/${boardId}/list/${listId}/cardTitle=${cardTitle}`, {routeParams});
+        const name = cardTitle;
+
+        const request = axios.post(`${BOARD_API}/${boardId}/list/${listId}`, {
+            name
+        });
 
         return new Promise((resolve, reject) => {
             request.then((response) => {
@@ -158,7 +162,10 @@ export function newCard(boardId, listId, cardTitle) {
 
 export function newList(boardId, listTitle) {
 
-    const request = axios.post(BOARD_API + `/${boardId}/list/${listTitle}`);
+    const name = listTitle;
+    const request = axios.post(BOARD_API + `/${boardId}/newList`, {
+        name
+    });
 
     return (dispatch) =>
         request.then((response) =>
@@ -171,10 +178,14 @@ export function newList(boardId, listTitle) {
 
 export function renameList(boardId, listId, listTitle) {
 
-    const request = axios.put(`${BOARD_API}/${boardId}/list/${listId}/listTitle=${listTitle}`,
+
+    const name = listTitle;
+    const id = listId;
+
+    const request = axios.put(`${BOARD_API}/${boardId}/list`,
         {
-            boardId,
-            listId
+            name,
+            id
         }
     );
     return (dispatch) =>
@@ -188,12 +199,7 @@ export function renameList(boardId, listId, listTitle) {
 }
 
 export function removeList(boardId, listId) {
-    const request = axios.put(`${BOARD_API}/${boardId}/list/${listId}/delete`,
-        {
-            boardId,
-            listId
-        }
-    );
+    const request = axios.delete(`${BOARD_API}/${boardId}/list/${listId}`);
 
     return (dispatch) =>
         request.then((response) =>
@@ -208,9 +214,10 @@ export function changeBoardSettings(newSettings) {
     return (dispatch, getState) => {
         const {board} = getState().scrumboardApp;
         const settings = _.merge(board.settings, newSettings);
-        const boardId = board.id;
-        const request = axios.put(`${BOARD_API}/${boardId}/settings`,
+        const id = board.id;
+        const request = axios.put(`${BOARD_API}/settings`,
             {
+                id,
                 settings
             }
         );
@@ -253,7 +260,12 @@ export function copyBoard(board) {
 }
 
 export function renameBoard(boardId, boardTitle) {
-    const request = axios.put(`${BOARD_API}/${boardId}/name=${boardTitle}`, {
+
+    const id = boardId;
+    const name = boardTitle;
+
+    const request = axios.put(`${BOARD_API}`, {
+            id, name,
             headers: {
                 'Content-Type': 'application/json'
             }

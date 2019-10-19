@@ -30,7 +30,7 @@ export function updateCard(boardId, card) {
             checklists, activities
         } = card;
 
-        const request = axios.post(`${BOARD_API}/card/update`, {
+        const request = axios.put(`${BOARD_API}/card`, {
             id, name, description, dueDate, idAttachmentCover,
             idMembers, idLabels, subscribed, attachments,
             checklists, activities
@@ -56,7 +56,8 @@ export function updateCard(boardId, card) {
 
 export function newCheckList({name}) {
     return () => {
-        const request = axios.post(`${BOARD_API}/card/newCheckList/name=${name}`, {
+        const request = axios.post(`${BOARD_API}/card/newCheckList`, {
+            name,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -74,7 +75,8 @@ export function newCheckList({name}) {
 
 export function newLabel({name, boardId}) {
     return (dispatch) => {
-        const request = axios.post(`${BOARD_API}/${boardId}/card/newLabel/name=${name}`, {
+        const request = axios.post(`${BOARD_API}/${boardId}/card/newLabel`, {
+            name,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -99,7 +101,8 @@ export function newLabel({name, boardId}) {
 
 export function newCheckItem({name}) {
     return () => {
-        const request = axios.post(`${BOARD_API}/card/newCheckItem/name=${name}`, {
+        const request = axios.post(`${BOARD_API}/card/newCheckItem`, {
+            name,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -117,7 +120,8 @@ export function newCheckItem({name}) {
 
 export function newActivity({message}, cardId) {
     return () => {
-        const request = axios.post(`${BOARD_API}/card/${cardId}/newActivity/message=${message} `, {
+        const request = axios.post(`${BOARD_API}/card/${cardId}/newActivity`, {
+            message,
             headers: {
                 'Content-Type': 'application/json'
             }
