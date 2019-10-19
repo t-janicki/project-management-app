@@ -40,3 +40,19 @@ export function newPersonalBoard() {
             }
         );
 }
+
+export function newTeamBoard(teamId) {
+    const request = axios.post(BOARD_API + '/team');
+    return (dispatch) =>
+        request.then((response) => {
+                const board = response.data;
+                history.push({
+                    pathname: '/apps/boards/teams/' + teamId + '/' + board.id + '/' + board.uri
+                });
+                return dispatch({
+                    type: NEW_BOARD,
+                    board
+                })
+            }
+        );
+}

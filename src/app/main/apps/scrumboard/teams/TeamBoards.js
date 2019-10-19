@@ -42,7 +42,9 @@ function TeamBoards(props)
 {
     const dispatch = useDispatch();
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-    console.log(team)
+    console.info(team)
+    console.log('team id')
+    const teamId = team.id;
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -67,7 +69,7 @@ function TeamBoards(props)
                     <Hidden xsDown>
                         <Button to="/apps/boards/teams" component={Link} variant="contained">
                             <Icon className="mr-8">assessment</Icon>
-                            Boards
+                            Team's
                         </Button>
                     </Hidden>
 
@@ -107,7 +109,7 @@ function TeamBoards(props)
                     <div className="w-224 h-224 p-16">
                         <div
                             className={clsx(classes.board, classes.newBoard, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                            onClick={() => dispatch(Actions.newPersonalBoard())}
+                            onClick={() => dispatch(Actions.newTeamBoard(teamId))}
                         >
                             <Icon className="text-56">add_circle</Icon>
                             <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">Add new board</Typography>

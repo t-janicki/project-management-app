@@ -105,7 +105,7 @@ function Teams(props)
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
-                                <Icon className="text-56">assessment</Icon>
+                                <Icon className="text-56">people</Icon>
                                 <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">{team.displayName}</Typography>
                             </Link>
                         </div>

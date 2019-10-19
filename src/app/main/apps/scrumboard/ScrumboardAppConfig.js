@@ -22,7 +22,13 @@ export const ScrumboardAppConfig = {
         },
         {
             path     : '/apps/boards/teams/:teamId',
+            exact    : true,
             component: React.lazy(() => import('./teams/TeamBoards'))
+        },
+        {
+            path     : '/apps/boards/teams/:teamId/:boardId/:uri',
+            exact    : true,
+            component: React.lazy(() => import('./teams/TeamBoard'))
         },
         {
             path     : '/apps/boards',
