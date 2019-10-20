@@ -17,9 +17,9 @@ const teamReducer = function (state = initialState, action) {
             return initialState;
         }
         case Actions.NEW_TEAM: {
-            return [
-                action.payload
-            ];
+            return {
+                ...action.payload
+            };
         }
         case Actions.GET_TEAM: {
             return {

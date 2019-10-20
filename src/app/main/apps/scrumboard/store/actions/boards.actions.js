@@ -6,6 +6,13 @@ export const GET_BOARDS = '[SCRUMBOARD APP] GET BOARDS';
 export const RESET_BOARDS = '[SCRUMBOARD APP] RESET BOARDS';
 export const NEW_BOARD = '[SCRUMBOARD APP] NEW BOARD';
 
+
+export function resetBoards() {
+    return {
+        type: RESET_BOARDS
+    }
+}
+
 export function getBoards() {
     const request = axios.get(BOARD_API);
     return (dispatch) =>
@@ -19,35 +26,13 @@ export function getBoards() {
         );
 }
 
-export function resetBoards() {
-    return {
-        type: RESET_BOARDS
-    }
-}
-
-export function newPersonalBoard() {
+export function newBoard() {
     const request = axios.post(BOARD_API);
     return (dispatch) =>
         request.then((response) => {
                 const board = response.data;
                 history.push({
                     pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
-                });
-                return dispatch({
-                    type: NEW_BOARD,
-                    board
-                })
-            }
-        );
-}
-
-export function newTeamBoard(teamId) {
-    const request = axios.post(BOARD_API + '/team');
-    return (dispatch) =>
-        request.then((response) => {
-                const board = response.data;
-                history.push({
-                    pathname: '/apps/boards/teams/' + teamId + '/' + board.id + '/' + board.uri
                 });
                 return dispatch({
                     type: NEW_BOARD,

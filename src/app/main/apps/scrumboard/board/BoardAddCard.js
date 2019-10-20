@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 function BoardAddCard(props) {
     const dispatch = useDispatch();
-    const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
+    const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
 
     const [formOpen, setFormOpen] = useState(false);
     const {form, handleChange, resetForm} = useForm({

@@ -20,7 +20,7 @@ import ListOptionsMenu from "./ListOptionsMenu";
 
 function BoardListHeader(props) {
     const dispatch = useDispatch();
-    const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
+    const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [formOpen, setFormOpen] = useState(false);

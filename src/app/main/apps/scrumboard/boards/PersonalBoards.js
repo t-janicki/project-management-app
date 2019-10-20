@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Typography, Icon, AppBar, Toolbar, Hidden, Button, IconButton} from '@material-ui/core';
 import {fade} from '@material-ui/core/styles/colorManipulator';
 import {FuseAnimateGroup, FuseAnimate} from '@fuse';
@@ -41,7 +41,6 @@ function PersonalBoards(props)
 {
     const dispatch = useDispatch();
     const boards = useSelector(({scrumboardApp}) => scrumboardApp.boards);
-    console.log(props)
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -105,12 +104,13 @@ function PersonalBoards(props)
                         <div className="w-224 h-224 p-16">
                             <div
                                 className={clsx(classes.board, classes.newBoard, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                                onClick={() => dispatch(Actions.newPersonalBoard())}
+                                onClick={() => dispatch(Actions.newBoard())}
                             >
                                 <Icon className="text-56">add_circle</Icon>
                                 <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">Add new board</Typography>
                             </div>
                         </div>
+
                     </FuseAnimateGroup>
                 </div>
             {/*</div>*/}

@@ -29,7 +29,7 @@ import CardComment from './comment/CardComment';
 function BoardCardForm(props) {
     const dispatch = useDispatch();
     const card = useSelector(({scrumboardApp}) => scrumboardApp.card.data);
-    const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
+    const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
 
     const boardType = 'PERSONAL';
 

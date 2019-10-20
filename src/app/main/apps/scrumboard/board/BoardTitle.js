@@ -7,7 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 function BoardTitle(props)
 {
     const dispatch = useDispatch();
-    const board = useSelector(({scrumboardApp}) => scrumboardApp.board);
+    const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
+    // console.log(board)
 
     const [formOpen, setFormOpen] = useState(false);
     const {form, handleChange, resetForm, setForm} = useForm({

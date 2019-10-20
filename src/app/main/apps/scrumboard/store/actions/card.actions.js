@@ -45,7 +45,6 @@ export function updateCard(boardId, card) {
                     horizontal: 'right'
                 }
             }));
-
             return dispatch({
                 type: UPDATE_CARD,
                 payload: card

@@ -32,15 +32,15 @@ function TeamDialog(props) {
 
     const [isFormValid, setIsFormValid] = useState(false);
 
-    const initDialog = useCallback(
-        () => {
-
-            setForm({
-                ...defaultFormState
-            });
-        },
-        [setForm],
-    );
+    // const initDialog = useCallback(
+    //     () => {
+    //
+    //         setForm({
+    //             ...defaultFormState
+    //         });
+    //     },
+    //     [setForm],
+    // );
 
     // useEffect(() => {
     //     if (dialogOpen.props.open) {

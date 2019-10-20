@@ -55,7 +55,6 @@ function Teams(props)
     const containerRef = useRef(null);
 
     function handleNewTeamDialog(ev) {
-        // console.log(team)
         ev.preventDefault();
         dispatch(Actions.openTeamDialog(ev));
     }

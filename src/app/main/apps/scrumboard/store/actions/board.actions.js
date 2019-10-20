@@ -24,8 +24,9 @@ export const REMOVE_LIST = '[SCRUMBOARD APP] REMOVE LIST';
 export function getBoard(params) {
 
     const {boardId} = params;
-    const request = axios.get(BOARD_API + `/${boardId}`);
+    const request = axios.get(`${BOARD_API}/${boardId}`);
 
+    console.log(request)
     return (dispatch) =>
         request.then(
             (response) =>
@@ -57,22 +58,21 @@ export function resetBoard() {
 export function reorderList(result) {
     return (dispatch, getState) => {
 
-        const {board} = getState().scrumboardApp;
-        let {lists} = board;
+        let lists = getState().scrumboardApp.board.data.lists;
 
-        const ordered = reorder(
+        lists = reorder(
             lists,
             result.source.index,
             result.destination.index
         );
 
-        lists = ordered;
+        // lists = ordered;
         const request = axios.put(BOARD_API + `/lists/reorder`, {
                 lists
             }
         );
 
-        request.then((response) => {
+        request.then(() => {
             dispatch(showMessage({
                 message: 'List Order Saved',
                 autoHideDuration: 2000,
@@ -85,7 +85,7 @@ export function reorderList(result) {
 
         return dispatch({
             type: ORDER_LIST,
-            payload: ordered
+            payload: lists
         });
     }
 }
@@ -93,7 +93,7 @@ export function reorderList(result) {
 export function reorderCard(result) {
     return (dispatch, getState) => {
 
-        const {board} = getState().scrumboardApp;
+        const board = getState().scrumboardApp.board.data;
         let {lists} = board;
 
         const ordered = reorderQuoteMap(
@@ -138,10 +138,8 @@ export function reorderCard(result) {
 }
 
 export function newCard(boardId, listId, cardTitle) {
-    return (dispatch, getState) => {
-
+    return (dispatch) => {
         // const {routeParams} = getState().scrumboardApp.board;
-
         const name = cardTitle;
 
         const request = axios.post(`${BOARD_API}/${boardId}/list/${listId}`, {
@@ -162,22 +160,26 @@ export function newCard(boardId, listId, cardTitle) {
 
 export function newList(boardId, listTitle) {
 
-    const name = listTitle;
-    const request = axios.post(BOARD_API + `/${boardId}/newList`, {
-        name
-    });
+    return (dispatch) => {
+        const name = listTitle;
+        const request = axios.post(BOARD_API + `/${boardId}/newList`, {
+            name
+        });
 
-    return (dispatch) =>
-        request.then((response) =>
-            dispatch({
-                type: ADD_LIST,
-                payload: response.data
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                resolve(response.data);
+                console.log(response.data)
+                return dispatch({
+                    type: ADD_LIST,
+                    payload: response.data
+                })
             })
-        );
+        })
+    }
 }
 
 export function renameList(boardId, listId, listTitle) {
-
 
     const name = listTitle;
     const id = listId;
@@ -188,6 +190,7 @@ export function renameList(boardId, listId, listTitle) {
             id
         }
     );
+
     return (dispatch) =>
         request.then((response) =>
             dispatch({
@@ -212,7 +215,9 @@ export function removeList(boardId, listId) {
 
 export function changeBoardSettings(newSettings) {
     return (dispatch, getState) => {
-        const {board} = getState().scrumboardApp;
+
+        const board = getState().scrumboardApp.board.data;
+
         const settings = _.merge(board.settings, newSettings);
         const id = board.id;
         const request = axios.put(`${BOARD_API}/settings`,
@@ -254,7 +259,7 @@ export function copyBoard(board) {
         uri: board.uri + '-copied'
     });
     return (dispatch) => {
-        dispatch(Actions.newPersonalBoard());
+        dispatch(Actions.newBoard());
         return {type: COPY_BOARD};
     }
 }
@@ -277,5 +282,6 @@ export function renameBoard(boardId, boardTitle) {
             dispatch({
                 type: RENAME_BOARD,
                 boardTitle
-            }));
+            })
+        );
 }
