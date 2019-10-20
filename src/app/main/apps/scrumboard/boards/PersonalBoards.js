@@ -9,6 +9,7 @@ import withReducer from '../../../../../app/store/withReducer';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
 import {makeStyles} from '@material-ui/styles';
+import NewBoardDialog from "../board/dialogs/NewBoardDialog";
 
 const useStyles = makeStyles(theme => ({
     root    : {
@@ -51,6 +52,11 @@ function PersonalBoards(props)
     }, [dispatch]);
 
     const containerRef = useRef(null);
+
+    function handleNewBoardDialog(ev) {
+        ev.preventDefault();
+        dispatch(Actions.openNewBoardDialog(ev));
+    }
 
     return (
         <div
@@ -104,14 +110,16 @@ function PersonalBoards(props)
                         <div className="w-224 h-224 p-16">
                             <div
                                 className={clsx(classes.board, classes.newBoard, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                                onClick={() => dispatch(Actions.newBoard())}
+                                onClick={(ev) => handleNewBoardDialog(ev)}
                             >
                                 <Icon className="text-56">add_circle</Icon>
                                 <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">Add new board</Typography>
                             </div>
                         </div>
-
                     </FuseAnimateGroup>
+
+                    <NewBoardDialog/>
+
                 </div>
             {/*</div>*/}
         </div>

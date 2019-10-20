@@ -13,12 +13,6 @@ const useStyles = makeStyles(theme => ({
 function CardActivity(props) {
     const classes = useStyles(props);
 
-    console.log(props)
-
-    // console.log(props.members.find(m => m.userId == props.item.userId));
-    // const user = props.members.find(m => m.userId == props.item.userId);
-    // console.log(user)
-
     switch (props.item.type) {
         case 'comment': {
             return (

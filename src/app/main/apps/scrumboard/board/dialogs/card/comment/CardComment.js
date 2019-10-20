@@ -14,9 +14,6 @@ function CardComment(props) {
     const dispatch = useDispatch();
 
     const user = useSelector(({auth}) => auth.user.userInfo);
-    // console.log(userId)
-    console.log(props)
-    // const user = props.members.find(member => member.userId === userId);
 
     function isFormInvalid() {
         return form.message === '';

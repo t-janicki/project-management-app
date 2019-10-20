@@ -41,9 +41,7 @@ function TeamBoards(props)
 {
     const dispatch = useDispatch();
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-    // console.info(team)
-    // console.log('team id')
-    // const teamId = team.id;
+
     const classes = useStyles(props);
 
     useEffect(() => {

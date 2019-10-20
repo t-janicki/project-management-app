@@ -20,13 +20,27 @@ export const ADD_LIST = '[SCRUMBOARD APP] ADD LIST';
 export const ADD_LABEL = '[SCRUMBOARD APP] ADD LABEL';
 export const RENAME_LIST = '[SCRUMBOARD APP] RENAME LIST';
 export const REMOVE_LIST = '[SCRUMBOARD APP] REMOVE LIST';
+export const OPEN_NEW_BOARD_DIALOG = '[SCRUMBOARD APP] OPEN NEW BOARD DIALOG';
+export const CLOSE_NEW_BOARD_DIALOG = '[SCRUMBOARD APP] CLOSE NEW BOARD DIALOG';
+
+export function openNewBoardDialog(data) {
+    return {
+        type: OPEN_NEW_BOARD_DIALOG,
+        payload: data
+    }
+}
+
+export function closeNewBoardDialog() {
+    return{
+        type: CLOSE_NEW_BOARD_DIALOG
+    }
+}
 
 export function getBoard(params) {
 
     const {boardId} = params;
     const request = axios.get(`${BOARD_API}/${boardId}`);
 
-    console.log(request)
     return (dispatch) =>
         request.then(
             (response) =>
@@ -169,7 +183,6 @@ export function newList(boardId, listTitle) {
         return new Promise((resolve, reject) => {
             request.then((response) => {
                 resolve(response.data);
-                console.log(response.data)
                 return dispatch({
                     type: ADD_LIST,
                     payload: response.data

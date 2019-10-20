@@ -231,8 +231,6 @@ function BoardCardForm(props) {
                                 className={cardForm.idMembers.length > 0 && 'sm:mr-8'}
                                 value={
                                     cardForm.idLabels.map(labelId => {
-                                        console.log('cardForm')
-                                        console.log(cardForm)
                                         // const label = _.find(board.labels, {id: labelId});
                                         const label = board.labels.find(v => v.id == labelId);
                                         return label && {

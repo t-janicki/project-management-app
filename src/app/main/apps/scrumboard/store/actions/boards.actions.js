@@ -17,7 +17,6 @@ export function getBoards() {
     const request = axios.get(BOARD_API);
     return (dispatch) =>
         request.then((response) => {
-                console.log(response)
                 dispatch({
                     type: GET_BOARDS,
                     payload: response.data

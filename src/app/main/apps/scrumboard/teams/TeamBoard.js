@@ -16,7 +16,6 @@ import BoardCardDialog from "../board/dialogs/card/BoardCardDialog";
 function TeamBoard(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
-    console.log(board)
     const containerRef = useRef(null);
     const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
 
