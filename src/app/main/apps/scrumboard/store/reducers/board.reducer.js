@@ -14,6 +14,12 @@ const boardReducer = function (state = initialState, action) {
                 data: {...action.payload}
             };
         }
+        case Actions.NEW_BOARD: {
+            return {
+                ...state,
+                data: {...action.board}
+            }
+        }
         case Actions.OPEN_NEW_BOARD_DIALOG: {
             return {
                 dialogOpen: true,

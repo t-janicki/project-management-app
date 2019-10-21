@@ -9,12 +9,6 @@ const boardsReducer = function (state = initialState, action) {
                 ...action.payload
             ];
         }
-        case Actions.NEW_BOARD: {
-            return [
-                ...state,
-                action.board
-            ];
-        }
         case Actions.RESET_BOARDS: {
             return [];
         }

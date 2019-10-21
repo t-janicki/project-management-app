@@ -40,17 +40,16 @@ function NewBoardDialog(props) {
     //     },
     //     [setForm],
     // );
-
+    //
     // useEffect(() => {
-    //     if (dialogOpen.props.open) {
+    //     if (dialogOpen) {
     //         initDialog();
     //     }
     //
-    // }, [dialogOpen.props.open, initDialog]);
+    // }, [dialogOpen, initDialog]);
 
     function handleSubmit() {
-        dispatch(Actions.newBoard());
-
+       dispatch(Actions.newBoard());
     }
 
     function enableButton() {

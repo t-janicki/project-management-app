@@ -8,6 +8,7 @@ import * as Actions from './index';
 import {BOARD_API} from "../../../../../apiURL";
 
 export const GET_BOARD = '[SCRUMBOARD APP] GET BOARD';
+export const NEW_BOARD = '[SCRUMBOARD APP] NEW BOARD';
 export const DELETE_BOARD = '[SCRUMBOARD APP] DELETE BOARD';
 export const COPY_BOARD = '[SCRUMBOARD APP] COPY BOARD';
 export const RENAME_BOARD = '[SCRUMBOARD APP] RENAME BOARD';
@@ -31,9 +32,30 @@ export function openNewBoardDialog(data) {
 }
 
 export function closeNewBoardDialog() {
-    return{
+    return {
         type: CLOSE_NEW_BOARD_DIALOG
     }
+}
+
+export function newBoard() {
+    // console.log(boardForm)
+    const request = axios.post(BOARD_API);
+
+    return (dispatch) =>
+        request.then((response) => {
+                const board = response.data;
+                console.log(board)
+
+                history.push({
+                    pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
+                });
+
+                return dispatch({
+                    type: NEW_BOARD,
+                    payload: board
+                })
+            }
+        );
 }
 
 export function getBoard(params) {

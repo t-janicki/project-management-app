@@ -9,6 +9,7 @@ import withReducer from '../../../../store/withReducer';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
 import {makeStyles} from '@material-ui/styles';
+import NewBoardDialog from "../board/dialogs/NewBoardDialog";
 
 const useStyles = makeStyles(theme => ({
     root    : {
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 function TeamBoards(props)
 {
     const dispatch = useDispatch();
-    const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
+    // const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
 
     const classes = useStyles(props);
 
@@ -52,6 +53,11 @@ function TeamBoards(props)
     }, [dispatch, props.match.params]);
 
     const containerRef = useRef(null);
+
+    function handleNewBoardDialog(ev) {
+        ev.preventDefault();
+        dispatch(Actions.openNewBoardDialog(ev));
+    }
 
     return (
         <div
@@ -106,13 +112,15 @@ function TeamBoards(props)
                     <div className="w-224 h-224 p-16">
                         <div
                             className={clsx(classes.board, classes.newBoard, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
-                            onClick={() => dispatch(Actions.newBoard())}
+                            onClick={(ev) => handleNewBoardDialog(ev)}
                         >
                             <Icon className="text-56">add_circle</Icon>
                             <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">Add new board</Typography>
                         </div>
                     </div>
                 </FuseAnimateGroup>
+
+                <NewBoardDialog/>
 
             </div>
             {/*</div>*/}
