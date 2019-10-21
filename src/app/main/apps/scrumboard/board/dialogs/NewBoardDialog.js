@@ -9,7 +9,7 @@ import {TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
 
 const defaultFormState = {
-    displayName: '',
+    name: '',
     description: ''
 };
 
@@ -88,11 +88,11 @@ function NewBoardDialog(props) {
 
                     <div className="flex items-center mb-24">
                         <TextFieldFormsy
-                            id="displayName"
-                            label="Display Name"
-                            name="displayName"
+                            id="name"
+                            label="Name"
+                            name="name"
                             className="mb-24"
-                            value={boardForm.displayName || ''}
+                            value={boardForm.name || ''}
                             onChange={handleChange}
                             validations={{
                                 minLength: 4,
