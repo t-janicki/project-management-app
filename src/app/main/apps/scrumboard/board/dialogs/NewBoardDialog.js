@@ -49,7 +49,7 @@ function NewBoardDialog(props) {
     // }, [dialogOpen, initDialog]);
 
     function handleSubmit() {
-       dispatch(Actions.newBoard());
+       dispatch(Actions.newBoard(boardForm));
     }
 
     function enableButton() {

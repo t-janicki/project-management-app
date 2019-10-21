@@ -6,6 +6,7 @@ import {showMessage} from 'app/store/actions/fuse';
 import reorder, {reorderQuoteMap} from './reorder';
 import * as Actions from './index';
 import {BOARD_API} from "../../../../../apiURL";
+import {useDispatch} from "react-redux";
 
 export const GET_BOARD = '[SCRUMBOARD APP] GET BOARD';
 export const NEW_BOARD = '[SCRUMBOARD APP] NEW BOARD';
@@ -37,26 +38,66 @@ export function closeNewBoardDialog() {
     }
 }
 
-export function newBoard() {
-    // console.log(boardForm)
-    const request = axios.post(BOARD_API);
+// export function newBoard() {
+//     // console.log(boardForm)
+//     const request = axios.post(BOARD_API);
+//     return (dispatch) =>
+//         request.then(
+//             (response) => {
+//                 const board = response.data;
+//                 console.log(board)
+//
+//                 history.push({
+//                     pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
+//                 });
+//
+//                 return dispatch({
+//                     type: NEW_BOARD,
+//                     payload: board
+//                 })
+//             }
+//         );
+// }
 
-    return (dispatch) =>
-        request.then((response) => {
-                const board = response.data;
-                console.log(board)
+// export function newBoard() {
+//     // console.log(boardForm)
+//     const request = axios.post(BOARD_API);
+//     return (dispatch) =>
+//         request.then(
+//             (response) => {
+//                 return dispatch({
+//                     type: NEW_BOARD,
+//                     payload: response.data
+//                 })
+//             }
+//         );
+// }
 
-                history.push({
-                    pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
-                });
+export function newBoard(boardForm) {
+    console.log(boardForm)
+    return (dispatch) => {
+        const request = axios.post(BOARD_API);
 
+        let board = {};
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                resolve(response.data);
+                board = response.data;
                 return dispatch({
                     type: NEW_BOARD,
-                    payload: board
+                    payload: response.data
                 })
-            }
-        );
+            })
+                .then(() => {
+                    history.push({
+                        pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
+                    });
+                })
+        })
+    }
 }
+
 
 export function getBoard(params) {
 

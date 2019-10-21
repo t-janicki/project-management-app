@@ -16,8 +16,7 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.NEW_BOARD: {
             return {
-                ...state,
-                data: {...action.board}
+                ...action.board
             }
         }
         case Actions.OPEN_NEW_BOARD_DIALOG: {
