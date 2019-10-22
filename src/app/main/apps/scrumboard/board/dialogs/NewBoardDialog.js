@@ -11,7 +11,8 @@ import {useForm} from '@fuse/hooks';
 const defaultFormState = {
     name: '',
     description: '',
-    boardType: ' '
+    boardType: 'PERSONAL',
+    team: ['']
 };
 
 const useStyles = makeStyles(theme => ({
@@ -58,8 +59,19 @@ function NewBoardDialog(props) {
         }
     ];
 
+    const teams = [
+        {
+            value: 'Team 1',
+            label: 'Team 1',
+        },
+        {
+            value: 'Team 2',
+            label: 'Team 2'
+        }
+    ];
+
     function handleSubmit() {
-       dispatch(Actions.newBoard(boardForm));
+        dispatch(Actions.newBoard(boardForm));
     }
 
     function enableButton() {
@@ -82,7 +94,9 @@ function NewBoardDialog(props) {
         >
             <DialogTitle component="div" className="p-0">
                 <AppBar position="static" elevation={1}>
-                    <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16"/>
+                    <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">
+                        New Board
+                    </Toolbar>
                 </AppBar>
             </DialogTitle>
 
@@ -96,7 +110,7 @@ function NewBoardDialog(props) {
                     className="flex flex-col justify-center w-full"
                 >
 
-                    <div className="flex items-center mb-24">
+                    <div>
                         <TextFieldFormsy
                             id="name"
                             label="Name"
@@ -119,7 +133,7 @@ function NewBoardDialog(props) {
                         />
                     </div>
 
-                    <div className="flex items-center mb-24">
+                    <div>
                         <TextFieldFormsy
                             id="boardType"
                             label="Board Type"
@@ -144,7 +158,34 @@ function NewBoardDialog(props) {
                         </TextFieldFormsy>
                     </div>
 
-                    <div className="w-full mb-24">
+                    {boardForm.boardType === 'TEAM' && (
+                        <div>
+                            <TextFieldFormsy
+                                id="team"
+                                label="Team"
+                                name="team"
+                                select
+                                className="mb-24"
+                                value={boardForm.team || ''}
+                                onChange={handleChange}
+                                SelectProps={{
+                                    native: true
+                                }}
+                                margin="normal"
+                                variant="outlined"
+                                required
+                                fullWidth
+                            >
+                                {teams.map(option => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </TextFieldFormsy>
+                        </div>
+                    )}
+
+                    <div>
                         <TextFieldFormsy
                             id="description"
                             className="mb-16"

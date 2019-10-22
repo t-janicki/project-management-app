@@ -81,6 +81,7 @@ export function newBoard({name, description, boardType}) {
     return (dispatch) => {
         const request = axios.post(BOARD_API, {
             name,
+            boardType,
             description,
             headers: {
                 'Content-Type': 'application/json'

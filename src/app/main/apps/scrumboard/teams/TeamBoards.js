@@ -41,8 +41,8 @@ const useStyles = makeStyles(theme => ({
 function TeamBoards(props)
 {
     const dispatch = useDispatch();
-    // const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-
+    const boards = useSelector(({scrumboardApp}) => scrumboardApp.team.boards);
+    console.log(boards)
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -97,18 +97,18 @@ function TeamBoards(props)
                         duration : 300
                     }}
                 >
-                    {/*{boards.map(board => (*/}
-                    {/*    <div className="w-224 h-224 p-16" key={board.id}>*/}
-                    {/*        <Link*/}
-                    {/*            to={'/apps/boards/personal/' + board.id + '/' + board.uri}*/}
-                    {/*            className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}*/}
-                    {/*            role="button"*/}
-                    {/*        >*/}
-                    {/*            <Icon className="text-56">assessment</Icon>*/}
-                    {/*            <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">{board.name}</Typography>*/}
-                    {/*        </Link>*/}
-                    {/*    </div>*/}
-                    {/*))}*/}
+                    {boards.map(board => (
+                        <div className="w-224 h-224 p-16" key={board.id}>
+                            <Link
+                                to={'/apps/boards/personal/' + board.id + '/' + board.uri}
+                                className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
+                                role="button"
+                            >
+                                <Icon className="text-56">assessment</Icon>
+                                <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">{board.name}</Typography>
+                            </Link>
+                        </div>
+                    ))}
                     <div className="w-224 h-224 p-16">
                         <div
                             className={clsx(classes.board, classes.newBoard, "flex flex-col items-center justify-center w-full h-full rounded py-24")}

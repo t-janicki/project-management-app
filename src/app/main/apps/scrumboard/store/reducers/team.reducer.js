@@ -1,6 +1,7 @@
 import * as Actions from '../actions';
 
 const initialState = {
+    boards: [],
     dialogOpen: false,
     data: null
 };
