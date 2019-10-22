@@ -10,13 +10,14 @@ import {useForm} from '@fuse/hooks';
 
 const defaultFormState = {
     name: '',
-    description: ''
+    description: '',
+    boardType: ' '
 };
 
 const useStyles = makeStyles(theme => ({
     paper: {
         color: theme.palette.text.primary
-    }
+    },
 }));
 
 function NewBoardDialog(props) {
@@ -24,8 +25,6 @@ function NewBoardDialog(props) {
     const dialogOpen = useSelector(({scrumboardApp}) => scrumboardApp.board.dialogOpen);
 
     const classes = useStyles(props);
-
-    // const {form, setForm, handleChange} = useForm(defaultFormState);
 
     const {form: boardForm, handleChange, setForm, setInForm} = useForm(defaultFormState);
 
@@ -48,6 +47,17 @@ function NewBoardDialog(props) {
     //
     // }, [dialogOpen, initDialog]);
 
+    const boardTypes = [
+        {
+            value: 'PERSONAL',
+            label: 'Personal',
+        },
+        {
+            value: 'TEAM',
+            label: 'Team',
+        }
+    ];
+
     function handleSubmit() {
        dispatch(Actions.newBoard(boardForm));
     }
@@ -65,7 +75,7 @@ function NewBoardDialog(props) {
     return (
         <Dialog
             classes={{
-                paper: clsx(classes.paper, "max-w-md w-full m-24")
+                paper: clsx(classes.paper, "max-w-sm w-full m-24")
             }}
             open={dialogOpen}
             onClose={ev => dispatch(Actions.closeNewBoardDialog())}
@@ -107,6 +117,31 @@ function NewBoardDialog(props) {
                             fullWidth
 
                         />
+                    </div>
+
+                    <div className="flex items-center mb-24">
+                        <TextFieldFormsy
+                            id="boardType"
+                            label="Board Type"
+                            name="boardType"
+                            select
+                            className="mb-24"
+                            value={boardForm.boardType || ''}
+                            onChange={handleChange}
+                            SelectProps={{
+                                native: true
+                            }}
+                            margin="normal"
+                            variant="outlined"
+                            required
+                            fullWidth
+                        >
+                            {boardTypes.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </TextFieldFormsy>
                     </div>
 
                     <div className="w-full mb-24">
