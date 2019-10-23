@@ -43,6 +43,7 @@ function Teams(props)
     const dispatch = useDispatch();
     const teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
 
+    console.log(teams)
     const classes = useStyles(props);
 
     useEffect(() => {

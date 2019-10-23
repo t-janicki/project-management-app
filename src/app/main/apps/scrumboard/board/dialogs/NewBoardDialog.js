@@ -12,8 +12,19 @@ const defaultFormState = {
     name: '',
     description: '',
     boardType: 'PERSONAL',
-    team: ['']
+    teamId: ['']
 };
+
+const boardTypes = [
+    {
+        value: 'PERSONAL',
+        label: 'Personal',
+    },
+    {
+        value: 'TEAM',
+        label: 'Team',
+    }
+];
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -24,6 +35,14 @@ const useStyles = makeStyles(theme => ({
 function NewBoardDialog(props) {
     const dispatch = useDispatch();
     const dialogOpen = useSelector(({scrumboardApp}) => scrumboardApp.board.dialogOpen);
+    const teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
+
+    useEffect(() => {
+        dispatch(Actions.getTeams());
+        return () => {
+            dispatch(Actions.resetTeams());
+        }
+    }, [dispatch]);
 
     const classes = useStyles(props);
 
@@ -47,28 +66,6 @@ function NewBoardDialog(props) {
     //     }
     //
     // }, [dialogOpen, initDialog]);
-
-    const boardTypes = [
-        {
-            value: 'PERSONAL',
-            label: 'Personal',
-        },
-        {
-            value: 'TEAM',
-            label: 'Team',
-        }
-    ];
-
-    const teams = [
-        {
-            value: 'Team 1',
-            label: 'Team 1',
-        },
-        {
-            value: 'Team 2',
-            label: 'Team 2'
-        }
-    ];
 
     function handleSubmit() {
         dispatch(Actions.newBoard(boardForm));
@@ -158,15 +155,15 @@ function NewBoardDialog(props) {
                         </TextFieldFormsy>
                     </div>
 
-                    {boardForm.boardType === 'TEAM' && (
+                    {boardForm.boardType === 'TEAM' && teams.length > 1 && (
                         <div>
                             <TextFieldFormsy
-                                id="team"
+                                id="teamId"
                                 label="Team"
-                                name="team"
+                                name="teamId"
                                 select
                                 className="mb-24"
-                                value={boardForm.team || ''}
+                                value={boardForm.teamId || ''}
                                 onChange={handleChange}
                                 SelectProps={{
                                     native: true
@@ -177,8 +174,8 @@ function NewBoardDialog(props) {
                                 fullWidth
                             >
                                 {teams.map(option => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
+                                    <option key={option.id} value={option.id}>
+                                        {option.displayName}
                                     </option>
                                 ))}
                             </TextFieldFormsy>

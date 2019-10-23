@@ -73,10 +73,11 @@ export function closeNewBoardDialog() {
 //         );
 // }
 
-export function newBoard({name, description, boardType}) {
+export function newBoard({name, description, boardType, teamId}) {
     console.log(name)
     console.log(description)
     console.log(boardType)
+    console.log(teamId)
 
     return (dispatch) => {
         const request = axios.post(BOARD_API, {
