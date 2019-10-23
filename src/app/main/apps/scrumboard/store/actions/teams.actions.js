@@ -1,10 +1,8 @@
 import axios from 'axios';
-import history from '@history';
 import {TEAM_API} from '../../../../../apiURL';
 
 export const GET_TEAMS = '[SCRUMBOARD APP] GET TEAMS';
 export const RESET_TEAMS = '[SCRUMBOARD APP] RESET TEAMS';
-export const NEW_TEAM = '[SCRUMBOARD APP] NEW TEAM';
 
 export function resetTeams() {
     return {
@@ -25,30 +23,4 @@ export function getTeams() {
     }
 }
 
-export function createNewTeam({displayName, description}) {
-    return (dispatch) => {
-        const request = axios.post(TEAM_API, {
-            displayName,
-            description
-        });
 
-        return new Promise((resolve, reject) => {
-            request.then((response) => {
-                if(response.data) {
-                    resolve(response.data);
-
-                    const team = response.data;
-
-                    history.push({
-                        pathname: '/apps/boards/teams/' + team.id
-                    });
-
-                    return dispatch({
-                        type: NEW_TEAM,
-                        team
-                    })
-                }
-            })
-        })
-    }
-}

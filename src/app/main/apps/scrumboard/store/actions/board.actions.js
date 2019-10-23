@@ -94,12 +94,15 @@ export function newBoard({name, description, boardType, teamId}) {
 
         return new Promise((resolve, reject) => {
             request.then((response) => {
+
                 resolve(response.data);
+
                 board = response.data;
+
                 return dispatch({
                     type: NEW_BOARD,
                     payload: response.data
-                })
+                });
             })
                 .then(() => {
                     history.push({
@@ -111,31 +114,56 @@ export function newBoard({name, description, boardType, teamId}) {
 }
 
 
+// export function getBoard(params) {
+//
+//     const {boardId} = params;
+//     const request = axios.get(`${BOARD_API}/${boardId}`);
+//
+//     return (dispatch) =>
+//         request.then(
+//             (response) =>
+//                 dispatch({
+//                     type: GET_BOARD,
+//                     payload: response.data
+//                 }),
+//             (error) => {
+//                 console.log(error)
+//                 dispatch(showMessage({
+//                     message: error.response.data,
+//                     autoHideDuration: 2000,
+//                     anchorOrigin: {
+//                         vertical: 'top',
+//                         horizontal: 'right'
+//                     }
+//                 }));
+//                 history.push({
+//                     pathname: '/apps/boards'
+//                 });
+//             });
+// }
 export function getBoard(params) {
+    return (dispatch) => {
+        const {boardId} = params;
+        const request = axios.get(`${BOARD_API}/${boardId}`);
 
-    const {boardId} = params;
-    const request = axios.get(`${BOARD_API}/${boardId}`);
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
 
-    return (dispatch) =>
-        request.then(
-            (response) =>
-                dispatch({
-                    type: GET_BOARD,
-                    payload: response.data
-                }),
-            (error) => {
-                dispatch(showMessage({
-                    message: error.response.data,
-                    autoHideDuration: 2000,
-                    anchorOrigin: {
-                        vertical: 'top',
-                        horizontal: 'right'
+                    return dispatch({
+                        type: GET_BOARD,
+                        payload: response.data
+                    })
+                }
+            })
+                .catch(function (error) {
+                    if (error.response.status === 404) {
+                        history.push('/not-found')
                     }
-                }));
-                history.push({
-                    pathname: '/apps/boards'
                 });
-            });
+        })
+    }
 }
 
 export function resetBoard() {

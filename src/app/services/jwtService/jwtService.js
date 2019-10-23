@@ -27,10 +27,11 @@ class jwtService extends FuseUtils.EventEmitter {
                     // if you ever get an unauthorized response, logout the user
                     this.emit('onAutoLogout', 'Unauthorized');
                     this.setSession(null);
-                } else
-                if (err.response.status === 404) {
-                    history.push('/not-found');
                 }
+                // else
+                // if (err.response.status === 404) {
+                //     history.push('/not-found');
+                // }
                 throw err;
             });
         });
