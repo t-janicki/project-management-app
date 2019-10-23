@@ -36,7 +36,7 @@ const routes = [
         component: () => <Redirect to="/apps/dashboards/analytics"/>
     },
     {
-        component: () => <Redirect to="/pages/errors/error-404"/>
+        component: () => <Redirect to="/not-found"/>
     }
 ];
 
