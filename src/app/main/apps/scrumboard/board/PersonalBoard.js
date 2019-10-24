@@ -20,13 +20,14 @@ function PersonalBoard(props) {
     const containerRef = useRef(null);
     const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
 
+    const boardType = 'PERSONAL';
 
     useEffect(() => {
-        dispatch(Actions.getBoard(props.match.params));
+        dispatch(Actions.getBoard(props.match.params, boardType));
         return () => {
             dispatch(Actions.resetBoard());
         }
-    }, [dispatch, props.match.params]);
+    }, [dispatch, props.match.params, boardType]);
 
     function onDragEnd(result) {
         const {source, destination} = result;

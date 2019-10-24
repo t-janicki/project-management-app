@@ -137,8 +137,10 @@ export function newActivity({message}, cardId) {
 }
 
 export function removeCard(boardId, cardId) {
-    return (dispatch) => {
-        const request = axios.delete(`${BOARD_API}/${boardId}/card/${cardId}`);
+    return (dispatch, getState) => {
+        const boardType = getState().scrumboardApp.board.data.boardType;
+
+        const request = axios.delete(`${BOARD_API}/${boardId}/card/${cardId}?boardType=${boardType}`);
 
         return new Promise((resolve, reject) => {
             request.then((response) => {

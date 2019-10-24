@@ -11,9 +11,10 @@ export function resetBoards() {
 }
 
 export function getBoards() {
-    const request = axios.get(BOARD_API);
+    const request = axios.get(BOARD_API + '?boardType=TEAM');
     return (dispatch) =>
         request.then((response) => {
+            console.log(response)
                 dispatch({
                     type: GET_BOARDS,
                     payload: response.data
