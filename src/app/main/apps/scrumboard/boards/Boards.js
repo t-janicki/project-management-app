@@ -58,7 +58,7 @@ function Boards(props) {
 
                 <FuseAnimate>
                     <Typography className="mt-44 sm:mt-88 sm:py-24 text-32 sm:text-40 font-300"
-                                color="inherit">Boards App</Typography>
+                                color="inherit">Boards</Typography>
                 </FuseAnimate>
 
                 <div>
@@ -71,7 +71,7 @@ function Boards(props) {
                     >
                         <div className="w-224 h-224 p-16">
                             <Link
-                                to={'/apps/boards/personal/'}
+                                to={'/personal/boards'}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
@@ -82,7 +82,7 @@ function Boards(props) {
                         </div>
                         <div className="w-224 h-224 p-16">
                             <Link
-                                to={'/apps/boards/teams'}
+                                to={'/teams'}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >

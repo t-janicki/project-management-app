@@ -7,36 +7,36 @@ export const ScrumboardAppConfig = {
     },
     routes  : [
         {
-            path     : '/apps/boards/personal/:boardId/:uri?',
+            path     : '/personal/boards/:boardId/:uri?',
             component: React.lazy(() => import('./board/PersonalBoard'))
         },
         {
-            path     : '/apps/boards/personal',
+            path     : '/personal/boards',
             exact    : true,
             component: React.lazy(() => import('./boards/PersonalBoards'))
         },
         {
-            path     : '/apps/boards/teams',
+            path     : '/teams',
             exact    : true,
             component: React.lazy(() => import('./teams/Teams'))
         },
         {
-            path     : '/apps/boards/teams/:teamId',
+            path     : '/teams/:teamId/boards',
             exact    : true,
             component: React.lazy(() => import('./teams/TeamBoards'))
         },
         {
-            path     : '/apps/boards/teams/:teamId/:boardId/:uri',
+            path     : '/teams/:teamId/boards/:boardId/:uri',
             exact    : true,
             component: React.lazy(() => import('./teams/TeamBoard'))
         },
         {
-            path     : '/apps/boards',
+            path     : '/boards',
             component: React.lazy(() => import('./boards/Boards'))
         },
         {
-            path     : '/apps/board',
-            component: () => <Redirect to="/apps/boards"/>
+            path     : '/board',
+            component: () => <Redirect to="/boards"/>
         }
     ]
 };

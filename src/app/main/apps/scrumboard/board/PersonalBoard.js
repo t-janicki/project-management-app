@@ -73,14 +73,14 @@ function PersonalBoard(props) {
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
 
                     <Hidden xsDown>
-                        <Button to="/apps/boards/personal" component={Link} variant="contained">
+                        <Button to="/personal/boards" component={Link} variant="contained">
                             <Icon className="mr-8">assessment</Icon>
                             Personal Boards
                         </Button>
                     </Hidden>
 
                     <Hidden smUp>
-                        <IconButton color="inherit" to="/apps/boards/personal" component={Link}>
+                        <IconButton color="inherit" to="/boards/personal" component={Link}>
                             <Icon>assessment</Icon>
                         </IconButton>
                     </Hidden>

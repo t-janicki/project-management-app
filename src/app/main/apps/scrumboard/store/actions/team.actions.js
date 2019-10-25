@@ -61,7 +61,7 @@ export function createNewTeam({displayName, description}) {
             })
                 .then(() => {
                     history.push({
-                        pathname: '/apps/boards/teams/' + team.id
+                        pathname: `/teams/${team.id}/boards`
                     });
                 })
         })

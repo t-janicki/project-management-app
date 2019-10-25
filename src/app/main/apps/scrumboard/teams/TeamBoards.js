@@ -43,8 +43,8 @@ function TeamBoards(props)
     const dispatch = useDispatch();
     const boards = useSelector(({scrumboardApp}) => scrumboardApp.team.boards);
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-    console.log(team)
-    console.log(boards)
+    // console.log(team)
+    // console.log(boards)
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -66,20 +66,17 @@ function TeamBoards(props)
             className="flex flex-1 flex-col w-full h-full relative items-center"
             ref={containerRef}
         >
-
-            {/*<div className="flex flex-grow flex-shrink-0 flex-col items-center container px-16 md:px-24">*/}
-
             <AppBar position="static" color="primary">
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
                     <Hidden xsDown>
-                        <Button to="/apps/boards/teams" component={Link} variant="contained">
+                        <Button to="/teams" component={Link} variant="contained">
                             <Icon className="mr-8">assessment</Icon>
                             Team's
                         </Button>
                     </Hidden>
 
                     <Hidden smUp>
-                        <IconButton color="inherit" to="/apps/boards/" component={Link}>
+                        <IconButton color="inherit" to="/boards/" component={Link}>
                             <Icon>assessment</Icon>
                         </IconButton>
                     </Hidden>
@@ -102,7 +99,7 @@ function TeamBoards(props)
                     {boards.map(board => (
                         <div className="w-224 h-224 p-16" key={board.id}>
                             <Link
-                                to={'/apps/boards/teams/' + team.id + '/' + board.id + '/' + board.uri}
+                                to={`/teams/${team.id}/boards/${board.id}/${board.uri}`}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
@@ -125,7 +122,6 @@ function TeamBoards(props)
                 <NewBoardDialog/>
 
             </div>
-            {/*</div>*/}
         </div>
     );
 }

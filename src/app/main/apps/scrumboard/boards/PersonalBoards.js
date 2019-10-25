@@ -68,14 +68,14 @@ function PersonalBoards(props)
                 <AppBar position="static" color="primary">
                     <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
                         <Hidden xsDown>
-                            <Button to="/apps/boards" component={Link} variant="contained">
+                            <Button to="/boards" component={Link} variant="contained">
                                 <Icon className="mr-8">assessment</Icon>
                                 Boards
                             </Button>
                         </Hidden>
 
                         <Hidden smUp>
-                            <IconButton color="inherit" to="/apps/boards/" component={Link}>
+                            <IconButton color="inherit" to="/boards/" component={Link}>
                                 <Icon>assessment</Icon>
                             </IconButton>
                         </Hidden>
@@ -98,7 +98,7 @@ function PersonalBoards(props)
                         {boards.map(board => (
                             <div className="w-224 h-224 p-16" key={board.id}>
                                 <Link
-                                    to={'/apps/boards/personal/' + board.id + '/' + board.uri}
+                                    to={'/personal/boards/' + board.id + '/' + board.uri}
                                     className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                     role="button"
                                 >

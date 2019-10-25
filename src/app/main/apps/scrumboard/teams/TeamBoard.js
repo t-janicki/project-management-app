@@ -16,7 +16,7 @@ import BoardCardDialog from "../board/dialogs/card/BoardCardDialog";
 function TeamBoard(props) {
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
-    console.log(board)
+
     const containerRef = useRef(null);
     const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
 
@@ -73,14 +73,14 @@ function TeamBoard(props) {
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
 
                     <Hidden xsDown>
-                        <Button to="/apps/boards/teams" component={Link} variant="contained">
+                        <Button to={`/teams/${props.match.params.teamId}/boards`}  component={Link} variant="contained">
                             <Icon className="mr-8">assessment</Icon>
                             Team Boards
                         </Button>
                     </Hidden>
 
                     <Hidden smUp>
-                        <IconButton color="inherit" to="/apps/boards/personal" component={Link}>
+                        <IconButton color="inherit" to="/boards/personal" component={Link}>
                             <Icon>assessment</Icon>
                         </IconButton>
                     </Hidden>

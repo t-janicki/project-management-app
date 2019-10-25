@@ -77,14 +77,38 @@ const navigationConfig = [
         'url'  : '/coming-soon',
     },
     {
-        'id'   : 'boards',
-        'title': 'Boards',
-        'type' : 'item',
+        'id'   : 'projects',
+        'title': 'Projects',
+        'type' : 'collapse',
         'icon' : 'assessment',
-        'url'  : '/apps/boards',
-        'exact': true
-        // 'url'  : '/coming-soon',
+        'url'  : '/boards',
+        'exact': true,
+        'children': [
+            {
+                'id': 'boards-personal',
+                'title' : 'Personal',
+                'type' : 'item',
+                'icon' : 'person',
+                'url' :  '/personal/boards'
+            },
+            {
+                'id': 'boards-teams',
+                'title' : 'Teams',
+                'type' : 'item',
+                'icon' : 'people',
+                'url' :  '/teams'
+            },
+        ]
+
     },
+    // {
+    //     'id'   : 'boards',
+    //     'title': 'Boards',
+    //     'type' : 'item',
+    //     'icon' : 'assessment',
+    //     'url'  : '/apps/boards',
+    //     'exact': true
+    // },
     // {
     //     'id'      : 'pages',
     //     'title'   : 'Pages',

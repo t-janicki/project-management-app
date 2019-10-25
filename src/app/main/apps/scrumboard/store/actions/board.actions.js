@@ -38,41 +38,6 @@ export function closeNewBoardDialog() {
     }
 }
 
-// export function newBoard() {
-//     // console.log(boardForm)
-//     const request = axios.post(BOARD_API);
-//     return (dispatch) =>
-//         request.then(
-//             (response) => {
-//                 const board = response.data;
-//                 console.log(board)
-//
-//                 history.push({
-//                     pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
-//                 });
-//
-//                 return dispatch({
-//                     type: NEW_BOARD,
-//                     payload: board
-//                 })
-//             }
-//         );
-// }
-
-// export function newBoard() {
-//     // console.log(boardForm)
-//     const request = axios.post(BOARD_API);
-//     return (dispatch) =>
-//         request.then(
-//             (response) => {
-//                 return dispatch({
-//                     type: NEW_BOARD,
-//                     payload: response.data
-//                 })
-//             }
-//         );
-// }
-
 export function newBoard({name, description, boardType, teams}) {
     console.log(name)
     console.log(description)
@@ -106,8 +71,8 @@ export function newBoard({name, description, boardType, teams}) {
                 });
             })
                 .then(() => {
-                    const uri = boardType === 'PERSONAL' ? `/apps/boards/personal/${board.id}/${board.uri}` :
-                        `/apps/boards/teams/${teamId}/${board.id}/${board.uri}`;
+                    const uri = boardType === 'PERSONAL' ? `/personal/boards/${board.id}/${board.uri}` :
+                        `/teams/${teamId}/boards/${board.id}/${board.uri}`;
                     history.push({
                         pathname: uri
                     });
@@ -367,7 +332,7 @@ export function deleteBoard(boardId) {
             })
                 .then(() => {
                     history.push({
-                        pathname: '/apps/boards'
+                        pathname: '/boards'
                     })
                 })
         })

@@ -67,14 +67,16 @@ function TeamDialog(props) {
     return (
         <Dialog
             classes={{
-                paper: clsx(classes.paper, "max-w-md w-full m-24")
+                paper: clsx(classes.paper, "max-w-sm w-full m-24")
             }}
             open={dialogOpen}
             onClose={ev => dispatch(Actions.closeTeamDialog())}
         >
             <DialogTitle component="div" className="p-0">
                 <AppBar position="static" elevation={1}>
-                    <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16"/>
+                    <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">
+                        New Team
+                    </Toolbar>
                 </AppBar>
             </DialogTitle>
 
@@ -88,7 +90,7 @@ function TeamDialog(props) {
                     className="flex flex-col justify-center w-full"
                 >
 
-                    <div className="flex items-center mb-24">
+                    <div>
                         <TextFieldFormsy
                             id="displayName"
                             label="Display Name"
@@ -111,7 +113,7 @@ function TeamDialog(props) {
                         />
                     </div>
 
-                    <div className="w-full mb-24">
+                    <div>
                         <TextFieldFormsy
                             id="description"
                             className="mb-16"
