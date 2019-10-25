@@ -10,7 +10,6 @@ const boardReducer = function (state = initialState, action) {
     switch (action.type) {
         case Actions.GET_BOARD: {
             return {
-                ...state,
                 data: {...action.payload}
             };
         }
@@ -33,7 +32,6 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.ORDER_LIST: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     lists: action.payload
@@ -42,7 +40,6 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.ORDER_CARD: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     lists: action.payload
@@ -51,7 +48,6 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.ADD_LIST: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     lists: action.payload
@@ -65,16 +61,17 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.ADD_LABEL: {
             return {
-                ...state,
-                labels: [
-                    ...state.labels,
-                    action.payload
-                ]
+                data: {
+                    ...state.data,
+                    labels: [
+                        ...state.data.labels,
+                        action.payload
+                    ]
+                }
             };
         }
         case Actions.UPDATE_CARD: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     cards: state.data.cards.map((_card) => {
@@ -88,7 +85,6 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.REMOVE_CARD: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     cards: _.reject(state.data.cards, {id: action.cardId}),
@@ -101,18 +97,19 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.RENAME_LIST: {
             return {
-                ...state,
-                lists: state.data.lists.map(list => {
-                    if (list.id === action.listId) {
-                        list.name = action.listTitle
-                    }
-                    return list;
-                })
+                data: {
+                    ...state.data,
+                    lists: state.data.lists.map(list => {
+                        if (list.id === action.listId) {
+                            list.name = action.listTitle
+                        }
+                        return list;
+                    })
+                }
             };
         }
         case Actions.REMOVE_LIST: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     lists: _.reject(state.data.lists, {id: action.listId})
@@ -121,7 +118,6 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.CHANGE_BOARD_SETTINGS: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     settings: action.payload
@@ -133,7 +129,6 @@ const boardReducer = function (state = initialState, action) {
         }
         case Actions.RENAME_BOARD: {
             return {
-                ...state,
                 data: {
                     ...state.data,
                     name: action.boardTitle

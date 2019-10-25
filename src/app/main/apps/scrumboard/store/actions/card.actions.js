@@ -83,10 +83,10 @@ export function newLabel({name, boardId}) {
 
         return new Promise((resolve, reject) => {
             request.then((response) => {
-                if (response.data) {
+                if (response.status === 200) {
 
                     resolve(response.data);
-
+                    console.log(response.data)
                     return dispatch({
                         type: ADD_LABEL,
                         payload: response.data
