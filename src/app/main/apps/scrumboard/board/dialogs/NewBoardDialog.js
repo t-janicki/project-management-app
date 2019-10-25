@@ -7,7 +7,6 @@ import clsx from 'clsx';
 import Formsy from "formsy-react";
 import {TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const boardTypes = [
     {

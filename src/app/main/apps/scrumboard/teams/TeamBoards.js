@@ -102,7 +102,7 @@ function TeamBoards(props)
                     {boards.map(board => (
                         <div className="w-224 h-224 p-16" key={board.id}>
                             <Link
-                                to={'/apps/boards/personal/' + board.id + '/' + board.uri}
+                                to={'/apps/boards/teams/' + team.id + '/' + board.id + '/' + board.uri}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >

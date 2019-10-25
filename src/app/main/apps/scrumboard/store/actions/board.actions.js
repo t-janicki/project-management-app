@@ -79,8 +79,9 @@ export function newBoard({name, description, boardType, teams}) {
     console.log(boardType)
     console.log(teams)
 
+    const teamId = teams;
     return (dispatch) => {
-        const request = axios.post(`${BOARD_API}?teamId=${teams}`, {
+        const request = axios.post(`${BOARD_API}?teamId=${teamId}`, {
             name,
             boardType,
             description,
@@ -105,8 +106,10 @@ export function newBoard({name, description, boardType, teams}) {
                 });
             })
                 .then(() => {
+                    const uri = boardType === 'PERSONAL' ? `/apps/boards/personal/${board.id}/${board.uri}` :
+                        `/apps/boards/teams/${teamId}/${board.id}/${board.uri}`;
                     history.push({
-                        pathname: '/apps/boards/personal/' + board.id + '/' + board.uri
+                        pathname: uri
                     });
                 })
         })
