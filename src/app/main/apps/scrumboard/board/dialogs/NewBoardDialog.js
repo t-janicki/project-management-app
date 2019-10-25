@@ -7,13 +7,7 @@ import clsx from 'clsx';
 import Formsy from "formsy-react";
 import {TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
-
-const defaultFormState = {
-    name: '',
-    description: '',
-    boardType: 'PERSONAL',
-    teamId: ['']
-};
+import MenuItem from '@material-ui/core/MenuItem';
 
 const boardTypes = [
     {
@@ -35,7 +29,15 @@ const useStyles = makeStyles(theme => ({
 function NewBoardDialog(props) {
     const dispatch = useDispatch();
     const dialogOpen = useSelector(({scrumboardApp}) => scrumboardApp.board.dialogOpen);
-    const teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
+    let teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
+    console.log(teams)
+
+    const defaultFormState = {
+        name: '',
+        description: '',
+        boardType: 'PERSONAL',
+        teams: []
+    };
 
     useEffect(() => {
         dispatch(Actions.getTeams());
@@ -155,15 +157,15 @@ function NewBoardDialog(props) {
                         </TextFieldFormsy>
                     </div>
 
-                    {boardForm.boardType === 'TEAM' && teams.length > 1 && (
+                    {boardForm.boardType === 'TEAM' && teams.length >= 1 && (
                         <div>
                             <TextFieldFormsy
-                                id="teamId"
-                                label="Team"
-                                name="teamId"
+                                id="teams"
+                                label="Select team..."
+                                name="teams"
                                 select
                                 className="mb-24"
-                                value={boardForm.teamId || ''}
+                                value={boardForm.teams || ''}
                                 onChange={handleChange}
                                 SelectProps={{
                                     native: true
@@ -173,6 +175,7 @@ function NewBoardDialog(props) {
                                 required
                                 fullWidth
                             >
+                                <option disabled hidden value=''/>
                                 {teams.map(option => (
                                     <option key={option.id} value={option.id}>
                                         {option.displayName}

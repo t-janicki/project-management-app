@@ -73,14 +73,14 @@ export function closeNewBoardDialog() {
 //         );
 // }
 
-export function newBoard({name, description, boardType, teamId}) {
+export function newBoard({name, description, boardType, teams}) {
     console.log(name)
     console.log(description)
     console.log(boardType)
-    console.log(teamId)
+    console.log(teams)
 
     return (dispatch) => {
-        const request = axios.post(BOARD_API, {
+        const request = axios.post(`${BOARD_API}?teamId=${teams}`, {
             name,
             boardType,
             description,
@@ -113,34 +113,6 @@ export function newBoard({name, description, boardType, teamId}) {
     }
 }
 
-
-// export function getBoard(params) {
-//
-//     const {boardId} = params;
-//     const request = axios.get(`${BOARD_API}/${boardId}`);
-//
-//     return (dispatch) =>
-//         request.then(
-//             (response) =>
-//                 dispatch({
-//                     type: GET_BOARD,
-//                     payload: response.data
-//                 }),
-//             (error) => {
-//                 console.log(error)
-//                 dispatch(showMessage({
-//                     message: error.response.data,
-//                     autoHideDuration: 2000,
-//                     anchorOrigin: {
-//                         vertical: 'top',
-//                         horizontal: 'right'
-//                     }
-//                 }));
-//                 history.push({
-//                     pathname: '/apps/boards'
-//                 });
-//             });
-// }
 export function getBoard(params, boardType) {
     return (dispatch) => {
 
@@ -399,17 +371,17 @@ export function deleteBoard(boardId) {
     }
 }
 
-export function copyBoard(board) {
-    const newBoard = _.merge(board, {
-        id: FuseUtils.generateGUID(),
-        name: board.name + ' (Copied)',
-        uri: board.uri + '-copied'
-    });
-    return (dispatch) => {
-        dispatch(Actions.newBoard());
-        return {type: COPY_BOARD};
-    }
-}
+// export function copyBoard(board) {
+//     const newBoard = _.merge(board, {
+//         id: FuseUtils.generateGUID(),
+//         name: board.name + ' (Copied)',
+//         uri: board.uri + '-copied'
+//     });
+//     return (dispatch) => {
+//         dispatch(Actions.newBoard());
+//         return {type: COPY_BOARD};
+//     }
+// }
 
 export function renameBoard(boardId, boardTitle) {
     return (dispatch, getState) => {

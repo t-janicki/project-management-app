@@ -50,12 +50,12 @@ function BoardSettingsSidebar(props)
                     </ListItemSecondaryAction>
                 </ListItem>
 
-                <ListItem button onClick={() => dispatch(Actions.copyBoard(board))}>
-                    <ListItemIcon className="min-w-40">
-                        <Icon>file_copy</Icon>
-                    </ListItemIcon>
-                    <ListItemText primary="Copy Board"/>
-                </ListItem>
+                {/*<ListItem button onClick={() => dispatch(Actions.copyBoard(board))}>*/}
+                {/*    <ListItemIcon className="min-w-40">*/}
+                {/*        <Icon>file_copy</Icon>*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText primary="Copy Board"/>*/}
+                {/*</ListItem>*/}
 
                 <ListItem button onClick={() => dispatch(Actions.deleteBoard(board.id))}>
                     <ListItemIcon className="min-w-40">
