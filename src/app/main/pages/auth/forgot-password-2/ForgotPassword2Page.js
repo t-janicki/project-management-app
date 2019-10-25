@@ -39,7 +39,7 @@ function ForgotPassword2Page()
 
                 <FuseAnimate animation="transition.slideUpIn" delay={300}>
                     <Typography variant="h3" color="inherit" className="font-light">
-                        Welcome to the task management!
+                        Welcome to the project management!
                     </Typography>
                 </FuseAnimate>
 
