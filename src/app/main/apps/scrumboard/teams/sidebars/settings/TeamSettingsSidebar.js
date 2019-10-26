@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import * as Actions from '../../../../../../../app/main/apps/scrumboard/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
+import TeamTitle from '../../../board/sidebars/settings/components/TeamTitle';
 
 function TeamSettingsSidebar(props) {
     const dispatch = useDispatch();
@@ -21,7 +22,11 @@ function TeamSettingsSidebar(props) {
     return (
         <div>
             <List className="py-16" dense>
-
+                <ListItem>
+                    <div className="flex flex-1 justify-center items-center">
+                        <TeamTitle/>
+                    </div>
+                </ListItem>
                 {/*<ListItem*/}
                 {/*    button*/}
                 {/*    onClick={() => dispatch(Actions.changeBoardSettings({cardCoverImages: !board.settings.cardCoverImages}))}*/}

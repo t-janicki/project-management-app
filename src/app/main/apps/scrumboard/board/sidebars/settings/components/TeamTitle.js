@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Paper, ClickAwayListener, Icon, IconButton, InputAdornment, TextField, Typography} from '@material-ui/core';
-import * as Actions from '../store/actions';
 import {useForm} from '@fuse/hooks';
 import {useDispatch, useSelector} from 'react-redux';
 
-function BoardTitle(props) {
+function TeamTitle(props) {
     const dispatch = useDispatch();
-    const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
+    const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
 
     const [formOpen, setFormOpen] = useState(false);
     const {form, handleChange, resetForm, setForm} = useForm({
-        title: board.name
+        displayName: team.displayName
     });
     useEffect(() => {
         if (!formOpen) {
@@ -19,8 +18,8 @@ function BoardTitle(props) {
     }, [formOpen, resetForm]);
 
     useEffect(() => {
-        setForm({title: board.name});
-    }, [board.name, setForm]);
+        setForm({displayName: team.displayName});
+    }, [team.displayName, setForm]);
 
     function handleOpenForm() {
         setFormOpen(true);
@@ -31,7 +30,7 @@ function BoardTitle(props) {
     }
 
     function isFormInvalid() {
-        return form.title === '';
+        return form.displayName === '';
     }
 
     function handleSubmit(ev) {
@@ -39,7 +38,8 @@ function BoardTitle(props) {
         if (isFormInvalid()) {
             return;
         }
-        dispatch(Actions.renameBoard(board.id, form.title));
+        console.log('action')
+        // dispatch(Actions.renameBoard(team.id, form.title));
         handleCloseForm();
     }
 
@@ -51,7 +51,7 @@ function BoardTitle(props) {
                         <form className="flex w-full" onSubmit={handleSubmit}>
                             <TextField
                                 name="title"
-                                value={form.title}
+                                value={form.displayName}
                                 onChange={handleChange}
                                 variant="outlined"
                                 margin="none"
@@ -74,16 +74,13 @@ function BoardTitle(props) {
                 </ClickAwayListener>
             ) : (
                 <div>
-                    <div className="flex items-center justify-center">
-                        {board.settings.subscribed && (
-                            <Icon className="text-16 mr-8">remove_red_eye</Icon>
-                        )}
+                    <div className="flex items-center justify-between">
                         <Typography
                             className="text-16 font-600 cursor-pointer"
                             onClick={() => handleOpenForm()}
                             color="inherit"
                         >
-                            {board.name}
+                            {team.displayName}
                         </Typography>
                     </div>
                 </div>
@@ -92,4 +89,4 @@ function BoardTitle(props) {
     );
 }
 
-export default BoardTitle;
+export default TeamTitle;
