@@ -10,12 +10,6 @@ function BoardSettingsSidebar(props)
 
     return (
         <div>
-            <AppBar position="static">
-                <Toolbar className="flex w-full justify-center">
-                    Settings
-                </Toolbar>
-            </AppBar>
-
             <List className="py-16" dense>
 
                 <ListItem
