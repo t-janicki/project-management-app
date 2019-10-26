@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from 'react';
-import {Typography, Icon, AppBar, Toolbar, Hidden, Button, IconButton} from '@material-ui/core';
+import React, {useEffect, useRef, useState} from 'react';
+import {Typography, Icon, AppBar, Toolbar, Hidden, Button, IconButton, Dialog, Slide} from '@material-ui/core';
 import {fade} from '@material-ui/core/styles/colorManipulator';
-import {FuseAnimateGroup, FuseAnimate} from '@fuse';
+import {FuseAnimateGroup, FuseAnimate, FuseScrollbars} from '@fuse';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import clsx from 'clsx';
@@ -10,6 +10,12 @@ import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
 import {makeStyles} from '@material-ui/styles';
 import NewBoardDialog from "../board/dialogs/NewBoardDialog";
+import TeamSettingsSidebar from "./sidebars/settings/TeamSettingsSidebar";
+import {red} from "@material-ui/core/colors";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="left" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles(theme => ({
     root    : {
@@ -35,6 +41,51 @@ const useStyles = makeStyles(theme => ({
         '&:hover'  : {
             borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.8)
         }
+    },
+    button               : {
+        position               : 'absolute',
+        right                  : 0,
+        top                    : 600,
+        minWidth               : 48,
+        width                  : 48,
+        height                 : 48,
+        opacity                : .9,
+        padding                : 0,
+        borderBottomRightRadius: 0,
+        borderTopRightRadius   : 0,
+        zIndex                 : 999,
+        color                  : theme.palette.getContrastText(red[500]),
+        backgroundColor        : red[500],
+        '&:hover'              : {
+            backgroundColor: red[500],
+            opacity        : 1
+        }
+    },
+    '@keyframes rotating': {
+        from: {
+            transform: 'rotate(0deg)'
+        },
+        to  : {
+            transform: 'rotate(360deg)'
+        }
+    },
+    buttonIcon           : {
+        animation: '$rotating 3s linear infinite'
+    },
+    dialogPaper          : {
+        position       : 'fixed',
+        width          : 330,
+        maxWidth       : '90vw',
+        backgroundColor: theme.palette.background.paper,
+        boxShadow      : theme.shadows[5],
+        top            : 0,
+        height         : '100%',
+        minHeight      : '100%',
+        bottom         : 0,
+        right          : 0,
+        margin         : 0,
+        zIndex         : 1000,
+        borderRadius   : 0
     }
 }));
 
@@ -59,6 +110,16 @@ function TeamBoards(props)
         dispatch(Actions.openNewBoardDialog(ev));
     }
 
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div
             className="flex flex-1 flex-col w-full h-full relative items-center"
@@ -78,6 +139,10 @@ function TeamBoards(props)
                             <Icon>assessment</Icon>
                         </IconButton>
                     </Hidden>
+
+                    <IconButton color="inherit" onClick={handleOpen}>
+                        <Icon>settings</Icon>
+                    </IconButton>
 
                 </Toolbar>
             </AppBar>
@@ -119,6 +184,29 @@ function TeamBoards(props)
 
                 <NewBoardDialog/>
 
+                <Dialog
+                    TransitionComponent={Transition}
+                    aria-labelledby="settings-panel"
+                    aria-describedby="settings"
+                    open={open}
+                    keepMounted
+                    onClose={handleClose}
+                    BackdropProps={{invisible: true}}
+                    classes={{
+                        paper: classes.dialogPaper
+                    }}
+                >
+                    <FuseScrollbars className="p-24 sm:p-32">
+                        <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>
+                            <Icon>close</Icon>
+                        </IconButton>
+
+                        <Typography className="mb-32" variant="h6">Team Settings</Typography>
+
+
+                        <TeamSettingsSidebar/>
+                    </FuseScrollbars>
+                </Dialog>
             </div>
         </div>
     );

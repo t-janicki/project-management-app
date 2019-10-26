@@ -63,9 +63,9 @@ function BoardCardForm(props) {
     //     setInForm('idLabels', _.xor(cardForm.idLabels, [labelId]));
     // }
 
-    function toggleMember(memberId) {
-        setInForm('idMembers', _.xor(cardForm.idMembers, [memberId]));
-    }
+    // function toggleMember(memberId) {
+    //     setInForm('idMembers', _.xor(cardForm.idMembers, [memberId]));
+    // }
 
     function addCheckList(newList) {
         setInForm('checklists', [...cardForm.checklists, newList]);
@@ -79,23 +79,23 @@ function BoardCardForm(props) {
         setInForm(name, [...cardForm[name], value]);
     }
 
-    function makeCover(attachmentId) {
-        setInForm('idAttachmentCover', attachmentId);
-    }
-
-    function removeCover() {
-        setInForm('idAttachmentCover', '');
-    }
-
-    function removeAttachment(attachmentId) {
-        setForm(
-            {
-                ...cardForm,
-                attachments: _.reject(cardForm.attachments, {id: attachmentId}),
-                idAttachmentCover: cardForm.idAttachmentCover === attachmentId ? '' : cardForm.idAttachmentCover
-            }
-        );
-    }
+    // function makeCover(attachmentId) {
+    //     setInForm('idAttachmentCover', attachmentId);
+    // }
+    //
+    // function removeCover() {
+    //     setInForm('idAttachmentCover', '');
+    // }
+    //
+    // function removeAttachment(attachmentId) {
+    //     setForm(
+    //         {
+    //             ...cardForm,
+    //             attachments: _.reject(cardForm.attachments, {id: attachmentId}),
+    //             idAttachmentCover: cardForm.idAttachmentCover === attachmentId ? '' : cardForm.idAttachmentCover
+    //         }
+    //     );
+    // }
 
     const handleCheckListChange = useCallback((item, index) => {
         setInForm(`checklists[${index}]`, item);
@@ -121,12 +121,6 @@ function BoardCardForm(props) {
                                 onRemoveDue={removeDue}
                                 dueDate={dueDate}
                             />
-
-                            {/*<MembersMenu*/}
-                            {/*    onToggleMember={toggleMember}*/}
-                            {/*    members={board.members}*/}
-                            {/*    idMembers={cardForm.idMembers}*/}
-                            {/*/>*/}
 
                             <IconButton color="inherit">
                                 <Icon>attachment</Icon>

@@ -2,11 +2,11 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {AppBar, Button, Dialog, DialogActions, DialogContent, DialogTitle, Toolbar} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {useDispatch, useSelector} from 'react-redux';
-import * as Actions from '../store/actions';
 import clsx from 'clsx';
 import Formsy from "formsy-react";
 import {TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
+import * as Actions from '../../store/actions';
 
 const defaultFormState = {
     displayName: '',

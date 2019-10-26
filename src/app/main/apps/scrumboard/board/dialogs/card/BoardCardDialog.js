@@ -12,8 +12,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function BoardCardDialog(props)
-{
+function BoardCardDialog(props) {
     const dispatch = useDispatch();
     const cardDialogOpen = useSelector(({scrumboardApp}) => scrumboardApp.card.dialogOpen);
 
