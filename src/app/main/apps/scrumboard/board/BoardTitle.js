@@ -93,13 +93,6 @@ function BoardTitle(props)
                             {board.name}
                         </Typography>
                     </div>
-                    {/*<div className="flex items-center justify-center">*/}
-                    {/*    <Typography className="text-16 font-600">*/}
-
-                    {/*    {board.description}*/}
-
-                    {/*    </Typography>*/}
-                    {/*</div>*/}
                 </div>
             )}
         </div>

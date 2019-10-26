@@ -4,17 +4,12 @@ import {
     Icon,
     IconButton,
     InputAdornment,
-    ListItemIcon,
-    ListItemText,
-    Menu,
-    MenuItem,
     TextField,
     Typography
 } from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import ToolbarMenu from './dialogs/card/toolbar/ToolbarMenu';
 import ListOptionsMenu from "./ListOptionsMenu";
 
 

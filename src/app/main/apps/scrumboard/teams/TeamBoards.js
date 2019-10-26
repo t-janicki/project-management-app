@@ -41,10 +41,8 @@ const useStyles = makeStyles(theme => ({
 function TeamBoards(props)
 {
     const dispatch = useDispatch();
-    const boards = useSelector(({scrumboardApp}) => scrumboardApp.team.boards);
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-    // console.log(team)
-    // console.log(boards)
+
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -96,7 +94,7 @@ function TeamBoards(props)
                         duration : 300
                     }}
                 >
-                    {boards.map(board => (
+                    {team.boards.map(board => (
                         <div className="w-224 h-224 p-16" key={board.id}>
                             <Link
                                 to={`/teams/${team.id}/boards/${board.id}/${board.uri}`}

@@ -43,7 +43,6 @@ function Teams(props)
     const dispatch = useDispatch();
     const teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
 
-    console.log(teams)
     const classes = useStyles(props);
 
     useEffect(() => {
@@ -65,9 +64,6 @@ function Teams(props)
             className="flex flex-1 flex-col w-full h-full relative items-center"
             ref={containerRef}
         >
-
-            {/*<div className="flex flex-grow flex-shrink-0 flex-col items-center container px-16 md:px-24">*/}
-
             <AppBar position="static" color="primary">
                 <Toolbar className="flex items-center justify-between px-4 sm:px-24 h-64 sm:h-96 container">
                     <Hidden xsDown>
@@ -124,7 +120,6 @@ function Teams(props)
                 <TeamDialog/>
 
             </div>
-            {/*</div>*/}
         </div>
     );
 }

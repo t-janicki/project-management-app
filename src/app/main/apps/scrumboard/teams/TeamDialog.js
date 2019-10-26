@@ -139,20 +139,14 @@ function TeamDialog(props) {
                         <Button
                             onClick={ev => dispatch(Actions.closeTeamDialog())}
                             color="primary"
-                            // className={classes.marginTop}
                             variant="contained"
                         >
                             CANCEL
                         </Button>
-                        {/*<div*/}
-                        {/*    className={clsx(classes.board, classes.newBoard, "flex flex-col items-center justify-center w-full h-full rounded py-24")}*/}
-                        {/*    onClick={() => dispatch(Actions.newPersonalBoard())}*/}
-                        {/*>*/}
                         <Button
                             type="submit"
                             color="primary"
                             disabled={!isFormValid}
-                            // className={classes.marginTop}
                             variant="contained"
                         >
                             CREATE
