@@ -45,8 +45,8 @@ function BoardCardForm(props) {
     let filteredIds = boardLabelsIds.filter(id => !labelsIds.includes(id));
     let availableLabels = [];
     filteredIds.forEach(id => {
-       const label =  board.labels.find(v => v.id === id);
-       availableLabels.push(label);
+        const label = board.labels.find(v => v.id === id);
+        availableLabels.push(label);
     });
 
     useUpdateEffect(() => {
@@ -214,50 +214,50 @@ function BoardCardForm(props) {
                 </div>
 
                 <div className="w-full mb-24">
-                        <div className="flex-1 mb-24">
-                            <div className="flex items-center mt-16 mb-12">
-                                <Icon className="text-20 mr-8" color="inherit">label</Icon>
-                                <Typography className="font-600 text-16">Labels</Typography>
-                            </div>
-                            <FuseChipSelect
-                                className={cardForm.idMembers.length > 0 && 'sm:mr-8'}
-                                value={
-                                    cardForm.idLabels.map(labelId => {
-                                        // const label = _.find(board.labels, {id: labelId});
-                                        const label = board.labels.find(v => v.id == labelId);
-                                        return label && {
-                                            value: labelId,
-                                            label: label.name,
-                                            class: label.className
-                                        }
-                                    })
-                                }
-                                onChange={(value) => chipChange('idLabels', value)}
-                                placeholder="Select multiple Labels"
-                                isMulti
-                                textFieldProps={{
-                                    variant: "outlined"
-                                }}
-                                // const label = board.labels.filter(v => v.id == id).map(x => x.label);
-                                options={availableLabels.map((label) => (
-                                    {
-                                        value: label.id,
+                    <div className="flex-1 mb-24">
+                        <div className="flex items-center mt-16 mb-12">
+                            <Icon className="text-20 mr-8" color="inherit">label</Icon>
+                            <Typography className="font-600 text-16">Labels</Typography>
+                        </div>
+                        <FuseChipSelect
+                            className={cardForm.idMembers.length > 0 && 'sm:mr-8'}
+                            value={
+                                cardForm.idLabels.map(labelId => {
+                                    // const label = _.find(board.labels, {id: labelId});
+                                    const label = board.labels.find(v => v.id == labelId);
+                                    return label && {
+                                        value: labelId,
                                         label: label.name,
                                         class: label.className
                                     }
-                                ))}
-                                onCreateOption={(name) => {
+                                })
+                            }
+                            onChange={(value) => chipChange('idLabels', value)}
+                            placeholder="Select multiple Labels"
+                            isMulti
+                            textFieldProps={{
+                                variant: "outlined"
+                            }}
+                            // const label = board.labels.filter(v => v.id == id).map(x => x.label);
+                            options={availableLabels.map((label) => (
+                                {
+                                    value: label.id,
+                                    label: label.name,
+                                    class: label.className
+                                }
+                            ))}
+                            onCreateOption={(name) => {
 
-                                    const boardId = board.id;
-                                    dispatch(Actions.newLabel({name, boardId})).then((data) => {
-                                        addNewChip('idLabels', data.id);
+                                const boardId = board.id;
+                                dispatch(Actions.newLabel({name, boardId})).then((data) => {
+                                    addNewChip('idLabels', data.id);
 
-                                        return data.id;
-                                    });
+                                    return data.id;
+                                });
 
-                                }}
-                            />
-                        </div>
+                            }}
+                        />
+                    </div>
 
                     {board.boardType === 'TEAM' && (
                         <div className="w-full mb-24">
@@ -330,19 +330,19 @@ function BoardCardForm(props) {
                 ))}
 
                 {/*{boardType === 'TEAM' && (*/}
-                    <div className="mb-24">
-                        <div className="flex items-center mt-16 mb-12">
-                            <Icon className="text-20 mr-8" color="inherit">comment</Icon>
-                            <Typography className="font-600 text-16">Comment</Typography>
-                        </div>
-                        <div>
-                            <CardComment
-                                cardId={cardId}
-                                members={board.members}
-                                onCommentAdd={commentAdd}
-                            />
-                        </div>
+                <div className="mb-24">
+                    <div className="flex items-center mt-16 mb-12">
+                        <Icon className="text-20 mr-8" color="inherit">comment</Icon>
+                        <Typography className="font-600 text-16">Comment</Typography>
                     </div>
+                    <div>
+                        <CardComment
+                            cardId={cardId}
+                            members={board.members}
+                            onCommentAdd={commentAdd}
+                        />
+                    </div>
+                </div>
                 {/*)}*/}
 
                 {cardForm.activities.length > 0 && (
@@ -353,7 +353,7 @@ function BoardCardForm(props) {
                         </div>
                         <List className="">
                             {cardForm.activities.map(item => (
-                                <CardActivity
+                                    <CardActivity
                                         item={item}
                                         key={item.id}
                                         members={board.members}

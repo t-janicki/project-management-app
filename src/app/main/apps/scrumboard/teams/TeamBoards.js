@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
     },
     dialogPaper: {
         position: 'fixed',
-        width: 400,
+        width: 600,
         maxWidth: '90vw',
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
@@ -222,8 +222,8 @@ function TeamBoards(props) {
 
                         {/*<Typography className="mb-32" variant="h6">Team Settings</Typography>*/}
 
-
                         <TeamSettingsSidebar/>
+
                     </FuseScrollbars>
                 </Dialog>
             </div>

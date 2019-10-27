@@ -1,23 +1,23 @@
 import React from 'react';
 import {Avatar, Table, TableHead, TableCell, TableRow, Typography, Paper, TableBody} from '@material-ui/core';
 
-function Widget11(props)
-{
+function Widget11(props) {
+
+    console.log(props)
     return (
         <Paper className="w-full rounded-8 shadow-none border-1">
             <div className="flex items-center justify-between px-16 h-64 border-b-1">
                 <Typography className="text-16">{props.widget.title}</Typography>
-                <Typography className="text-11 font-500 rounded-4 text-white bg-blue px-8 py-4">{props.widget.table.rows.length + " Members"}</Typography>
+                <Typography
+                    className="text-11 font-500 rounded-4 text-white bg-blue px-8 py-4">{props.widget.table.rows.length + " Members"}</Typography>
             </div>
             <div className="table-responsive">
                 <Table className="w-full min-w-full" size="small">
                     <TableHead>
                         <TableRow>
                             {props.widget.table.columns.map(column => {
-                                switch ( column.id )
-                                {
-                                    case 'avatar':
-                                    {
+                                switch (column.id) {
+                                    case 'avatar': {
                                         return (
                                             <TableCell
                                                 key={column.id}
@@ -27,8 +27,7 @@ function Widget11(props)
                                             </TableCell>
                                         )
                                     }
-                                    default:
-                                    {
+                                    default: {
                                         return (
                                             <TableCell
                                                 key={column.id}
@@ -46,10 +45,8 @@ function Widget11(props)
                         {props.widget.table.rows.map(row => (
                             <TableRow key={row.id}>
                                 {row.cells.map(cell => {
-                                        switch ( cell.id )
-                                        {
-                                            case 'avatar':
-                                            {
+                                        switch (cell.id) {
+                                            case 'avatar': {
                                                 return (
                                                     <TableCell
                                                         key={cell.id}
@@ -61,8 +58,7 @@ function Widget11(props)
                                                     </TableCell>
                                                 )
                                             }
-                                            case 'name':
-                                            {
+                                            case 'name': {
                                                 return (
                                                     <TableCell
                                                         key={cell.id}
@@ -74,8 +70,7 @@ function Widget11(props)
                                                     </TableCell>
                                                 )
                                             }
-                                            default:
-                                            {
+                                            default: {
                                                 return (
                                                     <TableCell
                                                         key={cell.id}
