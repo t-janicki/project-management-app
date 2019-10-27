@@ -31,8 +31,6 @@ function BoardCardForm(props) {
     const card = useSelector(({scrumboardApp}) => scrumboardApp.card.data);
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
 
-    const boardType = 'PERSONAL';
-
     const {form: cardForm, handleChange, setForm, setInForm} = useForm(card);
     const updateCard = useDebounce((boardId, newCard) => {
         dispatch(Actions.updateCard(boardId, {...newCard}));
@@ -261,7 +259,7 @@ function BoardCardForm(props) {
                             />
                         </div>
 
-                    {boardType === 'TEAM' && (
+                    {board.boardType === 'TEAM' && (
                         <div className="w-full mb-24">
                             <div className="flex items-center mt-16 mb-12">
                                 <Icon className="text-20 mr-8" color="inherit">supervisor_account</Icon>
@@ -272,7 +270,7 @@ function BoardCardForm(props) {
                                 value={
                                     cardForm.idMembers.map(memberId => {
                                         // const member = _.find(board.members, {id: memberId});
-                                        const member = board.members.find(member => member.id == memberId);
+                                        const member = props.members.find(member => member.id == memberId);
                                         return member && {
                                             value: member.id,
                                             label: (<Tooltip title={member.name}><Avatar className="-ml-12 w-32 h-32"
@@ -286,7 +284,7 @@ function BoardCardForm(props) {
                                 textFieldProps={{
                                     variant: "outlined"
                                 }}
-                                options={board.team.members.map((member) => (
+                                options={props.members.map((member) => (
                                     {
                                         value: member.id,
                                         label: (<span className="flex items-center"><Avatar className="w-32 h-32 mr-8"

@@ -7,8 +7,7 @@ import _ from '@lodash';
 import * as Actions from 'app/main/apps/notes/store/actions';
 import LabelModel from 'app/main/apps/notes/model/LabelModel';
 
-function LabelsForm(props)
-{
+function LabelsForm(props) {
     const dispatch = useDispatch();
     const labels = useSelector(({notesApp}) => notesApp.labels.entities);
 
@@ -28,22 +27,18 @@ function LabelsForm(props)
     }, 600);
 
     useEffect(() => {
-        if ( labelsForm && !_.isEqual(labelsForm, labels) )
-        {
+        if (labelsForm && !_.isEqual(labelsForm, labels)) {
             handleOnChange(labelsForm);
         }
     }, [handleOnChange, labels, labelsForm]);
 
-    function isFormInValid()
-    {
+    function isFormInValid() {
         return newLabelForm.name === '';
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
-        if ( isFormInValid() )
-        {
+        if (isFormInValid()) {
             return;
         }
         const newLabel = new LabelModel(newLabelForm);
@@ -79,13 +74,11 @@ function LabelsForm(props)
                     </ListItem>
                 </form>
                 {useMemo(() => {
-                    function handleOnDelete(label)
-                    {
+                    function handleOnDelete(label) {
                         setLabels(_.omit(labelsForm, [label.id]));
                     }
 
-                    function handleLabelChange(event, label)
-                    {
+                    function handleLabelChange(event, label) {
                         const updatedLabel = new LabelModel(_.setIn(label, event.target.name, event.target.value));
                         setLabels(_.setIn(labelsForm, updatedLabel.id, updatedLabel));
                     }
@@ -104,7 +97,8 @@ function LabelsForm(props)
                                 onChange={(event) => handleLabelChange(event, label)}
                                 disableUnderline
                             />
-                            <IconButton className="w-32 h-32 mx-4 p-0" aria-label="Delete" onClick={(ev) => handleOnDelete(label)}>
+                            <IconButton className="w-32 h-32 mx-4 p-0" aria-label="Delete"
+                                        onClick={(ev) => handleOnDelete(label)}>
                                 <Icon fontSize="small">delete</Icon>
                             </IconButton>
                         </ListItem>

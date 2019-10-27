@@ -26,7 +26,7 @@ function BoardCardDialog(props) {
             onClose={ev => dispatch(Actions.closeCardDialog())}
             open={cardDialogOpen}
         >
-            <BoardCardForm/>
+            <BoardCardForm members={props.members} />
         </Dialog>
     );
 }

@@ -3,7 +3,7 @@ import {Paper, ClickAwayListener, Icon, IconButton, InputAdornment, TextField, T
 import {useForm} from '@fuse/hooks';
 import {useDispatch, useSelector} from 'react-redux';
 
-function TeamTitle(props) {
+function TeamDisplayName(props) {
     const dispatch = useDispatch();
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
 
@@ -50,7 +50,7 @@ function TeamTitle(props) {
                     <Paper className="p-4">
                         <form className="flex w-full" onSubmit={handleSubmit}>
                             <TextField
-                                name="title"
+                                name="displayName"
                                 value={form.displayName}
                                 onChange={handleChange}
                                 variant="outlined"
@@ -89,4 +89,4 @@ function TeamTitle(props) {
     );
 }
 
-export default TeamTitle;
+export default TeamDisplayName;

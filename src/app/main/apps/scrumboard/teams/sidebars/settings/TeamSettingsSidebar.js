@@ -8,11 +8,14 @@ import {
     Icon,
     ListItemText,
     ListItemSecondaryAction,
-    Switch
+    Switch, TextField, InputAdornment, DialogContent, IconButton
 } from '@material-ui/core';
 import * as Actions from '../../../../../../../app/main/apps/scrumboard/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import TeamTitle from '../../../board/sidebars/settings/components/TeamTitle';
+import TeamDisplayName from './components/TeamDisplayName';
+import TeamDescription from './components/TeamDescription';
+import LabelsForm from "../../../../notes/dialogs/labels/LabelsForm";
+import MembersList from "./components/MembersList";
 
 function TeamSettingsSidebar(props) {
     const dispatch = useDispatch();
@@ -22,19 +25,89 @@ function TeamSettingsSidebar(props) {
     return (
         <div>
             <List className="py-16" dense>
-                <ListItem>
-                    <div className="flex flex-1 justify-center items-center">
-                        <TeamTitle/>
-                    </div>
-                </ListItem>
+                {/*<ListItem>*/}
+                {/*    <div className="flex flex-1 justify-center items-center">*/}
+                {/*        <TeamDisplayName/>*/}
+                {/*    </div>*/}
+                {/*</ListItem>*/}
+
+                {/*<ListItem>*/}
+                {/*    <div className="flex flex-1 justify-center items-center">*/}
+                {/*        <TeamDescription/>*/}
+                {/*    </div>*/}
+                {/*</ListItem>*/}
+
+                <div className="flex items-center mb-24">
+                    <TextField
+                        label="Title"
+                        type="text"
+                        name="name"
+                        value=""
+                        onChange="{handleChange}"
+                        variant="outlined"
+                        fullWidth
+                        required
+                        // InputProps={{
+                        //     endAdornment: (
+                        //         <InputAdornment position="end">
+                        //             {cardForm.subscribed && (
+                        //                 <Icon className="text-20" color="action">remove_red_eye</Icon>
+                        //             )}
+                        //         </InputAdornment>
+                        //     )
+                        // }}
+                    />
+                </div>
+
+                <div className="w-full mb-24">
+                    <TextField
+                        label="Description"
+                        name="description"
+                        multiline
+                        rows="4"
+                        value=""
+                        onChange="{handleChange}"
+                        variant="outlined"
+                        fullWidth
+                    />
+                </div>
+                {/*<div className="w-full mb-24">*/}
+                {/*    <TextField*/}
+                {/*        label="Member email"*/}
+                {/*        name="email"*/}
+                {/*        value=""*/}
+                {/*        onChange="{handleChange}"*/}
+                {/*        variant="outlined"*/}
+                {/*        margin="none"*/}
+                {/*        autoFocus*/}
+                {/*        fullWidth*/}
+                {/*        InputProps={{*/}
+                {/*            endAdornment: (*/}
+                {/*                <InputAdornment position="end">*/}
+                {/*                    <IconButton*/}
+                {/*                        type="submit"*/}
+                {/*                        // disabled={isFormInValid()}*/}
+                {/*                    >*/}
+                {/*                        <Icon>check</Icon>*/}
+                {/*                    </IconButton>*/}
+                {/*                </InputAdornment>*/}
+                {/*            )*/}
+                {/*        }}*/}
+                {/*    />*/}
+                {/*</div>*/}
+
+                <div>
+                    <MembersList/>
+                </div>
+
                 {/*<ListItem*/}
                 {/*    button*/}
                 {/*    onClick={() => dispatch(Actions.changeBoardSettings({cardCoverImages: !board.settings.cardCoverImages}))}*/}
                 {/*>*/}
-                    <ListItemIcon className="min-w-40">
-                        <Icon>photo</Icon>
-                    </ListItemIcon>
-                    <ListItemText primary="Card Cover Images"/>
+                {/*    <ListItemIcon className="min-w-40">*/}
+                {/*        <Icon>photo</Icon>*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText primary="Card Cover Images"/>*/}
                     {/*<ListItemSecondaryAction>*/}
                     {/*    <Switch*/}
                     {/*        onChange={() => dispatch(Actions.changeBoardSettings({cardCoverImages: !board.settings.cardCoverImages}))}*/}
@@ -47,10 +120,10 @@ function TeamSettingsSidebar(props) {
                 {/*    button*/}
                 {/*    onClick={() => dispatch(Actions.changeBoardSettings({subscribed: !board.settings.subscribed}))}*/}
                 {/*>*/}
-                    <ListItemIcon className="min-w-40">
-                        <Icon>remove_red_eye</Icon>
-                    </ListItemIcon>
-                    <ListItemText primary="Subscribe"/>
+                {/*    <ListItemIcon className="min-w-40">*/}
+                {/*        <Icon>remove_red_eye</Icon>*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText primary="Subscribe"/>*/}
                     {/*<ListItemSecondaryAction>*/}
                     {/*    <Switch*/}
                     {/*        onChange={() => dispatch(Actions.changeBoardSettings({subscribed: !board.settings.subscribed}))}*/}

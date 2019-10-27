@@ -73,10 +73,18 @@ function TeamBoard(props) {
 
     const dispatch = useDispatch();
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
+    const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
 
     const containerRef = useRef(null);
 
     const boardType = 'TEAM';
+
+    useEffect(() => {
+        dispatch(Actions.getTeam(props.match.params));
+        return () => {
+            dispatch(Actions.resetTeam());
+        }
+    }, [dispatch, props.match.params]);
 
     useEffect(() => {
         dispatch(Actions.getBoard(props.match.params, boardType));
@@ -208,7 +216,7 @@ function TeamBoard(props) {
                 </DragDropContext>
             </div>
 
-            <BoardCardDialog/>
+            <BoardCardDialog members={team.members}/>
 
         </div>
     );
