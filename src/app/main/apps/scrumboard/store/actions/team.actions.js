@@ -61,8 +61,10 @@ export function getTeam(params) {
 export function createNewTeam({displayName, description}) {
     return (dispatch) => {
         const request = axios.post(TEAM_API, {
-            displayName,
-            description
+            teamInfo: {
+                displayName,
+                description
+            }
         });
 
         let team = {};
