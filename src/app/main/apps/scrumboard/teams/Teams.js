@@ -95,14 +95,14 @@ function Teams(props)
                     }}
                 >
                     {teams.map(team => (
-                        <div className="w-224 h-224 p-16" key={team.id}>
+                        <div className="w-224 h-224 p-16" key={team.teamInfo.id}>
                             <Link
-                                to={`/teams/${team.id}/boards`}
+                                to={`/teams/${team.teamInfo.id}/boards`}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
                                 <Icon className="text-56">people</Icon>
-                                <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">{team.displayName}</Typography>
+                                <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">{team.teamInfo.displayName}</Typography>
                             </Link>
                         </div>
                     ))}

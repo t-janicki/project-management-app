@@ -7,7 +7,7 @@ const teamsReducer = function (state = initialState, action) {
         case Actions.GET_TEAMS: {
             return [
                 ...action.payload
-            ];
+            ]
         }
         case Actions.RESET_TEAMS: {
             return [];

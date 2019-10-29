@@ -1,9 +1,12 @@
 import * as Actions from '../actions';
 
 const initialState = {
-    boards: [],
     dialogOpen: false,
-    data: null
+    data: {
+        boards: [],
+        members: [],
+        teamInfo: null
+    }
 };
 
 const teamReducer = function (state = initialState, action) {
@@ -14,17 +17,31 @@ const teamReducer = function (state = initialState, action) {
                 data: action.payload
             };
         }
+        // case Actions.OPEN_SETTINGS_TEAM_DIALOG: {
+        //     console.log(state)
+        //     return {
+        //         ...state,
+        //         dialogOpen: true,
+        //         ...action.payload,
+        //     };
+        // }
         case Actions.CLOSE_TEAM_DIALOG: {
             return initialState;
         }
+        // case Actions.CLOSE_SETTINGS_TEAM_DIALOG: {
+        //     console.log(state)
+        //     return initialState;
+        // }
         case Actions.NEW_TEAM: {
             return {
-                ...action.payload
+                data: {
+                    ...action.payload
+                }
             };
         }
         case Actions.GET_TEAM: {
             return {
-                ...action.payload
+                data: {...action.payload}
             };
         }
         case Actions.RESET_TEAM: {

@@ -12,52 +12,27 @@ import {
 } from '@material-ui/core';
 import * as Actions from '../../../../../../../app/main/apps/scrumboard/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import TeamDisplayName from './components/TeamDisplayName';
-import TeamDescription from './components/TeamDescription';
 import LabelsForm from "../../../../notes/dialogs/labels/LabelsForm";
 import MembersList from "./components/MembersList";
+import TeamForm from "./components/TeamForm";
+import {useForm} from '@fuse/hooks';
+
 
 function TeamSettingsSidebar(props) {
     const dispatch = useDispatch();
-    const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-    console.log(team)
+    // const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data);
+    // console.log(team.displayName)
+    // const {displayName} = {team};
+    // console.log(displayName)
+    const team = [];
+    const {form: teamForm, handleChange, setForm, setInForm} = useForm(team);
+    console.log(teamForm)
 
     return (
         <div>
             <List className="py-16" dense>
-                {/*<ListItem>*/}
-                {/*    <div className="flex flex-1 justify-center items-center">*/}
-                {/*        <TeamDisplayName/>*/}
-                {/*    </div>*/}
-                {/*</ListItem>*/}
 
-                {/*<ListItem>*/}
-                {/*    <div className="flex flex-1 justify-center items-center">*/}
-                {/*        <TeamDescription/>*/}
-                {/*    </div>*/}
-                {/*</ListItem>*/}
-
-                <div className="flex items-center mb-24">
-                    <TextField
-                        label="Title"
-                        type="text"
-                        name="name"
-                        value=""
-                        onChange="{handleChange}"
-                        variant="outlined"
-                        fullWidth
-                        required
-                        // InputProps={{
-                        //     endAdornment: (
-                        //         <InputAdornment position="end">
-                        //             {cardForm.subscribed && (
-                        //                 <Icon className="text-20" color="action">remove_red_eye</Icon>
-                        //             )}
-                        //         </InputAdornment>
-                        //     )
-                        // }}
-                    />
-                </div>
+                {/*<TeamForm team={team}/>*/}
 
                 <div className="w-full mb-24">
                     <TextField
@@ -65,36 +40,12 @@ function TeamSettingsSidebar(props) {
                         name="description"
                         multiline
                         rows="4"
-                        value=""
-                        onChange="{handleChange}"
+                        value={teamForm.description}
+                        onChange={handleChange}
                         variant="outlined"
                         fullWidth
                     />
                 </div>
-                {/*<div className="w-full mb-24">*/}
-                {/*    <TextField*/}
-                {/*        label="Member email"*/}
-                {/*        name="email"*/}
-                {/*        value=""*/}
-                {/*        onChange="{handleChange}"*/}
-                {/*        variant="outlined"*/}
-                {/*        margin="none"*/}
-                {/*        autoFocus*/}
-                {/*        fullWidth*/}
-                {/*        InputProps={{*/}
-                {/*            endAdornment: (*/}
-                {/*                <InputAdornment position="end">*/}
-                {/*                    <IconButton*/}
-                {/*                        type="submit"*/}
-                {/*                        // disabled={isFormInValid()}*/}
-                {/*                    >*/}
-                {/*                        <Icon>check</Icon>*/}
-                {/*                    </IconButton>*/}
-                {/*                </InputAdornment>*/}
-                {/*            )*/}
-                {/*        }}*/}
-                {/*    />*/}
-                {/*</div>*/}
 
                 <div>
                     <MembersList/>

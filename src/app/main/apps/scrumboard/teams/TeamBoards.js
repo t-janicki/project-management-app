@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     Typography,
     Icon,
@@ -23,10 +23,11 @@ import {makeStyles} from '@material-ui/styles';
 import NewBoardDialog from "../board/dialogs/NewBoardDialog";
 import TeamSettingsSidebar from "./sidebars/settings/TeamSettingsSidebar";
 import {red} from "@material-ui/core/colors";
+import TeamSettingsDialog from "./sidebars/settings/components/TeamSettingsDialog";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="left" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//     return <Slide direction="left" ref={ref} {...props} />;
+// });
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -53,58 +54,59 @@ const useStyles = makeStyles(theme => ({
             borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.8)
         }
     },
-    button: {
-        position: 'absolute',
-        right: 0,
-        top: 600,
-        minWidth: 48,
-        width: 48,
-        height: 48,
-        opacity: .9,
-        padding: 0,
-        borderBottomRightRadius: 0,
-        borderTopRightRadius: 0,
-        zIndex: 999,
-        color: theme.palette.getContrastText(red[500]),
-        backgroundColor: red[500],
-        '&:hover': {
-            backgroundColor: red[500],
-            opacity: 1
-        }
-    },
-    '@keyframes rotating': {
-        from: {
-            transform: 'rotate(0deg)'
-        },
-        to: {
-            transform: 'rotate(360deg)'
-        }
-    },
-    buttonIcon: {
-        animation: '$rotating 3s linear infinite'
-    },
-    dialogPaper: {
-        position: 'fixed',
-        width: 600,
-        maxWidth: '90vw',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        top: 0,
-        height: '100%',
-        minHeight: '100%',
-        bottom: 0,
-        right: 0,
-        margin: 0,
-        zIndex: 1000,
-        borderRadius: 0
-    }
+    // button: {
+    //     position: 'absolute',
+    //     right: 0,
+    //     top: 600,
+    //     minWidth: 48,
+    //     width: 48,
+    //     height: 48,
+    //     opacity: .9,
+    //     padding: 0,
+    //     borderBottomRightRadius: 0,
+    //     borderTopRightRadius: 0,
+    //     zIndex: 999,
+    //     color: theme.palette.getContrastText(red[500]),
+    //     backgroundColor: red[500],
+    //     '&:hover': {
+    //         backgroundColor: red[500],
+    //         opacity: 1
+    //     }
+    // },
+    // '@keyframes rotating': {
+    //     from: {
+    //         transform: 'rotate(0deg)'
+    //     },
+    //     to: {
+    //         transform: 'rotate(360deg)'
+    //     }
+    // },
+    // buttonIcon: {
+    //     animation: '$rotating 3s linear infinite'
+    // },
+    // dialogPaper: {
+    //     position: 'fixed',
+    //     width: 600,
+    //     maxWidth: '90vw',
+    //     backgroundColor: theme.palette.background.paper,
+    //     boxShadow: theme.shadows[5],
+    //     top: 0,
+    //     height: '100%',
+    //     minHeight: '100%',
+    //     bottom: 0,
+    //     right: 0,
+    //     margin: 0,
+    //     zIndex: 1000,
+    //     borderRadius: 0
+    // }
 }));
 
 function TeamBoards(props) {
     const dispatch = useDispatch();
-    const team = useSelector(({scrumboardApp}) => scrumboardApp.team);
-
+    const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data);
+    console.log(team)
     const classes = useStyles(props);
+
 
     useEffect(() => {
         dispatch(Actions.getTeam(props.match.params));
@@ -112,6 +114,7 @@ function TeamBoards(props) {
             dispatch(Actions.resetTeam());
         }
     }, [dispatch, props.match.params]);
+
 
     const containerRef = useRef(null);
 
@@ -129,6 +132,7 @@ function TeamBoards(props) {
     const handleClose = () => {
         setOpen(false);
     };
+
 
     return (
         <div
@@ -150,9 +154,10 @@ function TeamBoards(props) {
                         </IconButton>
                     </Hidden>
 
-                    <IconButton color="inherit" onClick={handleOpen}>
-                        <Icon>settings</Icon>
-                    </IconButton>
+                    {/*<IconButton color="inherit" onClick={(ev) => handleSettingsOpenClick(ev, team)}>*/}
+                    {/*    <Icon>settings</Icon>*/}
+                    {/*</IconButton>*/}
+                    <TeamSettingsDialog />
 
                 </Toolbar>
             </AppBar>
@@ -173,7 +178,7 @@ function TeamBoards(props) {
                     {team.boards.map(board => (
                         <div className="w-224 h-224 p-16" key={board.id}>
                             <Link
-                                to={`/teams/${team.id}/boards/${board.id}/${board.uri}`}
+                                to={`/teams/${team.teamInfo.id}/boards/${board.id}/${board.uri}`}
                                 className={clsx(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                 role="button"
                             >
@@ -196,36 +201,38 @@ function TeamBoards(props) {
 
                 <NewBoardDialog/>
 
-                <Dialog
-                    TransitionComponent={Transition}
-                    aria-labelledby="settings-panel"
-                    aria-describedby="settings"
-                    open={open}
-                    keepMounted
-                    onClose={handleClose}
-                    BackdropProps={{invisible: true}}
-                    classes={{
-                        paper: classes.dialogPaper
-                    }}
-                >
-                    <DialogTitle component="div" className="p-0">
-                        <AppBar position="static" elevation={1}>
-                            <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">
-                                Team Settings
-                            </Toolbar>
-                        </AppBar>
-                    </DialogTitle>
-                    <FuseScrollbars className="p-16 sm:p-32">
-                        <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>
-                            <Icon>close</Icon>
-                        </IconButton>
+                {/*<TeamSettingsDialog/>*/}
 
-                        {/*<Typography className="mb-32" variant="h6">Team Settings</Typography>*/}
+                {/*<Dialog*/}
+                {/*    TransitionComponent={Transition}*/}
+                {/*    aria-labelledby="settings-panel"*/}
+                {/*    aria-describedby="settings"*/}
+                {/*    open={open}*/}
+                {/*    keepMounted*/}
+                {/*    onClose={handleClose}*/}
+                {/*    BackdropProps={{invisible: true}}*/}
+                {/*    classes={{*/}
+                {/*        paper: classes.dialogPaper*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <DialogTitle component="div" className="p-0">*/}
+                {/*        <AppBar position="static" elevation={1}>*/}
+                {/*            <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">*/}
+                {/*                Team Settings*/}
+                {/*            </Toolbar>*/}
+                {/*        </AppBar>*/}
+                {/*    </DialogTitle>*/}
+                {/*    <FuseScrollbars className="p-16 sm:p-32">*/}
+                {/*        <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>*/}
+                {/*            <Icon>close</Icon>*/}
+                {/*        </IconButton>*/}
 
-                        <TeamSettingsSidebar/>
+                {/*        /!*<Typography className="mb-32" variant="h6">Team Settings</Typography>*!/*/}
 
-                    </FuseScrollbars>
-                </Dialog>
+                {/*        <TeamSettingsSidebar/>*/}
+
+                {/*    </FuseScrollbars>*/}
+                {/*</Dialog>*/}
             </div>
         </div>
     );

@@ -31,10 +31,13 @@ function BoardCardForm(props) {
     const card = useSelector(({scrumboardApp}) => scrumboardApp.card.data);
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
 
+    console.log(card)
     const {form: cardForm, handleChange, setForm, setInForm} = useForm(card);
+    console.log(cardForm)
     const updateCard = useDebounce((boardId, newCard) => {
         dispatch(Actions.updateCard(boardId, {...newCard}));
     }, 600);
+
     const dueDate = cardForm && cardForm.dueDate ? moment(cardForm.dueDate).format(moment.HTML5_FMT.DATE) : "";
 
     const cardId = card === null ? '' : card.id;
@@ -42,7 +45,7 @@ function BoardCardForm(props) {
     const labelsIds = cardForm.idLabels.map(labelId => parseInt(labelId));
     const boardLabelsIds = board.labels.map(label => label.id);
 
-    let filteredIds = boardLabelsIds.filter(id => !labelsIds.includes(id));
+    const filteredIds = boardLabelsIds.filter(id => !labelsIds.includes(id));
     let availableLabels = [];
     filteredIds.forEach(id => {
         const label = board.labels.find(v => v.id === id);
