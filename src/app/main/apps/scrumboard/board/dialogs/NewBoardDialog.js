@@ -29,6 +29,7 @@ function NewBoardDialog(props) {
     const dispatch = useDispatch();
     const dialogOpen = useSelector(({scrumboardApp}) => scrumboardApp.board.dialogOpen);
     let teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
+    console.log(teams)
 
     const defaultFormState = {
         name: '',
@@ -175,8 +176,8 @@ function NewBoardDialog(props) {
                             >
                                 <option disabled hidden value=''/>
                                 {teams.map(option => (
-                                    <option key={option.id} value={option.id}>
-                                        {option.displayName}
+                                    <option key={option.teamInfo.id} value={option.teamInfo.id}>
+                                        {option.teamInfo.displayName}
                                     </option>
                                 ))}
                             </TextFieldFormsy>

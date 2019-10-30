@@ -21,7 +21,6 @@ import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
 import {makeStyles} from '@material-ui/styles';
 import NewBoardDialog from "../board/dialogs/NewBoardDialog";
-import TeamSettingsSidebar from "./sidebars/settings/TeamSettingsSidebar";
 import {red} from "@material-ui/core/colors";
 import TeamSettingsDialog from "./sidebars/settings/components/TeamSettingsDialog";
 

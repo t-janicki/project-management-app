@@ -1,15 +1,24 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {AppBar, Dialog, DialogTitle, Icon, IconButton, Slide, TextField, Toolbar} from '@material-ui/core';
+import React, {useCallback, useRef, useState} from 'react';
+import {
+    AppBar,
+    Button,
+    Dialog,
+    DialogTitle,
+    Icon,
+    IconButton,
+    Slide,
+    Toolbar
+} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {useDispatch, useSelector} from 'react-redux';
-import clsx from 'clsx';
-import TeamSettingsSidebar from "../TeamSettingsSidebar";
-import {fade} from "@material-ui/core/styles";
-import {red} from "@material-ui/core/colors";
+import {fade} from '@material-ui/core/styles';
+import {red} from '@material-ui/core/colors';
 import {FuseScrollbars} from '@fuse';
 import {useForm} from '@fuse/hooks';
-import * as Actions from "../../../../store/actions";
-import MembersList from "./MembersList";
+import * as Actions from '../../../../store/actions';
+import MembersList from './MembersList';
+import Formsy from 'formsy-react';
+import {TextFieldFormsy} from '../../../../../../../../@fuse/components/formsy';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -123,64 +132,108 @@ function TeamSettingsDialog(props) {
         resetForm();
     };
 
+    function handleSubmit() {
+        dispatch(Actions.updateTeamInfo(form));
+    }
+
+    const formRef = useRef(null);
+
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    function enableButton() {
+        setIsFormValid(true);
+    }
+
+    function disableButton() {
+        setIsFormValid(false);
+    }
+
     return (
         <div>
             <IconButton color="inherit" onClick={handleOpen}>
                 <Icon>settings</Icon>
             </IconButton>
-        <Dialog
-            TransitionComponent={Transition}
-            aria-labelledby="settings-panel"
-            aria-describedby="settings"
-            open={open}
-            keepMounted
-            onClose={handleClose}
-            BackdropProps={{invisible: true}}
-            classes={{
-                paper: classes.dialogPaper
-            }}
-        >
-            <DialogTitle component="div" className="p-0">
-                <AppBar position="static" elevation={1}>
-                    <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">
-                        Team Settings
-                    </Toolbar>
-                </AppBar>
-            </DialogTitle>
-            <FuseScrollbars className="p-16 sm:p-32">
-                <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>
-                    <Icon>close</Icon>
-                </IconButton>
+            <Dialog
+                TransitionComponent={Transition}
+                aria-labelledby="settings-panel"
+                aria-describedby="settings"
+                open={open}
+                keepMounted
+                onClose={handleClose}
+                BackdropProps={{invisible: true}}
+                classes={{
+                    paper: classes.dialogPaper
+                }}
+            >
+                <DialogTitle component="div" className="p-0">
+                    <AppBar position="static" elevation={1}>
+                        <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">
+                            Team Settings
+                        </Toolbar>
+                    </AppBar>
+                </DialogTitle>
+                <FuseScrollbars className="p-16 sm:p-32">
+                    <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>
+                        <Icon>close</Icon>
+                    </IconButton>
 
-                {/*<TeamSettingsSidebar/>*/}
+                    <Formsy
+                        onValidSubmit={handleSubmit}
+                        onValid={enableButton}
+                        onInvalid={disableButton}
+                        ref={formRef}
+                        className="flex flex-col justify-center w-full"
+                    >
+                        <div className="w-full mb-24 items-start">
+                            <TextFieldFormsy
+                                id="displayName"
+                                className="flex flex-1 mt-16"
+                                label="Display Name"
+                                name="displayName"
+                                value={form.displayName || ''}
+                                onChange={handleChange}
+                                variant="outlined"
+                                fullWidth
+                                required
+                                validations={{
+                                    minLength: 4,
+                                }}
+                                validationErrors={{
+                                    minLength: 'Min character length is 4',
+                                }}
+                            />
+                            <TextFieldFormsy
+                                id="description"
+                                className="flex flex-1 mt-16"
+                                label="Description"
+                                name="description"
+                                value={form.description || ''}
+                                onChange={handleChange}
+                                variant="outlined"
+                                multiline
+                                rows="4"
+                                fullWidth
+                            />
+                            <Button
+                                className="mt-16"
+                                aria-label="save"
+                                variant="contained"
+                                color="secondary"
+                                type="submit"
+                                size="small"
+                                disabled={!isFormValid}
+                            >
+                                Save
+                            </Button>
+                        </div>
 
-                <div className="w-full mb-24">
-                    <TextField
-                        label="Display Name"
-                        name="displayName"
-                        value={form.displayName}
-                        onChange={handleChange}
-                        variant="outlined"
-                        fullWidth
-                    />
-                </div>
-                <div className="w-full mb-24">
-                    <TextField
-                        label="Description"
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                        variant="outlined"
-                        fullWidth
-                    />
-                </div>
+                        <MembersList/>
 
-                <MembersList/>
+                    </Formsy>
 
-            </FuseScrollbars>
-        </Dialog>
+                </FuseScrollbars>
+            </Dialog>
         </div>
-
     )
 }
 

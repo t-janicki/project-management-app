@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from '@history';
+import {showMessage} from '../../../../../../app/store/actions/fuse';
 
 import {TEAM_API} from "../../../../../apiURL";
 
@@ -11,6 +12,7 @@ export const CLOSE_TEAM_DIALOG = '[SCRUMBOARD APP] CLOSE TEAM DIALOG';
 export const NEW_TEAM = '[SCRUMBOARD APP] NEW TEAM';
 export const OPEN_SETTINGS_TEAM_DIALOG = '[SCRUMBOARD APP] OPEN SETTINGS TEAM DIALOG';
 export const CLOSE_SETTINGS_TEAM_DIALOG = '[SCRUMBOARD APP] OPEN SETTINGS TEAM DIALOG';
+export const  UPDATE_TEAM_INFO = '[SCRUMBOARD APP] UPDATE_TEAM_INFO';
 
 export function openTeamDialog(data) {
     return {
@@ -54,6 +56,42 @@ export function getTeam(params) {
                     })
                 }
             })
+        })
+    }
+}
+
+export function updateTeamInfo(teamInfo) {
+    return (dispatch) => {
+
+       const request = axios.put(TEAM_API, {
+           id: teamInfo.id,
+           displayName: teamInfo.displayName,
+           description: teamInfo.description,
+           ownerId: teamInfo.ownerId
+       });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
+
+                    return dispatch({
+                        type: UPDATE_TEAM_INFO,
+                        payload: response.data
+                    })
+                }
+            })
+                .then(() => {
+                    dispatch(showMessage({
+                        message: 'Saved',
+                        autoHideDuration: 2000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        variant: 'success'
+                    }));
+                })
         })
     }
 }

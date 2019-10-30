@@ -44,6 +44,12 @@ const teamReducer = function (state = initialState, action) {
                 data: {...action.payload}
             };
         }
+        case Actions.UPDATE_TEAM_INFO: {
+            return {
+                ...state,
+                data: {...action.payload}
+            }
+        }
         case Actions.RESET_TEAM: {
             return initialState;
         }
