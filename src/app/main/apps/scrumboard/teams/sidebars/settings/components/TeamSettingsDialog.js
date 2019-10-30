@@ -215,7 +215,7 @@ function TeamSettingsDialog(props) {
                                 fullWidth
                             />
                             <Button
-                                className="mt-16"
+                                className="mt-16 float-right"
                                 aria-label="save"
                                 variant="contained"
                                 color="secondary"

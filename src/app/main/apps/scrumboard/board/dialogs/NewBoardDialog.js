@@ -29,7 +29,6 @@ function NewBoardDialog(props) {
     const dispatch = useDispatch();
     const dialogOpen = useSelector(({scrumboardApp}) => scrumboardApp.board.dialogOpen);
     let teams = useSelector(({scrumboardApp}) => scrumboardApp.teams);
-    console.log(teams)
 
     const defaultFormState = {
         name: '',
