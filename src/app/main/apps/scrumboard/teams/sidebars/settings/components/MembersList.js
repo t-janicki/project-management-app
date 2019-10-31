@@ -17,7 +17,7 @@ import clsx from 'clsx';
 import _ from '@lodash';
 import MemberModel from './MemberModel';
 import ReactTable from "react-table";
-import * as Actions from "../../../../../e-commerce/store/actions";
+import * as Actions from '../../../../store/actions';
 import InvitationStatus from "./InvitationStatus";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -74,10 +74,16 @@ const useStyles = makeStyles({
 });
 
 function MembersList(props) {
+
     const dispatch = useDispatch();
     const classes = useStyles();
+
+    const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data.teamInfo);
+    console.log(team)
     const members = [];
+
     const [membersForm, setMembers] = useState(members);
+
     const {form: newMemberForm, handleChange, resetForm} = useForm({
         email: ""
     });
@@ -94,23 +100,19 @@ function MembersList(props) {
         setPage(0);
     };
 
-    const handleOnChange = useDebounce((members) => {
-        console.log(members);
-    }, 600);
-
-    useEffect(() => {
-        setMembers(members);
-    }, [members]);
-
-    useEffect(() => {
-        if (membersForm && !_.isEqual(membersForm, members)) {
-            handleOnChange(membersForm);
-        }
-    }, [handleOnChange, members, membersForm]);
-
-    function isFormInValid() {
-        return newMemberForm.email === '';
-    }
+    // const handleOnChange = useDebounce((members) => {
+    //     console.log(members);
+    // }, 600);
+    //
+    // useEffect(() => {
+    //     setMembers(members);
+    // }, [members]);
+    //
+    // useEffect(() => {
+    //     if (membersForm && !_.isEqual(membersForm, members)) {
+    //         handleOnChange(membersForm);
+    //     }
+    // }, [handleOnChange, members, membersForm]);
 
     function handleSubmit(ev) {
         ev.preventDefault();
@@ -118,13 +120,23 @@ function MembersList(props) {
             return;
         }
 
-        const newMember = new MemberModel(newMemberForm);
-        console.log(newMember);
-        setMembers(_.setIn(membersForm, newMember.id, newMember));
+        // const newMember = new MemberModel(newMemberForm);
+        // console.log(newMember);
+        // setMembers(_.setIn(membersForm, newMember.id, newMember));
         console.log('action');
+
+        const email = newMemberForm.email;
+        console.log(email)
+        dispatch(Actions.inviteToTeam(team.id, email));
         resetForm();
 
     }
+
+    function isFormInValid() {
+        return newMemberForm.email === '';
+    }
+
+
 
     return (
         <React.Fragment>
@@ -161,77 +173,77 @@ function MembersList(props) {
                     <Typography
                         className="text-11 font-500 rounded-4 text-white bg-blue px-8 py-4">{rows.length + " Members"}</Typography>
                 </div>
-                <div className={classes.tableWrapper}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map(column => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(row => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                        <TableCell
-                                            component="th"
-                                            scope="row"
-                                            className="pl-16 pr-0"
-                                        >
-                                            <Avatar src='assets/images/avatars/profile.jpg'/>
-                                        </TableCell>
+                {/*<div className={classes.tableWrapper}>*/}
+                {/*    <Table stickyHeader aria-label="sticky table">*/}
+                {/*        <TableHead>*/}
+                {/*            <TableRow>*/}
+                {/*                {columns.map(column => (*/}
+                {/*                    <TableCell*/}
+                {/*                        key={column.id}*/}
+                {/*                        align={column.align}*/}
+                {/*                        style={{ minWidth: column.minWidth }}*/}
+                {/*                    >*/}
+                {/*                        {column.label}*/}
+                {/*                    </TableCell>*/}
+                {/*                ))}*/}
+                {/*            </TableRow>*/}
+                {/*        </TableHead>*/}
+                {/*        <TableBody>*/}
+                {/*            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)*/}
+                {/*                .map(row => {*/}
+                {/*                return (*/}
+                {/*                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>*/}
+                {/*                        <TableCell*/}
+                {/*                            component="th"*/}
+                {/*                            scope="row"*/}
+                {/*                            className="pl-16 pr-0"*/}
+                {/*                        >*/}
+                {/*                            <Avatar src='assets/images/avatars/profile.jpg'/>*/}
+                {/*                        </TableCell>*/}
 
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
+                {/*                        <TableCell component="th" scope="row">*/}
+                {/*                            {row.name}*/}
+                {/*                        </TableCell>*/}
 
-                                        <TableCell component="th" scope="row">
-                                            {row.email}
-                                        </TableCell>
+                {/*                        <TableCell component="th" scope="row">*/}
+                {/*                            {row.email}*/}
+                {/*                        </TableCell>*/}
 
-                                        <TableCell component="th" scope="row">
-                                            <InvitationStatus name={row.status[0].name}/>
-                                        </TableCell>
-                                        <TableCell>
-                                            <IconButton
-                                                onClick={(ev) => {
-                                                    ev.stopPropagation();
-                                                    console.log('remove invitation ' + row.id)
-                                                }}
-                                            >
-                                                <Icon>clear</Icon>
-                                            </IconButton>
-                                        </TableCell>
+                {/*                        <TableCell component="th" scope="row">*/}
+                {/*                            <InvitationStatus name={row.status[0].name}/>*/}
+                {/*                        </TableCell>*/}
+                {/*                        <TableCell>*/}
+                {/*                            <IconButton*/}
+                {/*                                onClick={(ev) => {*/}
+                {/*                                    ev.stopPropagation();*/}
+                {/*                                    console.log('remove invitation ' + row.id)*/}
+                {/*                                }}*/}
+                {/*                            >*/}
+                {/*                                <Icon>clear</Icon>*/}
+                {/*                            </IconButton>*/}
+                {/*                        </TableCell>*/}
 
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </div>
-                <TablePagination
-                    rowsPerPageOptions={[5, 15, 30]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'previous page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'next page',
-                    }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
+                {/*                    </TableRow>*/}
+                {/*                );*/}
+                {/*            })}*/}
+                {/*        </TableBody>*/}
+                {/*    </Table>*/}
+                {/*</div>*/}
+                {/*<TablePagination*/}
+                {/*    rowsPerPageOptions={[5, 15, 30]}*/}
+                {/*    component="div"*/}
+                {/*    count={rows.length}*/}
+                {/*    rowsPerPage={rowsPerPage}*/}
+                {/*    page={page}*/}
+                {/*    backIconButtonProps={{*/}
+                {/*        'aria-label': 'previous page',*/}
+                {/*    }}*/}
+                {/*    nextIconButtonProps={{*/}
+                {/*        'aria-label': 'next page',*/}
+                {/*    }}*/}
+                {/*    onChangePage={handleChangePage}*/}
+                {/*    onChangeRowsPerPage={handleChangeRowsPerPage}*/}
+                {/*/>*/}
             </List>
         </React.Fragment>
     );

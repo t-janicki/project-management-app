@@ -53,6 +53,12 @@ const teamReducer = function (state = initialState, action) {
         case Actions.RESET_TEAM: {
             return initialState;
         }
+        case Actions.INVITE_TO_TEAM: {
+            return {
+                ...state,
+                data: {...action.payload}
+            }
+        }
         default:
             return state;
     }

@@ -19,6 +19,7 @@ import * as Actions from '../../../../store/actions';
 import MembersList from './MembersList';
 import Formsy from 'formsy-react';
 import {TextFieldFormsy} from '../../../../../../../../@fuse/components/formsy';
+import InviteForm from "./InviteForm";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -227,7 +228,8 @@ function TeamSettingsDialog(props) {
                             </Button>
                         </div>
 
-                        <MembersList/>
+                        {/*<MembersList team={team}/>*/}
+                        <InviteForm/>
 
                     </Formsy>
 

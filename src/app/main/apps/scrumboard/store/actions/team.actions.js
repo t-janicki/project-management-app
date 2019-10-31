@@ -10,9 +10,8 @@ export const RESET_TEAM = '[SCRUMBOARD APP] RESET TEAM';
 export const OPEN_NEW_TEAM_DIALOG = '[SCRUMBOARD APP] OPEN TEAM DIALOG';
 export const CLOSE_TEAM_DIALOG = '[SCRUMBOARD APP] CLOSE TEAM DIALOG';
 export const NEW_TEAM = '[SCRUMBOARD APP] NEW TEAM';
-export const OPEN_SETTINGS_TEAM_DIALOG = '[SCRUMBOARD APP] OPEN SETTINGS TEAM DIALOG';
-export const CLOSE_SETTINGS_TEAM_DIALOG = '[SCRUMBOARD APP] OPEN SETTINGS TEAM DIALOG';
 export const  UPDATE_TEAM_INFO = '[SCRUMBOARD APP] UPDATE_TEAM_INFO';
+export const  INVITE_TO_TEAM = '[SCRUMBOARD APP] INVITE_TO_TEAM';
 
 export function openTeamDialog(data) {
     return {
@@ -27,18 +26,32 @@ export function closeTeamDialog() {
     }
 }
 
-// export function openSettingsTeamDialog(data) {
-//     return {
-//         type: OPEN_SETTINGS_TEAM_DIALOG,
-//         payload: data
-//     }
-// }
-//
-// export function closeTeamSettingsDialog() {
-//     return {
-//         type: CLOSE_SETTINGS_TEAM_DIALOG,
-//     }
-// }
+export function inviteToTeam(teamId, email) {
+    console.log(teamId)
+    console.log(email)
+    return (dispatch) => {
+
+        const request = axios.put(`${TEAM_API}/invite`, {
+            teamId,
+            email
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
+
+                    console.log(response.data)
+
+                    return dispatch({
+                        type: INVITE_TO_TEAM,
+                        payload: response.data
+                    })
+                }
+            })
+        })
+    }
+}
 
 export function getTeam(params) {
     return (dispatch) => {
