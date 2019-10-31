@@ -53,6 +53,7 @@ function TeamBoards(props) {
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data);
     const classes = useStyles(props);
 
+    console.log(team)
 
     useEffect(() => {
         dispatch(Actions.getTeam(props.match.params));

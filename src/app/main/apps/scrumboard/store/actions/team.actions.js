@@ -67,7 +67,7 @@ export function updateTeamInfo(teamInfo) {
            id: teamInfo.id,
            displayName: teamInfo.displayName,
            description: teamInfo.description,
-           ownerId: teamInfo.ownerId
+           ownerEmail: teamInfo.ownerEmail
        });
 
         return new Promise((resolve, reject) => {
