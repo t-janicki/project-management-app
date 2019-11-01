@@ -78,7 +78,7 @@ function MembersList(props) {
     const classes = useStyles();
 
     const rows = useSelector(({scrumboardApp}) => scrumboardApp.team.data.members);
-    console.log(rows)
+    const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data.teamInfo);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -144,7 +144,7 @@ function MembersList(props) {
                                             <IconButton
                                                 onClick={(ev) => {
                                                     ev.stopPropagation();
-                                                    console.log('remove invitation ' + row.id)
+                                                    dispatch(Actions.removeFromTeam(team.id, row.email))
                                                 }}
                                             >
                                                 <Icon>clear</Icon>

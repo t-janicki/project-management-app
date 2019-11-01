@@ -59,6 +59,12 @@ const teamReducer = function (state = initialState, action) {
                 data: {...action.payload}
             }
         }
+        case Actions.REMOVE_FROM_TEAM: {
+            return {
+                ...state,
+                data: {...action.payload}
+            }
+        }
         default:
             return state;
     }

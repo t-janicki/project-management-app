@@ -10,8 +10,9 @@ export const RESET_TEAM = '[SCRUMBOARD APP] RESET TEAM';
 export const OPEN_NEW_TEAM_DIALOG = '[SCRUMBOARD APP] OPEN TEAM DIALOG';
 export const CLOSE_TEAM_DIALOG = '[SCRUMBOARD APP] CLOSE TEAM DIALOG';
 export const NEW_TEAM = '[SCRUMBOARD APP] NEW TEAM';
-export const  UPDATE_TEAM_INFO = '[SCRUMBOARD APP] UPDATE_TEAM_INFO';
-export const  INVITE_TO_TEAM = '[SCRUMBOARD APP] INVITE_TO_TEAM';
+export const UPDATE_TEAM_INFO = '[SCRUMBOARD APP] UPDATE_TEAM_INFO';
+export const INVITE_TO_TEAM = '[SCRUMBOARD APP] INVITE_TO_TEAM';
+export const REMOVE_FROM_TEAM = '[SCRUMBOARD APP] REMOVE FROM TEAM';
 
 export function openTeamDialog(data) {
     return {
@@ -27,8 +28,6 @@ export function closeTeamDialog() {
 }
 
 export function inviteToTeam(teamId, email) {
-    console.log(teamId)
-    console.log(email)
     return (dispatch) => {
 
         const request = axios.put(`${TEAM_API}/invite`, {
@@ -41,7 +40,15 @@ export function inviteToTeam(teamId, email) {
                 if (response.status === 200) {
                     resolve(response.data);
 
-                    console.log(response.data)
+                    dispatch(showMessage({
+                        message: 'Invitation sended. ',
+                        autoHideDuration: 2000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        variant: 'info'
+                    }));
 
                     return dispatch({
                         type: INVITE_TO_TEAM,
@@ -50,6 +57,54 @@ export function inviteToTeam(teamId, email) {
                 }
             })
                 .catch(function (error) {
+                    reject(error.data);
+                    if (error.response.status === 400) {
+                        dispatch(showMessage({
+                            message: error.response.data.message,
+                            autoHideDuration: 2000,
+                            anchorOrigin: {
+                                vertical: 'top',
+                                horizontal: 'center'
+                            },
+                            variant: 'error'
+                        }));
+                    }
+                });
+        })
+    }
+}
+
+export function removeFromTeam(teamId, email) {
+    return (dispatch) => {
+
+        const request = axios.patch(`${TEAM_API}/remove`, {
+            teamId,
+            email
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
+
+                    dispatch(showMessage({
+                        message: 'Member removed. ',
+                        autoHideDuration: 2000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        variant: 'info'
+                    }));
+
+                    return dispatch({
+                        type: REMOVE_FROM_TEAM,
+                        payload: response.data
+                    })
+                }
+            })
+                .catch(function (error) {
+                    reject(error.data);
                     if (error.response.status === 400) {
                         dispatch(showMessage({
                             message: error.response.data.message,
@@ -89,12 +144,12 @@ export function getTeam(params) {
 export function updateTeamInfo(teamInfo) {
     return (dispatch) => {
 
-       const request = axios.put(TEAM_API, {
-           id: teamInfo.id,
-           displayName: teamInfo.displayName,
-           description: teamInfo.description,
-           ownerEmail: teamInfo.ownerEmail
-       });
+        const request = axios.put(TEAM_API, {
+            id: teamInfo.id,
+            displayName: teamInfo.displayName,
+            description: teamInfo.description,
+            ownerEmail: teamInfo.ownerEmail
+        });
 
         return new Promise((resolve, reject) => {
             request.then((response) => {
@@ -117,9 +172,9 @@ export function updateTeamInfo(teamInfo) {
                     })
                 }
             })
-                // .then(() => {
-                //
-                // })
+            // .then(() => {
+            //
+            // })
         })
     }
 }

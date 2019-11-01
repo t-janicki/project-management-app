@@ -84,7 +84,6 @@ export function newBoard({name, description, boardType, teams}) {
 export function getBoard(params, boardType) {
     return (dispatch) => {
 
-        console.log(boardType)
         const {boardId} = params;
         const request = axios.get(`${BOARD_API}/${boardId}?boardType=${boardType}`);
 
