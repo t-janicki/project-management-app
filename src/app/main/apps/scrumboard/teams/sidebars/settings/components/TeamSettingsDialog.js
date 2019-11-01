@@ -230,9 +230,13 @@ function TeamSettingsDialog(props) {
 
                     </Formsy>
 
-                    <InviteForm/>
+                    <div>
+                        <InviteForm/>
+                    </div>
 
-                    <MembersList/>
+                    <div>
+                        <MembersList/>
+                    </div>
 
                 </FuseScrollbars>
             </Dialog>

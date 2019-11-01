@@ -172,9 +172,6 @@ export function updateTeamInfo(teamInfo) {
                     })
                 }
             })
-            // .then(() => {
-            //
-            // })
         })
     }
 }

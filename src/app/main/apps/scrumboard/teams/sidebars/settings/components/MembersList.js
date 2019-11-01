@@ -42,8 +42,8 @@ const columns = [
     //     maxWidth: 10,
     // },
     {
-        id: 'remove',
-        label: 'Remove',
+        id: 'leave',
+        label: 'Leave',
         maxWidth: 25,
     }
 ];
@@ -73,12 +73,12 @@ const useStyles = makeStyles({
 });
 
 function MembersList(props) {
-
     const dispatch = useDispatch();
     const classes = useStyles();
 
     const rows = useSelector(({scrumboardApp}) => scrumboardApp.team.data.members);
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data.teamInfo);
+    const currentUserEmail = useSelector(({auth}) => auth.user.userInfo.email);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -119,6 +119,7 @@ function MembersList(props) {
                         <TableBody>
                             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(row => {
+                                    const buttonStatus = currentUserEmail !== row.email && team.ownerEmail !== currentUserEmail;
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                         <TableCell
@@ -140,17 +141,19 @@ function MembersList(props) {
                                         {/*<TableCell component="th" scope="row">*/}
                                         {/*    <InvitationStatus name={row.status[0].name}/>*/}
                                         {/*</TableCell>*/}
-                                        <TableCell>
-                                            <IconButton
-                                                onClick={(ev) => {
-                                                    ev.stopPropagation();
-                                                    dispatch(Actions.removeFromTeam(team.id, row.email))
-                                                }}
-                                            >
-                                                <Icon>clear</Icon>
-                                            </IconButton>
-                                        </TableCell>
-
+                                            <TableCell>
+                                                {team.ownerEmail !== row.email && (
+                                                    <IconButton
+                                                        onClick={(ev) => {
+                                                            ev.stopPropagation();
+                                                            dispatch(Actions.removeFromTeam(team.id, row.email))
+                                                        }}
+                                                        disabled={buttonStatus}
+                                                    >
+                                                        <Icon>exit_to_app</Icon>
+                                                    </IconButton>
+                                                )}
+                                            </TableCell>
                                     </TableRow>
                                 );
                             })}
