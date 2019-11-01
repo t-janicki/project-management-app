@@ -49,6 +49,19 @@ export function inviteToTeam(teamId, email) {
                     })
                 }
             })
+                .catch(function (error) {
+                    if (error.response.status === 400) {
+                        dispatch(showMessage({
+                            message: error.response.data.message,
+                            autoHideDuration: 2000,
+                            anchorOrigin: {
+                                vertical: 'top',
+                                horizontal: 'center'
+                            },
+                            variant: 'error'
+                        }));
+                    }
+                });
         })
     }
 }
@@ -88,13 +101,6 @@ export function updateTeamInfo(teamInfo) {
                 if (response.status === 200) {
                     resolve(response.data);
 
-                    return dispatch({
-                        type: UPDATE_TEAM_INFO,
-                        payload: response.data
-                    })
-                }
-            })
-                .then(() => {
                     dispatch(showMessage({
                         message: 'Saved',
                         autoHideDuration: 2000,
@@ -104,7 +110,16 @@ export function updateTeamInfo(teamInfo) {
                         },
                         variant: 'success'
                     }));
-                })
+
+                    return dispatch({
+                        type: UPDATE_TEAM_INFO,
+                        payload: response.data
+                    })
+                }
+            })
+                // .then(() => {
+                //
+                // })
         })
     }
 }
