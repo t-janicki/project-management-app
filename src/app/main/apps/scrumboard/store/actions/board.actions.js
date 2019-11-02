@@ -324,16 +324,13 @@ export function deleteBoard(boardId) {
                 if (response.status === 200) {
                     resolve(response);
 
+                    history.push('/boards');
+
                     return dispatch({
                         type: DELETE_BOARD
                     })
                 }
             })
-                .then(() => {
-                    history.push({
-                        pathname: '/boards'
-                    })
-                })
         })
     }
 }

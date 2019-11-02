@@ -80,6 +80,9 @@ const teamReducer = function (state = initialState, action) {
                 data: {...action.payload}
             }
         }
+        case Actions.DELETE_TEAM: {
+            return initialState;
+        }
         default:
             return state;
     }

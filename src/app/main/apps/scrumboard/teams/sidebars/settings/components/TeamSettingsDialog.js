@@ -2,7 +2,7 @@ import React, {useCallback, useRef, useState} from 'react';
 import {
     AppBar,
     Button,
-    Dialog,
+    Dialog, DialogActions,
     DialogTitle,
     Icon,
     IconButton,
@@ -20,6 +20,7 @@ import MembersList from './MembersList';
 import Formsy from 'formsy-react';
 import {TextFieldFormsy} from '../../../../../../../../@fuse/components/formsy';
 import InviteForm from "./InviteForm";
+import ConfirmDeleteTeam from "./ConfirmDeleteTeam";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -53,25 +54,6 @@ const useStyles = makeStyles(theme => ({
         borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.6),
         '&:hover': {
             borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.8)
-        }
-    },
-    button: {
-        position: 'absolute',
-        right: 0,
-        top: 600,
-        minWidth: 48,
-        width: 48,
-        height: 48,
-        opacity: .9,
-        padding: 0,
-        borderBottomRightRadius: 0,
-        borderTopRightRadius: 0,
-        zIndex: 999,
-        color: theme.palette.getContrastText(red[500]),
-        backgroundColor: red[500],
-        '&:hover': {
-            backgroundColor: red[500],
-            opacity: 1
         }
     },
     '@keyframes rotating': {
@@ -108,6 +90,7 @@ function TeamSettingsDialog(props) {
     const dispatch = useDispatch();
 
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data.teamInfo);
+    const currentUserEmail = useSelector(({auth}) => auth.user.userInfo.email);
 
     const {form, setForm, handleChange, resetForm} = useForm(defaultFormState);
 
@@ -174,7 +157,7 @@ function TeamSettingsDialog(props) {
                     </AppBar>
                 </DialogTitle>
                 <FuseScrollbars className="p-16 sm:p-32">
-                    <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>
+                    <IconButton className="fixed top-0 mt-3 mr-3 right-0 z-10" onClick={handleClose}>
                         <Icon>close</Icon>
                     </IconButton>
 
@@ -239,6 +222,11 @@ function TeamSettingsDialog(props) {
                     </div>
 
                 </FuseScrollbars>
+                {currentUserEmail === team.ownerEmail && (
+                    <DialogActions>
+                        <ConfirmDeleteTeam/>
+                    </DialogActions>
+                )}
             </Dialog>
         </div>
     )

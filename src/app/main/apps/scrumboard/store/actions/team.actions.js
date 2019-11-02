@@ -13,6 +13,7 @@ export const NEW_TEAM = '[SCRUMBOARD APP] NEW TEAM';
 export const UPDATE_TEAM_INFO = '[SCRUMBOARD APP] UPDATE_TEAM_INFO';
 export const INVITE_TO_TEAM = '[SCRUMBOARD APP] INVITE_TO_TEAM';
 export const REMOVE_FROM_TEAM = '[SCRUMBOARD APP] REMOVE FROM TEAM';
+export const DELETE_TEAM = '[SCRUMBOARD APP] DELETE_TEAM';
 
 export function openTeamDialog(data) {
     return {
@@ -209,6 +210,41 @@ export function createNewTeam({displayName, description}) {
                         pathname: `/teams/${team.id}/boards`
                     });
                 })
+        })
+    }
+}
+
+export function deleteTeam(teamId) {
+    return (dispatch) => {
+
+        const request = axios.delete(`${TEAM_API}/${teamId}`);
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response);
+
+                    history.push('/teams');
+
+                    return dispatch({
+                        type: DELETE_TEAM
+                    })
+                }
+            })
+                .catch(function (error) {
+                    reject(error.data);
+                    if (error.response.status) {
+                        dispatch(showMessage({
+                            message: error.response.data.message,
+                            autoHideDuration: 2000,
+                            anchorOrigin: {
+                                vertical: 'top',
+                                horizontal: 'center'
+                            },
+                            variant: 'error'
+                        }));
+                    }
+                });
         })
     }
 }
