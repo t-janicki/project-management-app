@@ -9,7 +9,18 @@ import {
     InputAdornment,
     TextField,
     TablePagination,
-    Tooltip, Table, TableHead, TableRow, TableCell, TableBody, Avatar
+    Tooltip,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    Avatar,
+    Dialog,
+    AppBar,
+    Toolbar,
+    DialogTitle,
+    DialogContent, Button
 } from '@material-ui/core';
 import {useDebounce, useForm} from '@fuse/hooks';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,7 +29,8 @@ import _ from '@lodash';
 import ReactTable from "react-table";
 import * as Actions from '../../../../store/actions';
 import InvitationStatus from "./InvitationStatus";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
+import RemoveMemberDialog from "./RemoveMemberDialog";
 
 const columns = [
     {
@@ -62,7 +74,7 @@ const columns = [
 //     {id: 481, name: 'Name8', email: 'email-8', status: [{id: 18678, name: 'Accepted',}]},
 // ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
     },
@@ -70,7 +82,10 @@ const useStyles = makeStyles({
         maxHeight: 440,
         overflow: 'auto',
     },
-});
+    paper: {
+        color: theme.palette.text.primary
+    }
+}));
 
 function MembersList(props) {
     const dispatch = useDispatch();
@@ -92,10 +107,19 @@ function MembersList(props) {
         setPage(0);
     };
 
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <React.Fragment>
             <List dense>
-
                 <div className="flex items-center justify-between px-16 h-64 border-b-1">
                     <Typography className="text-16">Team Members</Typography>
                     <Typography
@@ -109,7 +133,7 @@ function MembersList(props) {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{minWidth: column.minWidth}}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -120,43 +144,39 @@ function MembersList(props) {
                             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(row => {
                                     const buttonStatus = currentUserEmail !== row.email && team.ownerEmail !== currentUserEmail;
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                        <TableCell
-                                            component="th"
-                                            scope="row"
-                                            className="pl-16 pr-0"
-                                        >
-                                            <Avatar src={row.avatarUrl}/>
-                                        </TableCell>
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
+                                                className="pl-16 pr-0"
+                                            >
+                                                <Avatar src={row.avatarUrl}/>
+                                            </TableCell>
 
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
+                                            <TableCell component="th" scope="row">
+                                                {row.name}
+                                            </TableCell>
 
-                                        <TableCell component="th" scope="row">
-                                            {row.email}
-                                        </TableCell>
+                                            <TableCell component="th" scope="row">
+                                                {row.email}
+                                            </TableCell>
 
-                                        {/*<TableCell component="th" scope="row">*/}
-                                        {/*    <InvitationStatus name={row.status[0].name}/>*/}
-                                        {/*</TableCell>*/}
+                                            {/*<TableCell component="th" scope="row">*/}
+                                            {/*    <InvitationStatus name={row.status[0].name}/>*/}
+                                            {/*</TableCell>*/}
                                             <TableCell>
                                                 {team.ownerEmail !== row.email && (
-                                                    <IconButton
-                                                        onClick={(ev) => {
-                                                            ev.stopPropagation();
-                                                            dispatch(Actions.removeFromTeam(team.id, row.email))
-                                                        }}
-                                                        disabled={buttonStatus}
-                                                    >
-                                                        <Icon>exit_to_app</Icon>
-                                                    </IconButton>
+                                                    <RemoveMemberDialog
+                                                        teamId={team.id}
+                                                        email={row.email}
+                                                        buttonStatus={buttonStatus}
+                                                    />
                                                 )}
                                             </TableCell>
-                                    </TableRow>
-                                );
-                            })}
+                                        </TableRow>
+                                    );
+                                })}
                         </TableBody>
                     </Table>
                 </div>
