@@ -86,7 +86,7 @@ export function newLabel({name, boardId}) {
                 if (response.status === 200) {
 
                     resolve(response.data);
-                    console.log(response.data)
+
                     return dispatch({
                         type: ADD_LABEL,
                         payload: response.data
@@ -146,6 +146,7 @@ export function removeCard(boardId, cardId) {
             request.then((response) => {
                 if (response.data) {
                     resolve(response.data);
+
                     return dispatch({
                         type: REMOVE_CARD,
                         cardId,

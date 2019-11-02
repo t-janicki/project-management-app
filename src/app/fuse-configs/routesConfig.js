@@ -33,7 +33,8 @@ const routes = [
     {
         path     : '/',
         exact    : true,
-        component: () => <Redirect to="/apps/dashboards/analytics"/>
+        // component: () => <Redirect to="/apps/dashboards/analytics"/>
+        component: () => <Redirect to="/boards"/>
     },
     {
         component: () => <Redirect to="/not-found"/>

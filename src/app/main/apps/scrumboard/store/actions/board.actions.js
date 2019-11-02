@@ -1,17 +1,13 @@
 import axios from 'axios';
-import {FuseUtils} from '@fuse';
 import history from '@history';
 import _ from '@lodash';
 import {showMessage} from 'app/store/actions/fuse';
 import reorder, {reorderQuoteMap} from './reorder';
-import * as Actions from './index';
-import {BOARD_API} from "../../../../../apiURL";
-import {useDispatch} from "react-redux";
+import {BOARD_API} from '../../../../../apiURL';
 
 export const GET_BOARD = '[SCRUMBOARD APP] GET BOARD';
 export const NEW_BOARD = '[SCRUMBOARD APP] NEW BOARD';
 export const DELETE_BOARD = '[SCRUMBOARD APP] DELETE BOARD';
-export const COPY_BOARD = '[SCRUMBOARD APP] COPY BOARD';
 export const RENAME_BOARD = '[SCRUMBOARD APP] RENAME BOARD';
 export const CHANGE_BOARD_SETTINGS = '[SCRUMBOARD APP] CHANGE BOARD SETTINGS';
 export const RESET_BOARD = '[SCRUMBOARD APP] RESET BOARD';
@@ -39,13 +35,9 @@ export function closeNewBoardDialog() {
 }
 
 export function newBoard({name, description, boardType, teams}) {
-    console.log(name)
-    console.log(description)
-    console.log(boardType)
-    console.log(teams)
-
-    const teamId = teams;
     return (dispatch) => {
+        const teamId = teams;
+
         const request = axios.post(`${BOARD_API}?teamId=${teamId}`, {
             name,
             boardType,
@@ -71,8 +63,9 @@ export function newBoard({name, description, boardType, teams}) {
                 });
             })
                 .then(() => {
-                    const uri = boardType === 'PERSONAL' ? `/personal/boards/${board.id}/${board.uri}` :
-                        `/teams/${teamId}/boards/${board.id}/${board.uri}`;
+                    const uri = boardType === 'PERSONAL'
+                        ? `/personal/boards/${board.id}/${board.uri}`
+                        : `/teams/${teamId}/boards/${board.id}/${board.uri}`;
                     history.push({
                         pathname: uri
                     });
@@ -124,7 +117,6 @@ export function reorderList(result) {
             result.destination.index
         );
 
-        // lists = ordered;
         const request = axios.put(BOARD_API + `/lists/reorder`, {
                 lists
             }
@@ -207,6 +199,7 @@ export function newCard(boardId, listId, cardTitle) {
         return new Promise((resolve, reject) => {
             request.then((response) => {
                 resolve(response.data);
+
                 return dispatch({
                     type: ADD_CARD,
                     payload: response.data

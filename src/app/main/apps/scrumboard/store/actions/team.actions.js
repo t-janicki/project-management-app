@@ -142,6 +142,12 @@ export function getTeam(params) {
                     })
                 }
             })
+                .catch(function (error) {
+                    reject(error.data);
+                    if (error.response.status === 404) {
+                        history.push('/not-found')
+                    }
+                });
         })
     }
 }
