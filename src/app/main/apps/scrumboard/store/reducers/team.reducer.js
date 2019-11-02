@@ -5,9 +5,24 @@ const initialState = {
     data: {
         boards: [],
         members: [],
-        teamInfo: null
+        teamInfo: {
+            id: 0,
+            displayName: '',
+            description: '',
+            ownerEmail: '',
+
+        }
     }
 };
+
+// const initialState = {
+//     dialogOpen: false,
+//     data: {
+//         boards: [],
+//         members: [],
+//         teamInfo: null
+//     }
+// };
 
 const teamReducer = function (state = initialState, action) {
     switch (action.type) {

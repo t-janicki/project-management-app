@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
     Typography,
     Icon,
@@ -53,8 +53,6 @@ function TeamBoards(props) {
     const team = useSelector(({scrumboardApp}) => scrumboardApp.team.data);
     const classes = useStyles(props);
 
-    console.log(team)
-
     useEffect(() => {
         dispatch(Actions.getTeam(props.match.params));
         return () => {
@@ -62,23 +60,12 @@ function TeamBoards(props) {
         }
     }, [dispatch, props.match.params]);
 
-
     const containerRef = useRef(null);
 
     function handleNewBoardDialog(ev) {
         ev.preventDefault();
         dispatch(Actions.openNewBoardDialog(ev));
     }
-
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     return (
         <div
@@ -94,15 +81,19 @@ function TeamBoards(props) {
                         </Button>
                     </Hidden>
 
+                    <Typography
+                        className="text-16 font-600"
+                        color="inherit"
+                    >
+                      {team.teamInfo.displayName}
+                    </Typography>
+
                     <Hidden smUp>
                         <IconButton color="inherit" to="/boards/" component={Link}>
                             <Icon>assessment</Icon>
                         </IconButton>
                     </Hidden>
 
-                    {/*<IconButton color="inherit" onClick={(ev) => handleSettingsOpenClick(ev, team)}>*/}
-                    {/*    <Icon>settings</Icon>*/}
-                    {/*</IconButton>*/}
                     <TeamSettingsDialog />
 
                 </Toolbar>
@@ -147,38 +138,6 @@ function TeamBoards(props) {
 
                 <NewBoardDialog/>
 
-                {/*<TeamSettingsDialog/>*/}
-
-                {/*<Dialog*/}
-                {/*    TransitionComponent={Transition}*/}
-                {/*    aria-labelledby="settings-panel"*/}
-                {/*    aria-describedby="settings"*/}
-                {/*    open={open}*/}
-                {/*    keepMounted*/}
-                {/*    onClose={handleClose}*/}
-                {/*    BackdropProps={{invisible: true}}*/}
-                {/*    classes={{*/}
-                {/*        paper: classes.dialogPaper*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    <DialogTitle component="div" className="p-0">*/}
-                {/*        <AppBar position="static" elevation={1}>*/}
-                {/*            <Toolbar className="flex w-full overflow-x-auto px-8 sm:px-16">*/}
-                {/*                Team Settings*/}
-                {/*            </Toolbar>*/}
-                {/*        </AppBar>*/}
-                {/*    </DialogTitle>*/}
-                {/*    <FuseScrollbars className="p-16 sm:p-32">*/}
-                {/*        <IconButton className="fixed top-0 right-0 z-10" onClick={handleClose}>*/}
-                {/*            <Icon>close</Icon>*/}
-                {/*        </IconButton>*/}
-
-                {/*        /!*<Typography className="mb-32" variant="h6">Team Settings</Typography>*!/*/}
-
-                {/*        <TeamSettingsSidebar/>*/}
-
-                {/*    </FuseScrollbars>*/}
-                {/*</Dialog>*/}
             </div>
         </div>
     );
