@@ -9,12 +9,12 @@ import {
     makeStyles,
     Toolbar,
     Typography
-} from "@material-ui/core";
-import {useDispatch, useSelector} from "react-redux";
-import clsx from "clsx";
+} from '@material-ui/core';
+import {useDispatch, useSelector} from 'react-redux';
+import clsx from 'clsx';
 import * as Actions from '../../../../store/actions';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     paper: {
         color: theme.palette.text.primary
     }
@@ -31,6 +31,8 @@ function RemoveMemberDialog(props) {
     const handleOpen = () => {
         setOpen(true);
     };
+
+    let quitStatus = '';
 
     const handleClose = () => {
         setOpen(false);
@@ -67,7 +69,8 @@ function RemoveMemberDialog(props) {
                             <Typography>
                                 {currentUserEmail === props.email
                                     ? 'Are you sure you want to quit team?'
-                                    : 'Are you sure you want to remove member from team?'}
+                                    : 'Are you sure you want to remove member from team?'
+                                }
                             </Typography>
                         </div>
                         <div className="mt-12 mb-12 float-right">
@@ -80,10 +83,10 @@ function RemoveMemberDialog(props) {
                                 size="small"
                                 onClick={(ev) => {
                                     ev.stopPropagation();
-                                dispatch(Actions.removeFromTeam(props.teamId, props.email))
+                                    dispatch(Actions.removeFromTeam(props.teamId, props.email, quitStatus))
                                 }}
                             >
-                                {currentUserEmail === props.email ? 'Quit': 'Remove'}
+                                {quitStatus = (currentUserEmail === props.email ? 'Quit' : 'Remove')}
                             </Button>
 
                             <Button
@@ -97,7 +100,6 @@ function RemoveMemberDialog(props) {
                             >
                                 Cancel
                             </Button>
-
                         </div>
                     </DialogContent>
                 </Dialog>

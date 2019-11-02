@@ -74,7 +74,7 @@ export function inviteToTeam(teamId, email) {
     }
 }
 
-export function removeFromTeam(teamId, email) {
+export function removeFromTeam(teamId, email, quitStatus) {
     return (dispatch) => {
 
         const request = axios.patch(`${TEAM_API}/remove`, {
@@ -87,15 +87,19 @@ export function removeFromTeam(teamId, email) {
                 if (response.status === 200) {
                     resolve(response.data);
 
-                    dispatch(showMessage({
-                        message: 'Member removed. ',
-                        autoHideDuration: 2000,
-                        anchorOrigin: {
-                            vertical: 'top',
-                            horizontal: 'center'
-                        },
-                        variant: 'info'
-                    }));
+                    if (quitStatus === 'Remove') {
+                        dispatch(showMessage({
+                            message: 'Member removed. ',
+                            autoHideDuration: 2000,
+                            anchorOrigin: {
+                                vertical: 'top',
+                                horizontal: 'center'
+                            },
+                            variant: 'info'
+                        }));
+                    } else {
+                        history.push('/teams');
+                    }
 
                     return dispatch({
                         type: REMOVE_FROM_TEAM,
@@ -105,7 +109,7 @@ export function removeFromTeam(teamId, email) {
             })
                 .catch(function (error) {
                     reject(error.data);
-                    if (error.response.status === 400) {
+                    if (error.response.status) {
                         dispatch(showMessage({
                             message: error.response.data.message,
                             autoHideDuration: 2000,
