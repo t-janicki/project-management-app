@@ -71,7 +71,7 @@ function AccountDialog(props) {
     }
 
     function handleSubmit() {
-        dispatch(AccountActions.updateAccountInfo(form));
+        dispatch(AccountActions.updateUserInfo(form));
     }
 
     const formRef = useRef(null);

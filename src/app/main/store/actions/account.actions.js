@@ -14,7 +14,7 @@ export const GET_ACCOUNT_INFO = '[ACCOUNT] GET ACCOUNT INFO';
 export const NEW_PASSWORD = '[ACCOUNT] NEW PASSWORD REQUEST';
 
 export function getUserInfo(params) {
-    return(dispatch) => {
+    return (dispatch) => {
 
         return new Promise((resolve, reject) => {
             axios.get(GET_USER_DATA, {params})
@@ -44,14 +44,14 @@ export function getUserInfo(params) {
     }
 }
 
-export function updateAccountInfo({id, name, email, phone, jobTitle, isActive}) {
+export function updateUserInfo({id, firstName, lastName, displayName, email, phone}) {
     return (dispatch, getState) => {
 
         const {routeParams} = getState().auth.user;
 
         return new Promise((resolve, reject) => {
             axios.put(UPDATE_USER, {
-                id, name, email, phone, jobTitle, isActive
+                id, firstName, lastName, displayName, email, phone
             })
                 .then(response => {
                     if (response.data) {
@@ -99,10 +99,7 @@ export function newPasswordRequest({password, newPassword, confirmNewPassword}) 
                 password, newPassword, confirmNewPassword
             })
                 .then(response => {
-                    if (response.data) {
-                        dispatch({
-                            type: NEW_PASSWORD
-                        });
+                    if (response.status === 200) {
 
                         resolve(response.data);
                         history.push('/login');
@@ -116,6 +113,10 @@ export function newPasswordRequest({password, newPassword, confirmNewPassword}) 
                             },
                             variant: 'info'
                         }));
+
+                        return dispatch({
+                            type: NEW_PASSWORD
+                        });
                     }
                 })
                 .catch(error => {

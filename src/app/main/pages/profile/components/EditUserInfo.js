@@ -12,20 +12,20 @@ import {
 import {FuseScrollbars} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import Formsy from 'formsy-react';
-import * as Actions from '../../../store/actions'
 import {useDispatch, useSelector} from 'react-redux';
 import {TextFieldFormsy} from "../../../../../@fuse/components/formsy";
+import * as Actions from  '../../../store/actions';
 
 function EditUserInfo(props) {
     const dispatch = useDispatch();
 
     const user = useSelector(({account}) => account.account.data.userInfo);
-    console.log(user)
 
     const {form, setForm, handleChange, resetForm} = useForm({
         firstName: '',
         lastName: '',
         displayName: '',
+        phone: ''
     });
 
     useEffect(() => {
@@ -33,7 +33,8 @@ function EditUserInfo(props) {
     }, [user, setForm]);
 
     function handleSubmit() {
-        // dispatch(Actions.updateTeamInfo(form));
+        console.log(form)
+        dispatch(Actions.updateUserInfo(form));
     }
 
     const formRef = useRef(null);
@@ -98,6 +99,22 @@ function EditUserInfo(props) {
                             label="Last Name"
                             name="lastName"
                             value={form.lastName || ''}
+                            onChange={handleChange}
+                            variant="outlined"
+                            fullWidth
+                            validations={{
+                                minLength: 4,
+                            }}
+                            validationErrors={{
+                                minLength: 'Min character length is 4',
+                            }}
+                        />
+                        <TextFieldFormsy
+                            id="phone"
+                            className="flex flex-1 mt-16"
+                            label="Phone number"
+                            name="phone"
+                            value={form.phone || ''}
                             onChange={handleChange}
                             variant="outlined"
                             fullWidth

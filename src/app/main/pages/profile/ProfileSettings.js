@@ -33,7 +33,6 @@ function ProfileSettings(props) {
     const classes = useStyles();
 
     const user = useSelector(({account}) => account.account.data.userInfo);
-    console.log(user)
 
     useEffect(() => {
         dispatch(Actions.getUserInfo(props.match.params));
@@ -50,8 +49,7 @@ function ProfileSettings(props) {
                     <ProfileHeader/>
                 }
                 content={
-                    <div
-                        className="p-16 flex flex-1 flex-col items-center justify-center max-w-sm md:flex-row md:items-end">
+                    <div className="p-16 max-w-sm md:flex-row md:items-end">
                         <FuseScrollbars className="p-16 flex flex-col flex-1 md:pr-32">
                             <Paper className={classes.root}>
                                 <EditUserInfo/>
