@@ -70,8 +70,10 @@ const teamReducer = function (state = initialState, action) {
         }
         case Actions.INVITE_TO_TEAM: {
             return {
-                ...state,
-                data: {...action.payload}
+                data: {
+                    ...state.data,
+                    members: action.payload
+                }
             }
         }
         case Actions.REMOVE_FROM_TEAM: {
