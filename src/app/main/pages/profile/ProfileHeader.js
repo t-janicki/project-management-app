@@ -16,7 +16,7 @@ function ProfileHeader(props) {
                 </FuseAnimate>
                 <FuseAnimate animation="transition.slideLeftIn" delay={300}>
                     <Typography className="md:ml-24" variant="h4" color="inherit">
-                        {account.name}
+                        {account.displayName}
                     </Typography>
                 </FuseAnimate>
 

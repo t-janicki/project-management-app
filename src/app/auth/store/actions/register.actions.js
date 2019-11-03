@@ -6,44 +6,6 @@ import history from '@history';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
-// ORIGINAL VERSION DON'T DELETE
-// export function submitRegister({companyName, name, lastName, phone, email, password})
-// {
-//     return (dispatch) =>
-//         jwtService.createUser({
-//           signUpUserRequest: {
-//             lastName,
-//             name,
-//             password,
-//             email,
-//             phone
-//           },
-//             companyRequest: {
-//                 companyName
-//           }
-//         })
-//             .then((user) => {
-//                     dispatch(UserActions.setUserData(user));
-//                     return dispatch({
-//                         type: REGISTER_SUCCESS
-//                     });
-//                 }
-//             )
-//             .catch(error => {
-//                 if (error.response.data.message) {
-//                     dispatch(showMessage({
-//                         message: (error.response.data.message),
-//                         autoHideDuration: 3000,
-//                         anchorOrigin: {
-//                             vertical: 'top',
-//                             horizontal: 'center'
-//                         },
-//                         variant: 'error'
-//                     }))
-//                 }
-//             })
-// }
-
 export function submitRegister({name, email, password}) {
     return (dispatch) => {
 

@@ -37,7 +37,7 @@ class Auth extends Component {
 
                   resolve();
 
-                    this.props.showMessage({message: 'Welcome, ' + user.userInfo.name});
+                    this.props.showMessage({message: 'Welcome, ' + user.userInfo.displayName});
                 })
                 .catch(error => {
 

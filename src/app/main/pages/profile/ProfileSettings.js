@@ -33,46 +33,55 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const defaultFormState = {
-    displayName: '',
-    description: ''
+    displayName: ''
 };
 
 function ProfileSettings(props) {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const account = useSelector(({account}) => account.account.data);
-    console.log(account)
+    const user = useSelector(({account}) => account.account.data.userInfo);
 
-    const {form, setForm, handleChange, resetForm} = useForm(defaultFormState);
+    console.log(user)
+
+    const {form, setForm, handleChange, resetForm} = useForm({
+        name: ''
+    });
+
+    useEffect(() => {
+        // setUserForm(user)
+        setForm(user);
+    }, [user, setForm]);
+
+    console.log(form)
+
 
     useEffect(() => {
         dispatch(Actions.getUserInfo(props.match.params));
     }, [dispatch, props.match.params]);
 
-    const team = {};
 
-    const initDialog = useCallback(() => {
-        if (team) {
-            setForm({...team})
-        }
-    }, [team, setForm]);
+    // const initData = useCallback(() => {
+    //     if (displayName) {
+    //         setForm({...displayName})
+    //     }
+    // }, [displayName, setForm]);
+    //
+    // const [open, setOpen] = useState(false);
+    //
+    // const handleOpen = () => {
+    //     setOpen(true);
 
-    const [open, setOpen] = useState(false);
+        // if (team) {
+        //     initDialog();
+        // }
+    // };
 
-    const handleOpen = () => {
-        setOpen(true);
-
-        if (team) {
-            initDialog();
-        }
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-
-        resetForm();
-    };
+    // const handleClose = () => {
+    //     setOpen(false);
+    //
+    //     resetForm();
+    // };
 
     function handleSubmit() {
         // dispatch(Actions.updateTeamInfo(form));
@@ -114,11 +123,11 @@ function ProfileSettings(props) {
                             >
                                 <div className="w-full mb-24 items-start">
                                     <TextFieldFormsy
-                                        id="displayName"
+                                        id="name"
                                         className="flex flex-1 mt-16"
-                                        label="Display Name"
-                                        name="displayName"
-                                        value={form.displayName || ''}
+                                        label="Name"
+                                        name="name"
+                                        value={form.name || ''}
                                         onChange={handleChange}
                                         variant="outlined"
                                         fullWidth
@@ -129,18 +138,6 @@ function ProfileSettings(props) {
                                         validationErrors={{
                                             minLength: 'Min character length is 4',
                                         }}
-                                    />
-                                    <TextFieldFormsy
-                                        id="description"
-                                        className="flex flex-1 mt-16"
-                                        label="Description"
-                                        name="description"
-                                        value={form.description || ''}
-                                        onChange={handleChange}
-                                        variant="outlined"
-                                        multiline
-                                        rows="4"
-                                        fullWidth
                                     />
                                     <Button
                                         className="mt-16 float-right"

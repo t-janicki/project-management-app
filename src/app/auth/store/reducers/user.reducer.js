@@ -3,7 +3,8 @@ import * as Actions from '../actions';
 const initialState = {
     userInfo: {
         'role': [],
-        'name': '',
+        'displayName': '',
+        'firstName' : '',
         'lastName': '',
         'avatarUrl': '',
         'email': '',

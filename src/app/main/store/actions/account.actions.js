@@ -20,7 +20,7 @@ export function getUserInfo(params) {
             axios.get(GET_USER_DATA, {params})
                 .then(response => {
                     if (response.status === 200) {
-
+                        console.log(response)
                         dispatch({
                             type: GET_ACCOUNT_INFO,
                             payload: response.data

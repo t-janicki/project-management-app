@@ -34,7 +34,7 @@ function CardComment(props) {
 
     return (
         <form onSubmit={handleSubmit} className="flex">
-            <Avatar className="w-32 h-32" alt={user.name} src={user.avatarUrl}/>
+            <Avatar className="w-32 h-32" alt={user.displayName} src={user.avatarUrl}/>
             <div className="flex flex-col items-start flex-1 pr-0 pl-16">
                 <TextField
                     className="flex flex-1"
