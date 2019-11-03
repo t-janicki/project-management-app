@@ -95,7 +95,10 @@ function SettingsTab() {
                                         minLength: 'Min character length is 8'
                                     }}
                                     InputProps={{
-                                        endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">vpn_key</Icon></InputAdornment>
+                                        endAdornment: <InputAdornment position="end">
+                                            <Icon className="text-20"
+                                                  color="action">vpn_key</Icon>
+                                        </InputAdornment>
                                     }}
                                     variant="outlined"
                                     required
@@ -111,7 +114,10 @@ function SettingsTab() {
                                         equalsField: 'Passwords do not match'
                                     }}
                                     InputProps={{
-                                        endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">vpn_key</Icon></InputAdornment>
+                                        endAdornment:
+                                            <InputAdornment position="end">
+                                                <Icon className="text-20" color="action">vpn_key</Icon>
+                                            </InputAdornment>
                                     }}
                                     variant="outlined"
                                     required
@@ -127,7 +133,10 @@ function SettingsTab() {
                                         equalsField: 'Passwords do not match'
                                     }}
                                     InputProps={{
-                                        endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">vpn_key</Icon></InputAdornment>
+                                        endAdornment: <InputAdornment position="end">
+                                            <Icon className="text-20"
+                                                  color="action">vpn_key</Icon>
+                                        </InputAdornment>
                                     }}
                                     variant="outlined"
                                     required
