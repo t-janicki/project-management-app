@@ -103,16 +103,15 @@ function BoardListHeader(props) {
                             {props.list.name}
                         </Typography>
                     )}
-
                 </div>
                 <div>
                     <ListOptionsMenu
-                        onRemoveList={() => dispatch(Actions.removeList(board.id, props.list.id))}
+                        boardId={board.id}
+                        listId={props.list.id}
                         onRenameList={() => handleOpenForm()}
                     />
                 </div>
             </div>
-
         </div>
     );
 }

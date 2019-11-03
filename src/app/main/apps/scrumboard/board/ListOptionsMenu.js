@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Icon, IconButton, ListItemIcon, ListItemText, MenuItem} from '@material-ui/core';
 import ToolbarMenu from "./dialogs/card/toolbar/ToolbarMenu";
+import RemoveListDialog from "./RemoveListDialog";
 
 function ListOptionsMenu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -19,12 +20,10 @@ function ListOptionsMenu(props) {
                 <Icon>more_horiz</Icon>
             </IconButton>
             <ToolbarMenu state={anchorEl} onClose={handleMenuClose}>
-                <MenuItem onClick={props.onRemoveList}>
-                    <ListItemIcon className="min-w-40">
-                        <Icon>delete</Icon>
-                    </ListItemIcon>
-                    <ListItemText primary="Remove List"/>
-                </MenuItem>
+                <RemoveListDialog
+                    boardId={props.boardId}
+                    listId={props.listId}
+                />
                 <MenuItem onClick={props.onRenameList} onMouseLeave={handleMenuClose}>
                     <ListItemIcon className="min-w-40">
                         <Icon>edit</Icon>
