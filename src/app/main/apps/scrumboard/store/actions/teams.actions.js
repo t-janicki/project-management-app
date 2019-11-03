@@ -11,13 +11,19 @@ export function resetTeams() {
 }
 
 export function getTeams() {
-    const request = axios.get(TEAM_API);
-
     return (dispatch) => {
-        request.then((response) => {
-            dispatch({
-                type: GET_TEAMS,
-                payload: response.data
+        const request = axios.get(TEAM_API);
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
+
+                    return dispatch({
+                        type: GET_TEAMS,
+                        payload: response.data
+                    })
+                }
             })
         })
     }
