@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Icon, IconButton, MenuItem} from '@material-ui/core';
+import {Icon, IconButton} from '@material-ui/core';
 import ToolbarMenu from './ToolbarMenu';
+import RemoveCardDialog from "../RemoveCardDialog";
 
 function CardOptionsMenu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -19,9 +20,10 @@ function CardOptionsMenu(props) {
                 <Icon>more_horiz</Icon>
             </IconButton>
             <ToolbarMenu state={anchorEl} onClose={handleMenuClose}>
-                <MenuItem onClick={props.onRemoveCard}>
-                    Remove Card
-                </MenuItem>
+                <RemoveCardDialog
+                    cardFormId={props.cardFormId}
+                    boardId={props.boardId}
+                />
             </ToolbarMenu>
         </div>
     );

@@ -6,13 +6,13 @@ import {
     DialogTitle,
     Icon,
     IconButton,
-    makeStyles,
+    makeStyles, MenuItem,
     Toolbar,
     Typography
 } from '@material-ui/core';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import clsx from 'clsx';
-import * as Actions from '../../../../store/actions';
+import * as Actions from '../../../store/actions';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -20,19 +20,15 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function RemoveMemberDialog(props) {
+function RemoveCardDialog(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
-
-    const currentUserEmail = useSelector(({auth}) => auth.user.userInfo.email);
 
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
     };
-
-    let quitStatus = '';
 
     const handleClose = () => {
         setOpen(false);
@@ -41,12 +37,9 @@ function RemoveMemberDialog(props) {
     return (
         <React.Fragment>
             <div>
-                <IconButton
-                    onClick={handleOpen}
-                    disabled={props.buttonStatus}
-                >
-                    <Icon>exit_to_app</Icon>
-                </IconButton>
+                <MenuItem onClick={handleOpen}>
+                    Remove Card
+                </MenuItem>
                 <Dialog
                     classes={{
                         paper: clsx(classes.paper, "max-w-sm w-full m-24")
@@ -68,10 +61,7 @@ function RemoveMemberDialog(props) {
                     <DialogContent>
                         <div>
                             <Typography>
-                                {currentUserEmail === props.email
-                                    ? 'Are you sure you want to quit team?'
-                                    : 'Are you sure you want to remove member from team?'
-                                }
+                                Are you sure you want to delete card?
                             </Typography>
                         </div>
                         <div className="mt-12 mb-12 float-right">
@@ -84,10 +74,10 @@ function RemoveMemberDialog(props) {
                                 size="small"
                                 onClick={(ev) => {
                                     ev.stopPropagation();
-                                    dispatch(Actions.removeFromTeam(props.teamId, props.email, quitStatus))
+                                    dispatch(Actions.removeCard(props.boardId, props.cardFormId))
                                 }}
                             >
-                                {quitStatus = (currentUserEmail === props.email ? 'Quit' : 'Remove')}
+                                Delete
                             </Button>
 
                             <Button
@@ -109,4 +99,4 @@ function RemoveMemberDialog(props) {
     )
 }
 
-export default RemoveMemberDialog;
+export default RemoveCardDialog;
