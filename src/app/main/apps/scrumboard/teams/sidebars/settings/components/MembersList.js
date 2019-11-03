@@ -123,7 +123,7 @@ function MembersList(props) {
                 <div className="flex items-center justify-between px-16 h-64 border-b-1">
                     <Typography className="text-16">Team Members</Typography>
                     <Typography
-                        className="text-11 font-500 rounded-4 text-white bg-blue px-8 py-4">{rows.length + " Members"}</Typography>
+                        className="text-11 font-500 rounded-4 text-white bg-blue px-8 py-4">{rows.length + (rows.length === 1 ? " Member" : " Members")}</Typography>
                 </div>
                 <div className={classes.tableWrapper}>
                     <Table stickyHeader aria-label="sticky table">

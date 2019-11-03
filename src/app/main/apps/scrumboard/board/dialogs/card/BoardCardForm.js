@@ -31,9 +31,8 @@ function BoardCardForm(props) {
     const card = useSelector(({scrumboardApp}) => scrumboardApp.card.data);
     const board = useSelector(({scrumboardApp}) => scrumboardApp.board.data);
 
-    console.log(card)
     const {form: cardForm, handleChange, setForm, setInForm} = useForm(card);
-    console.log(cardForm)
+
     const updateCard = useDebounce((boardId, newCard) => {
         dispatch(Actions.updateCard(boardId, {...newCard}));
     }, 600);
@@ -123,9 +122,9 @@ function BoardCardForm(props) {
                                 dueDate={dueDate}
                             />
 
-                            <IconButton color="inherit">
-                                <Icon>attachment</Icon>
-                            </IconButton>
+                            {/*<IconButton color="inherit">*/}
+                            {/*    <Icon>attachment</Icon>*/}
+                            {/*</IconButton>*/}
 
                             <CheckListMenu
                                 onAddCheckList={addCheckList}
