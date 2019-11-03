@@ -12,15 +12,14 @@ import {
 import {makeStyles} from '@material-ui/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {fade} from '@material-ui/core/styles';
-import {red} from '@material-ui/core/colors';
 import {FuseScrollbars} from '@fuse';
 import {useForm} from '@fuse/hooks';
-import * as Actions from '../../../../store/actions';
-import MembersList from './MembersList';
+import * as Actions from '../../../store/actions';
+import MembersList from './components/MembersList';
 import Formsy from 'formsy-react';
-import {TextFieldFormsy} from '../../../../../../../../@fuse/components/formsy';
-import InviteForm from "./InviteForm";
-import ConfirmDeleteTeam from "./ConfirmDeleteTeam";
+import {TextFieldFormsy} from '../../../../../../../@fuse/components/formsy';
+import InviteForm from './components/InviteForm';
+import ConfirmDeleteTeam from './components/ConfirmDeleteTeam';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;

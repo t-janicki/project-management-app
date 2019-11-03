@@ -3,12 +3,11 @@ import * as Actions from '../actions';
 const initialState = {
     data: {
         userInfo: {
-            name: '',
-            email: '',
-            phone: '',
+            id: 0,
             role: '',
-            isActive: '',
-            jobTitle: ''
+            name: '',
+            avatarUrl: '',
+            email: ''
         }
     },
     accountDialog: {
@@ -25,7 +24,9 @@ const accountReducer = function (state = initialState, action) {
         case Actions.GET_ACCOUNT_INFO: {
             return {
                 ...state,
-                data: action.payload.userInfo
+                data: {
+                    userInfo: {...action.payload.userInfo}
+                }
             };
         }
         case Actions.ACCOUNT_OPEN_EDIT_DIALOG: {

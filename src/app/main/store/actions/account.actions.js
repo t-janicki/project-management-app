@@ -19,7 +19,8 @@ export function getUserInfo(params) {
         return new Promise((resolve, reject) => {
             axios.get(GET_USER_DATA, {params})
                 .then(response => {
-                    if (response.data) {
+                    if (response.status === 200) {
+
                         dispatch({
                             type: GET_ACCOUNT_INFO,
                             payload: response.data

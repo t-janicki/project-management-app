@@ -9,6 +9,7 @@ import AccountDialog from "./AccountDialog";
 import * as Actions from '../../store/actions';
 import reducer from '../../store/reducers';
 import SettingsTab from "./tabs/SettingsTab";
+import ProfileHeader from "./ProfileHeader";
 
 const useStyles = makeStyles(theme => ({
     layoutHeader: {
@@ -44,22 +45,7 @@ function Account(props) {
                     toolbar: "px-16 sm:px-24"
                 }}
                 header={
-                    <div className="p-24 flex flex-1 flex-col items-center justify-center md:flex-row md:items-end">
-                        <div
-                            className="flex flex-1 flex-col items-center justify-center md:flex-row md:items-center md:justify-start">
-                            <FuseAnimate animation="transition.expandIn" delay={300}>
-                                <Avatar className="w-96 h-96" src={account.avatarUrl}/>
-                            </FuseAnimate>
-                            <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                                <Typography className="md:ml-24" variant="h4" color="inherit">
-                                    {account.name}
-                                </Typography>
-                            </FuseAnimate>
-
-                            <AccountDialog/>
-
-                        </div>
-                    </div>
+                    <ProfileHeader/>
                 }
                 contentToolbar={
                     <Tabs
@@ -96,6 +82,7 @@ function Account(props) {
                     </div>
                 }
             />
+            <AccountDialog/>
         </React.Fragment>
     )
 }

@@ -18,7 +18,7 @@ import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
 import {makeStyles} from '@material-ui/styles';
 import NewBoardDialog from '../board/dialogs/NewBoardDialog';
-import TeamSettingsDialog from './sidebars/settings/components/TeamSettingsDialog';
+import TeamSettingsDialog from './sidebars/settings/TeamSettingsDialog';
 
 
 const useStyles = makeStyles(theme => ({
