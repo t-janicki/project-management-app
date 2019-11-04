@@ -12,6 +12,7 @@ import reducer from '../../store/reducers';
 import withReducer from '../../../store/withReducer';
 import EditUserInfo from "./components/EditUserInfo";
 import ResetPassword from "./components/ResetPassword";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
     layoutHeader: {
@@ -24,7 +25,8 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         padding: theme.spacing(2, 3),
-        marginTop: 5
+        margin: 5,
+        minWidth: 300
     },
 }));
 
@@ -49,17 +51,15 @@ function ProfileSettings(props) {
                     <ProfileHeader/>
                 }
                 content={
-                    <div className="p-16 max-w-sm md:flex-row md:items-end">
-                        <FuseScrollbars className="p-16 flex flex-col flex-1 md:pr-32">
-                            <Paper className={classes.root}>
-                                <EditUserInfo/>
-                            </Paper>
+                    <FuseScrollbars className="flex flex-wrap w-full justify-center py-32 px-16">
+                        <Paper className={classes.root}>
+                            <EditUserInfo/>
+                        </Paper>
 
-                            <Paper className={classes.root}>
-                                <ResetPassword/>
-                            </Paper>
-                        </FuseScrollbars>
-                    </div>
+                        <Paper className={classes.root}>
+                            <ResetPassword/>
+                        </Paper>
+                    </FuseScrollbars>
                 }
             />
         </React.Fragment>

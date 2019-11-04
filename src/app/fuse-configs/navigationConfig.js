@@ -60,25 +60,25 @@ const navigationConfig = [
     //         },
     //     ]
     // },
+    // {
+    //     'id'   : 'todo',
+    //     'title': 'To-Do-App',
+    //     'type' : 'item',
+    //     'icon' : 'check_box',
+    //     // 'url'  : '/apps/todo',
+    //     'url'  : '/coming-soon',
+    // },
+    // {
+    //     'id'   : 'calendar',
+    //     'title': 'Calendar',
+    //     'type' : 'item',
+    //     'icon' : 'today',
+    //     // 'url'  : '/apps/calendar'
+    //     'url'  : '/coming-soon',
+    // },
     {
-        'id'   : 'todo',
-        'title': 'To-Do-App',
-        'type' : 'item',
-        'icon' : 'check_box',
-        // 'url'  : '/apps/todo',
-        'url'  : '/coming-soon',
-    },
-    {
-        'id'   : 'calendar',
-        'title': 'Calendar',
-        'type' : 'item',
-        'icon' : 'today',
-        // 'url'  : '/apps/calendar'
-        'url'  : '/coming-soon',
-    },
-    {
-        'id'   : 'projects',
-        'title': 'Projects',
+        'id'   : 'boards',
+        'title': 'Boards',
         'type' : 'collapse',
         'icon' : 'assessment',
         'url'  : '/boards',
