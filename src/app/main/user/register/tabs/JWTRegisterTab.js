@@ -4,9 +4,9 @@ import {TextFieldFormsy, CheckboxFormsy} from '@fuse';
 import {Button, InputAdornment, Icon, Checkbox, FormControlLabel} from '@material-ui/core';
 import * as authActions from '../../../../auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL} from "../../../../apiURL";
+import {GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL} from '../../../../apiURL';
 import '../../../../../styles/social.css';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 function JWTRegisterTab(props) {
     const dispatch = useDispatch();
@@ -127,7 +127,7 @@ function JWTRegisterTab(props) {
                     className="font-medium flex flex-col items-center justify-center"
                     name="accept"
                     value={false}
-                    label={<Link to="/login">Terms and privacy policy</Link>}
+                    label={<a href="https://www.termsfeed.com/privacy-policy/750f0425b5f5e3501fc45706c6c48fc4" target="_blank">Terms and privacy policy</a>}
                     validations="equals:true"
                     validationError="You need to accept"
                 />
