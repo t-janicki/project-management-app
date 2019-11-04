@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Formsy from 'formsy-react';
-import {TextFieldFormsy} from '@fuse';
-import {Button, InputAdornment, Icon} from '@material-ui/core';
+import {TextFieldFormsy, CheckboxFormsy} from '@fuse';
+import {Button, InputAdornment, Icon, Checkbox, FormControlLabel} from '@material-ui/core';
 import * as authActions from '../../../../auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL} from "../../../../apiURL";
 import '../../../../../styles/social.css';
+import {Link} from "react-router-dom";
 
 function JWTRegisterTab(props) {
     const dispatch = useDispatch();
@@ -120,6 +121,15 @@ function JWTRegisterTab(props) {
                     }}
                     variant="outlined"
                     required
+                />
+
+                <CheckboxFormsy
+                    className="font-medium flex flex-col items-center justify-center"
+                    name="accept"
+                    value={false}
+                    label={<Link to="/login">Terms and privacy policy</Link>}
+                    validations="equals:true"
+                    validationError="You need to accept"
                 />
 
                 <Button
