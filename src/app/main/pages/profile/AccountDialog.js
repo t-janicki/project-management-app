@@ -14,7 +14,7 @@ import {
     DialogTitle
 } from '@material-ui/core';
 import {useForm} from '@fuse/hooks';
-import * as AccountActions from '../../store/actions';
+import * as AccountActions from '../../user/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {FusePageSimple} from '../../../../@fuse';
 import {makeStyles} from "@material-ui/styles";

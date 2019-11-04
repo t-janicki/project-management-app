@@ -3,8 +3,8 @@ import {
     GET_USER_DATA,
     UPDATE_USER,
     NEW_PASSWORD_REQUEST
-} from '../../../apiURL';
-import {showMessage} from '../../../store/actions/fuse';
+} from '../../../../apiURL';
+import {showMessage} from '../../../../store/actions/fuse';
 import history from '@history';
 
 export const ACCOUNT_OPEN_EDIT_DIALOG = '[ACCOUNT] OPEN EDIT DIALOG';

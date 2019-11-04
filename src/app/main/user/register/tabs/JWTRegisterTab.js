@@ -2,10 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import Formsy from 'formsy-react';
 import {TextFieldFormsy} from '@fuse';
 import {Button, InputAdornment, Icon} from '@material-ui/core';
-import * as authActions from './../../../../app/auth/store/actions';
+import * as authActions from '../../../../auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL} from "../../../apiURL";
-import '../../../../styles/social.css';
+import {GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL} from "../../../../apiURL";
+import '../../../../../styles/social.css';
 
 function JWTRegisterTab(props) {
     const dispatch = useDispatch();

@@ -2,10 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Button, InputAdornment, Icon, makeStyles} from '@material-ui/core';
 import {TextFieldFormsy} from '@fuse';
 import Formsy from 'formsy-react';
-import * as authActions from '../../../../app/auth/store/actions';
+import * as authActions from '../../../../auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, GOOGLE_AUTH_URL} from "../../../apiURL";
-import '../../../../styles/social.css';
+import {FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, GOOGLE_AUTH_URL} from "../../../../apiURL";
+import '../../../../../styles/social.css';
 
 const useStyles = makeStyles(theme => ({
     root: {

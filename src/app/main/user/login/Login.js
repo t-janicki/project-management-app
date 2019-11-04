@@ -6,36 +6,22 @@ import {Link} from 'react-router-dom';
 import clsx from 'clsx';
 import JWTLoginTab from './tabs/JWTLoginTab';
 import {makeStyles} from '@material-ui/styles';
+import MainSite from "../MainSite";
 
 const useStyles = makeStyles(theme => ({
     root: {
         background: 'linear-gradient(to right, ' + theme.palette.primary.dark + ' 0%, ' + darken(theme.palette.primary.dark, 0.5) + ' 100%)',
-        color     : theme.palette.primary.contrastText
+        color: theme.palette.primary.contrastText
     }
 }));
 
-function Login()
-{
+function Login() {
     const classes = useStyles();
 
     return (
         <div className={clsx(classes.root, "flex flex-col flex-1 flex-shrink-0 p-24 md:flex-row md:p-0")}>
 
-            <div className="flex flex-col flex-grow-0 items-center text-white p-16 text-center md:p-128 md:items-start md:flex-shrink-0 md:flex-1 md:text-left">
-
-                <FuseAnimate animation="transition.slideUpIn" delay={300}>
-                    <Typography variant="h3" color="inherit" className="font-light">
-                        Welcome to the project management!
-                    </Typography>
-                </FuseAnimate>
-
-                {/*<FuseAnimate delay={400}>*/}
-                {/*    <Typography variant="subtitle1" color="inherit" className="max-w-512 mt-16">*/}
-                {/*        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit*/}
-                {/*        facilisis facilisis.*/}
-                {/*    </Typography>*/}
-                {/*</FuseAnimate>*/}
-            </div>
+            <MainSite/>
 
             <FuseAnimate animation={{translateX: [0, '100%']}}>
 
@@ -43,9 +29,10 @@ function Login()
 
                     <CardContent className="flex flex-col items-center justify-center p-32 md:p-48 md:pt-128 ">
 
-                        <Typography variant="h6" className="text-center md:w-full mb-48">LOGIN TO YOUR ACCOUNT</Typography>
+                        <Typography variant="h6" className="text-center md:w-full mb-48">LOGIN TO YOUR
+                            ACCOUNT</Typography>
 
-                         <JWTLoginTab/>
+                        <JWTLoginTab/>
 
                         <div className="flex flex-col items-center justify-center pt-32">
                             <span className="font-medium">Don't have an account?</span>

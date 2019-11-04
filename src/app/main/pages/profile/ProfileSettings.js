@@ -3,12 +3,12 @@ import {
     Paper
 } from '@material-ui/core';
 import {FuseScrollbars} from '@fuse';
-import * as Actions from '../../store/actions'
+import * as Actions from '../../user/store/actions'
 import {useDispatch, useSelector} from "react-redux";
 import {FusePageSimple} from "../../../../@fuse";
 import {makeStyles} from "@material-ui/styles";
 import ProfileHeader from "./ProfileHeader";
-import reducer from '../../store/reducers';
+import reducer from '../../user/store/reducers';
 import withReducer from '../../../store/withReducer';
 import EditUserInfo from "./components/EditUserInfo";
 import ResetPassword from "./components/ResetPassword";

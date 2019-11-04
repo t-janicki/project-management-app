@@ -6,8 +6,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import withReducer from '../../../../app/store/withReducer';
 import ContactTab from "./tabs/ContactTab";
 import AccountDialog from "./AccountDialog";
-import * as Actions from '../../store/actions';
-import reducer from '../../store/reducers';
+import * as Actions from '../../user/store/actions';
+import reducer from '../../user/store/reducers';
 import SettingsTab from "./tabs/SettingsTab";
 import ProfileHeader from "./ProfileHeader";
 

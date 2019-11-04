@@ -1,7 +1,6 @@
 import Login from './Login';
 import {authRoles} from 'app/auth';
-import OAuth2RedirectHandler from "../../fuse-configs/OAuth2RedirectHandler";
-import jwtService from '../../services/jwtService'
+import OAuth2RedirectHandler from "../../../fuse-configs/OAuth2RedirectHandler";
 
 export const LoginConfig = {
     settings: {
