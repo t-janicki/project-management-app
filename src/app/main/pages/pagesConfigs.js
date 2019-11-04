@@ -17,7 +17,7 @@ import {CompactInvoicePageConfig} from './invoices/compact/CompactInvoicePageCon
 import {PricingStyle1PageConfig} from './pricing/style-1/PricingStyle1PageConfig';
 import {PricingStyle2PageConfig} from './pricing/style-2/PricingStyle2PageConfig';
 import {PricingStyle3PageConfig} from './pricing/style-3/PricingStyle3PageConfig';
-import {ProfilePageConfig} from './profile/ProfilePageConfig';
+import {ProfilePageConfig} from '../user/profile/ProfilePageConfig';
 import {ClassicSearchPageConfig} from './search/classic/ClassicSearchPageConfig';
 import {ModernSearchPageConfig} from './search/modern/ModernSearchPageConfig';
 import {FaqPageConfig} from './faq/FaqPageConfig';

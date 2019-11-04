@@ -12,7 +12,7 @@ import {
 import {FuseAnimateGroup, TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import Formsy from 'formsy-react';
-import * as Actions from '../../../user/store/actions';
+import * as Actions from '../../store/actions';
 import {useDispatch} from "react-redux";
 import {FuseScrollbars} from "../../../../../@fuse";
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {AppBar, Card, CardContent, Icon, IconButton, Toolbar, Typography} from '@material-ui/core';
 import {FuseAnimateGroup} from '@fuse';
 import {useDispatch, useSelector} from "react-redux";
-import * as Actions from '../../../user/store/actions';
+import * as Actions from '../../store/actions';
 
 function ContactTab() {
 

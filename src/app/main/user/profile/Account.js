@@ -3,11 +3,11 @@ import {Avatar, Tab, Tabs, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {FusePageSimple, FuseAnimate} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
-import withReducer from '../../../../app/store/withReducer';
+import withReducer from '../../../store/withReducer';
 import ContactTab from "./tabs/ContactTab";
 import AccountDialog from "./AccountDialog";
-import * as Actions from '../../user/store/actions';
-import reducer from '../../user/store/reducers';
+import * as Actions from '../store/actions';
+import reducer from '../store/reducers';
 import SettingsTab from "./tabs/SettingsTab";
 import ProfileHeader from "./ProfileHeader";
 
