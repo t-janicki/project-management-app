@@ -29,14 +29,15 @@ function Login() {
 
                     <CardContent className="flex flex-col items-center justify-center p-32 md:p-48 md:pt-128 ">
 
-                        <Typography variant="h6" className="text-center md:w-full mb-48">LOGIN TO YOUR
-                            ACCOUNT</Typography>
+                        <Typography variant="h6" className="text-center md:w-full mb-48">LOGIN TO YOUR ACCOUNT</Typography>
 
                         <JWTLoginTab/>
 
                         <div className="flex flex-col items-center justify-center pt-32">
                             <span className="font-medium">Don't have an account?</span>
                             <Link className="font-medium" to="/register">Create an account</Link>
+
+                            <Link className="font-medium" to="/forgot-password">Forgot password?</Link>
                         </div>
 
                     </CardContent>

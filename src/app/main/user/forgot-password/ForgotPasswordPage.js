@@ -80,7 +80,7 @@ function ForgotPasswordPage()
                         </form>
 
                         <div className="flex flex-col items-center justify-center pt-32 pb-24">
-                            <Link className="font-medium" to="/pages/auth/login-2">Go back to login</Link>
+                            <Link className="font-medium" to="/login">Go back to login</Link>
                         </div>
 
                     </CardContent>
