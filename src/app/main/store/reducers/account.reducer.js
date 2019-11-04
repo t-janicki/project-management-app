@@ -29,6 +29,14 @@ const accountReducer = function (state = initialState, action) {
                 }
             };
         }
+        case Actions.UPDATE_USER_INFO: {
+            return {
+                ...state,
+                data: {
+                    userInfo: {...action.payload}
+                }
+            }
+        }
         case Actions.ACCOUNT_OPEN_EDIT_DIALOG: {
             return {
                 ...state,

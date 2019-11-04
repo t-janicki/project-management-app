@@ -15,6 +15,7 @@ import Formsy from 'formsy-react';
 import {useDispatch, useSelector} from 'react-redux';
 import {TextFieldFormsy} from "../../../../../@fuse/components/formsy";
 import * as Actions from  '../../../store/actions';
+import {phoneRegex} from "../../../../utils";
 
 function EditUserInfo(props) {
     const dispatch = useDispatch();
@@ -119,10 +120,10 @@ function EditUserInfo(props) {
                             variant="outlined"
                             fullWidth
                             validations={{
-                                minLength: 4,
+                                matchRegexp: phoneRegex
                             }}
                             validationErrors={{
-                                minLength: 'Min character length is 4',
+                                matchRegexp: 'Please enter valid phone number'
                             }}
                         />
                         <Button

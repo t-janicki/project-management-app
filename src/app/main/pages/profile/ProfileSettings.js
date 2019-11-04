@@ -34,7 +34,7 @@ function ProfileSettings(props) {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const user = useSelector(({account}) => account.account.data.userInfo);
+    // const user = useSelector(({account}) => account.account.data.userInfo);
 
     useEffect(() => {
         dispatch(Actions.getUserInfo(props.match.params));

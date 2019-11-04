@@ -9,7 +9,7 @@ import history from '@history';
 
 export const ACCOUNT_OPEN_EDIT_DIALOG = '[ACCOUNT] OPEN EDIT DIALOG';
 export const ACCOUNT_CLOSE_EDIT_DIALOG = '[ACCOUNT] CLOSE EDIT DIALOG';
-export const UPDATE_ACCOUNT_INFO = '[ACCOUNT] UPDATE ACCOUNT INFO';
+export const UPDATE_USER_INFO = '[ACCOUNT] UPDATE USER INFO';
 export const GET_ACCOUNT_INFO = '[ACCOUNT] GET ACCOUNT INFO';
 export const NEW_PASSWORD = '[ACCOUNT] NEW PASSWORD REQUEST';
 
@@ -45,33 +45,34 @@ export function getUserInfo(params) {
 }
 
 export function updateUserInfo({id, firstName, lastName, displayName, email, phone}) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
 
-        const {routeParams} = getState().auth.user;
+        const request = axios.put(UPDATE_USER, {
+            id, firstName, lastName, displayName, email, phone
+        });
 
         return new Promise((resolve, reject) => {
-            axios.put(UPDATE_USER, {
-                id, firstName, lastName, displayName, email, phone
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
+
+                    console.log(response)
+                    dispatch(showMessage({
+                        message: 'Saved',
+                        autoHideDuration: 2000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        variant: 'success'
+                    }));
+
+                    return dispatch({
+                        type: UPDATE_USER_INFO,
+                        payload: response.data
+                    })
+                }
             })
-                .then(response => {
-                    if (response.data) {
-                        dispatch({
-                            type: UPDATE_ACCOUNT_INFO
-                        });
-
-                        dispatch(getUserInfo(routeParams));
-
-                        dispatch(showMessage({
-                            message: "Account Updated",
-                            autoHideDuration: 2000,
-                            anchorOrigin: {
-                                vertical: 'top',
-                                horizontal: 'center'
-                            },
-                            variant: 'info'
-                        }));
-                    }
-                })
                 .catch(error => {
                     if (error.response.data.message) {
                         dispatch(showMessage({
@@ -88,6 +89,54 @@ export function updateUserInfo({id, firstName, lastName, displayName, email, pho
         })
     }
 }
+
+// export function updateUserInfo({id, firstName, lastName, displayName, email, phone}) {
+//     return (dispatch, getState) => {
+//
+//         const {routeParams} = getState().auth.user;
+//
+//         return new Promise((resolve, reject) => {
+//             axios.put(UPDATE_USER, {
+//                 id, firstName, lastName, displayName, email, phone
+//             })
+//                 .then(response => {
+//                     console.log(response)
+//
+//                     if (response.data) {
+//                         dispatch({
+//                             type: UPDATE_ACCOUNT_INFO
+//                         });
+//
+//
+//                         dispatch(getUserInfo(routeParams));
+//
+//                         dispatch(showMessage({
+//                             message: "Account Updated",
+//                             autoHideDuration: 2000,
+//                             anchorOrigin: {
+//                                 vertical: 'top',
+//                                 horizontal: 'center'
+//                             },
+//                             variant: 'info'
+//                         }));
+//                     }
+//                 })
+//                 .catch(error => {
+//                     if (error.response.data.message) {
+//                         dispatch(showMessage({
+//                             message: (error.response.data.message),
+//                             autoHideDuration: 3000,
+//                             anchorOrigin: {
+//                                 vertical: 'top',
+//                                 horizontal: 'center'
+//                             },
+//                             variant: 'error'
+//                         }))
+//                     }
+//                 })
+//         })
+//     }
+// }
 
 export function newPasswordRequest({password, newPassword, confirmNewPassword}) {
     return (dispatch) => {
