@@ -42,15 +42,16 @@ function ToolbarLayout2(props)
 
                     <div className="flex">
 
+                        <div className={classes.separator}/>
+
                         <UserMenu/>
 
-                        <div className={classes.separator}/>
 
-                        <FuseSearch/>
+                        {/*<FuseSearch/>*/}
 
-                        <div className={classes.separator}/>
+                        {/*<div className={classes.separator}/>*/}
 
-                        <QuickPanelToggleButton/>
+                        {/*<QuickPanelToggleButton/>*/}
                     </div>
 
                 </Toolbar>

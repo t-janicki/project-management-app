@@ -34,7 +34,7 @@ function EditUserInfo(props) {
     }, [user, setForm]);
 
     function handleSubmit() {
-        console.log(form)
+
         dispatch(Actions.updateUserInfo(form));
     }
 

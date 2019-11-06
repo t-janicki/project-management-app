@@ -14,7 +14,7 @@ class jwtService extends FuseUtils.EventEmitter {
 
     setInterceptors = () => {
         axios.interceptors.response.use(response => {
-            console.log(response);
+
             return response;
         }, err => {
             return new Promise((resolve, reject) => {

@@ -59,7 +59,6 @@ export function updateUserInfo({id, firstName, lastName, displayName, email, pho
                 if (response.status === 200) {
                     resolve(response.data);
 
-                    console.log(response)
                     dispatch(showMessage({
                         message: 'Saved',
                         autoHideDuration: 2000,

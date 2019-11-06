@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 function Account(props) {
     const dispatch = useDispatch();
     const account = useSelector(({account}) => account.account.data);
-    console.log(account)
+
     const classes = useStyles();
     const [selectedTab, setSelectedTab] = useState(0);
 

@@ -3,7 +3,6 @@ import {Avatar, Table, TableHead, TableCell, TableRow, Typography, Paper, TableB
 
 function Widget11(props) {
 
-    console.log(props)
     return (
         <Paper className="w-full rounded-8 shadow-none border-1">
             <div className="flex items-center justify-between px-16 h-64 border-b-1">
