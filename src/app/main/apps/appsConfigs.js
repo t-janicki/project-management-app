@@ -10,15 +10,15 @@ import {OrdersAppConfig} from './e-commerce/orders/OrdersAppConfig';
 import {PersonnelAppConfig} from './e-commerce/personnel/PersonnelAppConfig';
 
 export const appsConfigs = [
-    AnalyticsDashboardAppConfig,
-    ProjectDashboardAppConfig,
-    TodoAppConfig,
-    CustomersAppConfig,
-    ProductsAppConfig,
-    OrdersAppConfig,
-    PersonnelAppConfig,
-    CalendarAppConfig,
+    // AnalyticsDashboardAppConfig,
+    // ProjectDashboardAppConfig,
+    // TodoAppConfig,
+    // CustomersAppConfig,
+    // ProductsAppConfig,
+    // OrdersAppConfig,
+    // PersonnelAppConfig,
+    // CalendarAppConfig,
     // ECommerceAppConfig,
     ScrumboardAppConfig,
-    NotesAppConfig
+    // NotesAppConfig
 ];

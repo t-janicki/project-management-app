@@ -1,6 +1,7 @@
 import {Typography} from '@material-ui/core';
 import React from 'react';
 import {FuseAnimate} from '@fuse';
+import SiteScreenShoots from "./SiteScreenShoots";
 
 function MainSite(props) {
 
@@ -10,9 +11,12 @@ function MainSite(props) {
 
             <FuseAnimate animation="transition.slideUpIn" delay={300}>
                 <Typography variant="h3" color="inherit" className="font-light">
-                    Welcome Project management!
+                    Welcome Project management! (BETA)
                 </Typography>
             </FuseAnimate>
+            <div>
+                <SiteScreenShoots/>
+            </div>
 
         </div>
     )

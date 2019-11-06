@@ -6,30 +6,33 @@ import {FuseAnimate} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-import MainSite from "../MainSite";
+import MainSite from '../MainSite';
+import {useDispatch} from 'react-redux';
+import * as Actions from '../store/actions';
 
 const useStyles = makeStyles(theme => ({
     root: {
         background: 'linear-gradient(to right, ' + theme.palette.primary.dark + ' 0%, ' + darken(theme.palette.primary.dark, 0.5) + ' 100%)',
-        color     : theme.palette.primary.contrastText
+        color: theme.palette.primary.contrastText
     }
 }));
 
-function ForgotPasswordPage()
-{
+function ForgotPasswordPage() {
+    const dispatch = useDispatch();
     const classes = useStyles();
     const {form, handleChange, resetForm} = useForm({
         email: ''
     });
 
-    function isFormValid()
-    {
+    function isFormValid() {
         return form.email.length > 0;
     }
 
-    function handleSubmit(ev)
-    {
+    function handleSubmit(ev) {
         ev.preventDefault();
+
+        dispatch(Actions.forgotPasswordRequest(form));
+
         resetForm();
     }
 

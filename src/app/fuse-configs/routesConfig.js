@@ -16,9 +16,9 @@ import {ResetPasswordPageConfig} from '../main/user/reset-password/ResetPassword
 const routeConfigs = [
     ...appsConfigs,
     ...pagesConfigs,
-    ...authRoleExamplesConfigs,
-    UserInterfaceConfig,
-    DocumentationConfig,
+    // ...authRoleExamplesConfigs,
+    // UserInterfaceConfig,
+    // DocumentationConfig,
     LogoutConfig,
     LoginConfig,
     RegisterConfig,

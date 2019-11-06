@@ -1,5 +1,4 @@
-import {Avatar, Typography, Button} from "@material-ui/core";
-import AccountDialog from "./AccountDialog";
+import {Avatar, Typography} from "@material-ui/core";
 import React from "react";
 import {useSelector} from "react-redux";
 import {FuseAnimate} from '@fuse';

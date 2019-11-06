@@ -4,8 +4,8 @@ import {makeStyles, ThemeProvider} from '@material-ui/styles';
 import {FuseSearch, FuseShortcuts} from '@fuse';
 import NavbarMobileToggleButton from 'app/fuse-layouts/shared-components/NavbarMobileToggleButton';
 import QuickPanelToggleButton from 'app/fuse-layouts/shared-components/quickPanel/QuickPanelToggleButton';
-import UserMenu from 'app/fuse-layouts/shared-components/UserMenu';
 import {useSelector} from 'react-redux';
+import UserMenu from "../../../main/user/UserMenu";
 
 const useStyles = makeStyles(theme => ({
     separator: {

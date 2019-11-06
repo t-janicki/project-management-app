@@ -7,11 +7,11 @@ export const ProfilePageConfig = {
         }
     },
     routes  : [
-        {
-            path     : '/profile',
-            exact: true,
-            component: React.lazy(() => import('./Account'))
-        },
+        // {
+        //     path     : '/profile',
+        //     exact: true,
+        //     component: React.lazy(() => import('./Account'))
+        // },
         {
             path     : '/settings',
             exact: true,

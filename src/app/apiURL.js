@@ -1,8 +1,8 @@
 // const BASE_URL = 'https://vps701667.ovh.net:8888/api';
-const BASE_URL = 'http://localhost:8080/api';
+export const BASE_URL = 'http://localhost:8080/api';
 // const BASE_URL = 'https://task-management-api.herokuapp.com/api';
 
-//ACCOUNT & COMPANY
+//ACCOUNT
 export const USER_SIGN_IN = BASE_URL + '/auth/login';
 export const USER_SIGN_UP = BASE_URL + '/auth/signup';
 export const GET_USER_DATA = BASE_URL + '/users/me';
@@ -23,8 +23,6 @@ export const GITHUB_AUTH_URL = BASE_URL + '/oauth2/authorize/github?redirect_uri
 
 //COMPANY
 export const REGISTER_COMPANY = BASE_URL + '/company/register';
-export const UPDATE_COMPANY = BASE_URL + '/company';
-export const GET_COMPANY = BASE_URL + '/company';
 
 //PRODUCTS
 export const REGISTER_PRODUCT_API = BASE_URL + '/products';

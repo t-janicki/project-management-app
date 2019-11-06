@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Avatar, Button, Icon, ListItemIcon, ListItemText, Popover, MenuItem, Typography} from '@material-ui/core';
 import {useSelector, useDispatch} from 'react-redux';
-import * as authActions from '../../../app/auth/store/actions';
+import * as authActions from '../../auth/store/actions';
 import {Link} from 'react-router-dom';
 
 function UserMenu(props) {
@@ -55,12 +55,12 @@ function UserMenu(props) {
             >
                 <React.Fragment>
 
-                    <MenuItem component={Link} to="/profile" onClick={userMenuClose}>
-                        <ListItemIcon className="min-w-40">
-                            <Icon>account_circle</Icon>
-                        </ListItemIcon>
-                        <ListItemText className="pl-0" primary="My Profile"/>
-                    </MenuItem>
+                    {/*<MenuItem component={Link} to="/profile" onClick={userMenuClose}>*/}
+                    {/*    <ListItemIcon className="min-w-40">*/}
+                    {/*        <Icon>account_circle</Icon>*/}
+                    {/*    </ListItemIcon>*/}
+                    {/*    <ListItemText className="pl-0" primary="My Profile"/>*/}
+                    {/*</MenuItem>*/}
                     <MenuItem component={Link} to="/settings" onClick={userMenuClose}>
                         <ListItemIcon className="min-w-40">
                             <Icon>settings</Icon>

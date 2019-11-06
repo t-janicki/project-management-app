@@ -5,9 +5,9 @@ import {FuseSearch} from '@fuse';
 import clsx from 'clsx';
 import NavbarMobileToggleButton from 'app/fuse-layouts/shared-components/NavbarMobileToggleButton';
 import QuickPanelToggleButton from 'app/fuse-layouts/shared-components/quickPanel/QuickPanelToggleButton';
-import UserMenu from 'app/fuse-layouts/shared-components/UserMenu';
 import Logo from 'app/fuse-layouts/shared-components/Logo';
 import {useSelector} from 'react-redux';
+import UserMenu from "../../../main/user/UserMenu";
 
 const useStyles = makeStyles(theme => ({
     separator: {

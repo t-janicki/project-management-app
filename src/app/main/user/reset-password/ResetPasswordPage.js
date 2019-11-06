@@ -1,12 +1,16 @@
-import React from 'react';
-import {Button, Card, CardContent, TextField, Typography} from '@material-ui/core';
+import React, {useRef, useState} from 'react';
+import {Button, Card, CardContent, Icon, InputAdornment, TextField, Typography} from '@material-ui/core';
 import {darken} from '@material-ui/core/styles/colorManipulator';
 import {makeStyles} from '@material-ui/styles';
-import {FuseAnimate} from '@fuse';
+import {FuseAnimate, TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import MainSite from "../MainSite";
+import Formsy from "formsy-react";
+import * as authActions from '../../../auth/store/actions';
+import * as Actions from '../store/actions';
+import {useDispatch} from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -15,8 +19,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function ResetPasswordPage2() {
+function ResetPasswordPage(props) {
+    const dispatch = useDispatch();
     const classes = useStyles();
+
+    const params = new URLSearchParams(props.location.search);
+    const token = params.get('token');
 
     const {form, handleChange, resetForm} = useForm({
         name: '',
@@ -25,18 +33,20 @@ function ResetPasswordPage2() {
         passwordConfirm: ''
     });
 
-    function isFormValid() {
-        return (
-            form.email.length > 0 &&
-            form.password.length > 0 &&
-            form.password.length > 3 &&
-            form.password === form.passwordConfirm
-        );
+    const [isFormValid, setIsFormValid] = useState(false);
+    const formRef = useRef(null);
+
+
+    function disableButton() {
+        setIsFormValid(false);
     }
 
-    function handleSubmit(ev) {
-        ev.preventDefault();
-        resetForm();
+    function enableButton() {
+        setIsFormValid(true);
+    }
+
+    function handleSubmit(form) {
+        dispatch((Actions.resetPassword(form, token)));
     }
 
     return (
@@ -52,62 +62,86 @@ function ResetPasswordPage2() {
 
                         <Typography variant="h6" className="md:w-full mb-32">RESET YOUR PASSWORD</Typography>
 
-                        <form
-                            name="resetForm"
-                            noValidate
+                        <Formsy
+                            onValidSubmit={handleSubmit}
+                            onValid={enableButton}
+                            onInvalid={disableButton}
+                            ref={formRef}
                             className="flex flex-col justify-center w-full"
-                            onSubmit={handleSubmit}
                         >
 
-                            <TextField
-                                className="mb-16"
-                                label="Email"
-                                autoFocus
-                                type="email"
-                                name="email"
-                                value={form.email}
-                                onChange={handleChange}
-                                variant="outlined"
-                                required
-                                fullWidth
-                            />
+                            {/*<TextFieldFormsy*/}
+                            {/*    className="mb-16"*/}
+                            {/*    type="text"*/}
+                            {/*    name="email"*/}
+                            {/*    label="Email"*/}
+                            {/*    validations="isEmail"*/}
+                            {/*    validationErrors={{*/}
+                            {/*        isEmail: 'Please enter a valid email'*/}
+                            {/*    }}*/}
+                            {/*    InputProps={{*/}
+                            {/*        endAdornment: <InputAdornment position="end"><Icon className="text-20"*/}
+                            {/*                                                           color="action">email</Icon></InputAdornment>*/}
+                            {/*    }}*/}
+                            {/*    variant="outlined"*/}
+                            {/*    required*/}
+                            {/*/>*/}
 
-                            <TextField
+                            <TextFieldFormsy
                                 className="mb-16"
-                                label="Password"
                                 type="password"
                                 name="password"
-                                value={form.password}
-                                onChange={handleChange}
+                                label="Password"
+                                validations={{
+                                    equalsField: 'password-confirm',
+                                    minLength: 8
+                                }}
+                                validationErrors={{
+                                    equalsField: 'Passwords do not match',
+                                    minLength: 'Min character length is 8'
+                                }}
+                                InputProps={{
+                                    endAdornment: <InputAdornment position="end"><Icon className="text-20"
+                                                                                       color="action">vpn_key</Icon></InputAdornment>
+                                }}
                                 variant="outlined"
                                 required
-                                fullWidth
                             />
 
-                            <TextField
+                            <TextFieldFormsy
                                 className="mb-16"
-                                label="Password (Confirm)"
                                 type="password"
-                                name="passwordConfirm"
-                                value={form.passwordConfirm}
-                                onChange={handleChange}
+                                name="password-confirm"
+                                label="Confirm Password"
+                                validations={{
+                                    equalsField: 'password',
+                                    minLength: 8
+                                }}
+                                validationErrors={{
+                                    equalsField: 'Passwords do not match',
+                                    minLength: 'Min character length is 8'
+                                }}
+                                InputProps={{
+                                    endAdornment: <InputAdornment position="end"><Icon className="text-20"
+                                                                                       color="action">vpn_key</Icon></InputAdornment>
+                                }}
                                 variant="outlined"
                                 required
-                                fullWidth
                             />
 
                             <Button
+                                type="submit"
                                 variant="contained"
                                 color="primary"
-                                className="w-224 mx-auto mt-16"
-                                aria-label="Reset"
-                                disabled={!isFormValid()}
-                                type="submit"
+                                className="w-full mx-auto mt-16 normal-case"
+                                aria-label="RESET_PASSWORD"
+                                disabled={!isFormValid}
+                                value="legacy"
                             >
-                                RESET MY PASSWORD
+                                Reset Password
                             </Button>
 
-                        </form>
+                        </Formsy>
 
                         <div className="flex flex-col items-center justify-center pt-32 pb-24">
                             <Link className="font-medium" to="/login">Go back to login</Link>
@@ -120,4 +154,4 @@ function ResetPasswordPage2() {
     );
 }
 
-export default ResetPasswordPage2;
+export default ResetPasswordPage;

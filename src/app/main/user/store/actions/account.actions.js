@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+    BASE_URL,
     GET_USER_DATA,
     UPDATE_USER,
     NEW_PASSWORD_REQUEST
@@ -12,6 +13,8 @@ export const ACCOUNT_CLOSE_EDIT_DIALOG = '[ACCOUNT] CLOSE EDIT DIALOG';
 export const UPDATE_USER_INFO = '[ACCOUNT] UPDATE USER INFO';
 export const GET_ACCOUNT_INFO = '[ACCOUNT] GET ACCOUNT INFO';
 export const NEW_PASSWORD = '[ACCOUNT] NEW PASSWORD REQUEST';
+export const FORGOT_PASSWORD = '[ACCOUNT] FORGOT_PASSWORD';
+export const RESET_PASSWORD = '[ACCOUNT] RESET_PASSWORD';
 
 export function getUserInfo(params) {
     return (dispatch) => {
@@ -90,54 +93,6 @@ export function updateUserInfo({id, firstName, lastName, displayName, email, pho
     }
 }
 
-// export function updateUserInfo({id, firstName, lastName, displayName, email, phone}) {
-//     return (dispatch, getState) => {
-//
-//         const {routeParams} = getState().auth.user;
-//
-//         return new Promise((resolve, reject) => {
-//             axios.put(UPDATE_USER, {
-//                 id, firstName, lastName, displayName, email, phone
-//             })
-//                 .then(response => {
-//                     console.log(response)
-//
-//                     if (response.data) {
-//                         dispatch({
-//                             type: UPDATE_ACCOUNT_INFO
-//                         });
-//
-//
-//                         dispatch(getUserInfo(routeParams));
-//
-//                         dispatch(showMessage({
-//                             message: "Account Updated",
-//                             autoHideDuration: 2000,
-//                             anchorOrigin: {
-//                                 vertical: 'top',
-//                                 horizontal: 'center'
-//                             },
-//                             variant: 'info'
-//                         }));
-//                     }
-//                 })
-//                 .catch(error => {
-//                     if (error.response.data.message) {
-//                         dispatch(showMessage({
-//                             message: (error.response.data.message),
-//                             autoHideDuration: 3000,
-//                             anchorOrigin: {
-//                                 vertical: 'top',
-//                                 horizontal: 'center'
-//                             },
-//                             variant: 'error'
-//                         }))
-//                     }
-//                 })
-//         })
-//     }
-// }
-
 export function newPasswordRequest({password, newPassword, confirmNewPassword}) {
     return (dispatch) => {
 
@@ -168,6 +123,103 @@ export function newPasswordRequest({password, newPassword, confirmNewPassword}) 
                         });
                     }
                 })
+                .catch(error => {
+                    if (error.response.data.message) {
+                        dispatch(showMessage({
+                            message: (error.response.data.message),
+                            autoHideDuration: 3000,
+                            anchorOrigin: {
+                                vertical: 'top',
+                                horizontal: 'center'
+                            },
+                            variant: 'error'
+                        }))
+                    }
+                })
+        })
+    }
+}
+
+export function forgotPasswordRequest({email}) {
+    return (dispatch) => {
+
+        const request = axios.post(`${BASE_URL}/auth/forgot-password?email=${email}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response.data);
+
+                    dispatch(showMessage({
+                        message: "Please check email to reset password. ",
+                        autoHideDuration: 3000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        variant: 'info'
+                    }));
+
+                    return dispatch({
+                        type: FORGOT_PASSWORD,
+                        payload: response.data
+                    })
+                }
+            })
+                .catch(error => {
+                    if (error.response.data.message) {
+                        dispatch(showMessage({
+                            message: (error.response.data.message),
+                            autoHideDuration: 3000,
+                            anchorOrigin: {
+                                vertical: 'top',
+                                horizontal: 'center'
+                            },
+                            variant: 'error'
+                        }))
+                    }
+                })
+        })
+    }
+}
+
+export function resetPassword({password}, token) {
+    return (dispatch) => {
+
+        const request = axios.post(`${BASE_URL}/auth/reset-password?token=${token}`,{
+            password,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return new Promise((resolve, reject) => {
+            request.then((response) => {
+                if (response.status === 200) {
+                    resolve(response);
+
+                    dispatch(showMessage({
+                        message: "Password changed. Please log in. ",
+                        autoHideDuration: 3000,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        variant: 'info'
+                    }));
+
+                    history.push('/login');
+
+                    return dispatch({
+                        type: RESET_PASSWORD,
+                        payload: response.data
+                    })
+                }
+            })
                 .catch(error => {
                     if (error.response.data.message) {
                         dispatch(showMessage({
