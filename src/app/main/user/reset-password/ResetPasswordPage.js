@@ -6,7 +6,7 @@ import {FuseAnimate, TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-import MainSite from "../MainSite";
+import WelcomePage from "../WelcomePage";
 import Formsy from "formsy-react";
 import * as authActions from '../../../auth/store/actions';
 import * as Actions from '../store/actions';
@@ -52,7 +52,7 @@ function ResetPasswordPage(props) {
     return (
         <div className={clsx(classes.root, "flex flex-col flex-auto flex-shrink-0 p-24 md:flex-row md:p-0")}>
 
-            <MainSite/>
+            <WelcomePage/>
 
             <FuseAnimate animation={{translateX: [0, '100%']}}>
 

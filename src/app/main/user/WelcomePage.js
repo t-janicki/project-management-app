@@ -1,9 +1,9 @@
 import {Typography} from '@material-ui/core';
 import React from 'react';
 import {FuseAnimate} from '@fuse';
-import SiteScreenShoots from "./SiteScreenShoots";
+import WelcomeCarousel from "./WelcomeCarousel";
 
-function MainSite(props) {
+function WelcomePage(props) {
 
     return (
         <div
@@ -14,12 +14,12 @@ function MainSite(props) {
                     Welcome Project management! (BETA)
                 </Typography>
             </FuseAnimate>
-            <div>
-                <SiteScreenShoots/>
+            <div className="p-40 ">
+                <WelcomeCarousel />
             </div>
 
         </div>
     )
 }
 
-export default MainSite;
+export default WelcomePage;

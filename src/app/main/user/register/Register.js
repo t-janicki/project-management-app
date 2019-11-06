@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import clsx from 'clsx';
 import JWTRegisterTab from './tabs/JWTRegisterTab';
 import {makeStyles} from '@material-ui/styles';
-import MainSite from "../MainSite";
+import WelcomePage from "../WelcomePage";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,7 +23,7 @@ function Register() {
     return (
         <div className={clsx(classes.root, "flex flex-col flex-1 flex-shrink-0 p-24 md:flex-row md:p-0")}>
 
-            <MainSite/>
+            <WelcomePage/>
 
             <FuseAnimate animation={{translateX: [0, '100%']}}>
 

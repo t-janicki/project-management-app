@@ -6,7 +6,7 @@ import {FuseAnimate} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-import MainSite from '../MainSite';
+import WelcomePage from '../WelcomePage';
 import {useDispatch} from 'react-redux';
 import * as Actions from '../store/actions';
 
@@ -39,7 +39,7 @@ function ForgotPasswordPage() {
     return (
         <div className={clsx(classes.root, "flex flex-col flex-auto flex-shrink-0 p-24 md:flex-row md:p-0")}>
 
-            <MainSite/>
+            <WelcomePage/>
 
             <FuseAnimate animation={{translateX: [0, '100%']}}>
 

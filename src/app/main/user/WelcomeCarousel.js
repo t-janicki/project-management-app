@@ -1,34 +1,8 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import {Carousel} from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-// import img1 from  './../../../../p'
-// import img2 from './board/img2.png';
-// import img3 from './board/img3.png';
-// import img4 from './images/board/img4.png';
-// import img5 from './images/board/img5.png';
-// import img6 from './images/board/img6.png';
-// import img7 from './images/board/img7.png';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        width: 500,
-        height: 450,
-    },
-}));
-
-function SiteScreenShoots() {
-    const classes = useStyles();
+function WelcomeCarousel() {
 
     const photos = [
         {
@@ -53,7 +27,7 @@ function SiteScreenShoots() {
         {
             id: 5,
             alt: 'img3',
-            title: 'edit team settings or invite more members...',
+            title: 'you can edit team settings or invite more members...',
             link: 'https://lh3.googleusercontent.com/_F_942OX2m7Au5QF9r74BJUi7r9F5ti3v6K6At3SF3V4lwMYANA1hXL4JRuosN-__W3X2g8wH0gQtC475TJfBdPSvlP0HL3vYf-_YiiI0y3yIfFnNUIdzDsOVF1IYvnGHtDFK1xovZe_AxyStuK98K5p_CLjyQGcmeM0LMkCIIDzgH5Dx08zUGVVqD901D04_ip0D_KLzTRlt532clRcbbOn0U1qusV2GpC0lL1ejLJahyXol1b3XbU7smPBTo9oOzrdX6c_EOLXhXgtt0GDfcIHcvqH53Ws3C20pSlMWGg72-Jz2jtc9U3JP7RylD5sL4_0_V0HqYmoHohs99f7NTZWF1aDjOZi1D7DFUhKI43dyikJ57VMP0EhI8EnsQkCDEv9byj1bOFQJ4sJNToTPrJ-3qJFf8iX7TYHE3i4JI7NGfz1FCYU5kNi_lKQLs-iz40Xoum8QXmsaMS0BiraoGhizb9MPYMGZGQB7xDKG6l-tqYGmjZECAMJL7SzAvubn78rRuV8jKe5SiJYO9Scz-DzvW4ZAsu0jGUOX2_Qou552iDL-CUbEV19EdCC9WNUPNwneBvbotLrm0ppLw_rdw9QSv0Nv93nEaX4Xi9F43uGxasUAHD6zrbgxqos99RqUTO2iR_mXmH3s0f0qGUJDsHzd8ixAzHLO0lhhMZTYEhxEV8F5snX0w=w1721-h929-no',
         },
         {
@@ -68,26 +42,21 @@ function SiteScreenShoots() {
             title: 'add more details to your card and enjoy. :)',
             link: 'https://lh3.googleusercontent.com/FGqv305e1yFSLgPSkQM5q80pKz5GOyrwZvjZcByjxQVMNYvsKrpVWA0oX7wAdC2lvFxxLvd97THweTOsClqpiU8YzSTIoWMqCMbIBjUYR9dvRtBC5Ytixgn-IB4MdAw-VJSMmekrSIN2GeoTm9N7m_z59lgiB2HATcj2pBcVEoPF-LHONqQbVLhXi_VYDmPhJ2pHD86xU22V_yMPBfIK1A_kkTHeji1KS1yU52erdWkIil5dyXacoERbqgjCQCkN6XuLg2F-2VYFzu3TvpbyDH2-1lD7RJugrDiBcxN0_fn5s68P5s3kzop3KTS4aAJmo2hsr_a2ZbO89jaVf7W_zS4Nqgza15QjfzT7FwTVPNFcgFptxqyuubMD18w_dTgCrCtMDnXkpKsHMIaIIgIUv8bhYkeSYYo-EnSAnySBCs0os1Khh4zx1TwTiJoWZNOlCmfjIlFrn58KCHInP6YwVj_x3Tlpb9QcQ2ODU7XB95LRFkBH_9YAeUb4TxoZvqY9QgcNmEJuDrikk0GdaVXLmqGyW7OxGzAPovWl9E2Kf_q9fthrxtgiD6-cJptG942U6h7diuU9xOdrLTO54jK9BLXfl4uivXIOCbMBU1ybkL-k0iUTVb_-QMvOucl56o6dzzqMp0CwtrLtHhXis9hcxquitZO4PHMOqpO6EF3flK4Z-vB2Tm8TsQ=w1721-h929-no',
         },
-
-
-
-
     ];
 
     return (
-        <div className={classes.root}>
-            <div>
-                <Carousel>
-                    {photos.map(photo => (
-                        <div>
-                            <img alt={photo.alt} src={photo.link}/>
-                            <p className="legend">{photo.title}</p>
-                        </div>
-                    ))}
-                </Carousel>
-            </div>
-        </div>
+        <React.Fragment>
+            <Carousel showStatus={false} autoPlay={true} interval={4000} transitionTime={700}
+                      useKeyboardArrows={true} showThumbs={false}>
+                {photos.map(photo => (
+                    <div>
+                        <img alt={photo.alt} src={photo.link}/>
+                        <p className="legend">{photo.title}</p>
+                    </div>
+                ))}
+            </Carousel>
+        </React.Fragment>
     );
 }
 
-export default SiteScreenShoots;
+export default WelcomeCarousel;
