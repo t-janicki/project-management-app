@@ -1,5 +1,8 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
+import {Carousel} from 'react-responsive-carousel';
+import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 // import img1 from  './../../../../p'
@@ -27,61 +30,62 @@ const useStyles = makeStyles(theme => ({
 function SiteScreenShoots() {
     const classes = useStyles();
 
-    const tileData = [
+    const photos = [
         {
-            img: 'https://lh3.googleusercontent.com/-zjJTuR5v8BOAGYfNIEFr7HkjqhAE6WKP2OyOWXIuJdeMg5G8uQoSz4lZp2efkxYXVFR3cdldtsiIzfYwZ8nRxZVvwor3_Y1K_loHygOvDPdGgbh_J4J7cYdaxmTSVxGXmW15P4C1wNDVL0odlPuEc6HVgoh_W2Mfq19r3Pd6geQ5VziaXbbKVTLezhDOJ7JHixPGhBvyYhGgK8-9MKYy7Z2mGk-PsXTNn-roLgZFhUDFOjcosj9Oqh_BlYp93SZ8KqQ7cqH7eby7dsis4wIFEBX0z6hWbMl60Ws0C-8gaLi77de787Dr6kLdoxY6MnZEMjkc_BUJwf97D3X5h7V1h29m7gqUbJ45uvQ6E-b9r2NkS2I38jpAHloMNjqePqLx8GbQajdFLYGDg_8SN1xk-7HBzAPPYjq_pSFjg4lnie7OA80Xy_xkNx1Ba_BLq79AtxHzUpaVzD7jA9E-eKd7zMg48PQjjUUZ4gZg9mepVA-vjx3z-3GRwXH6-spasfkpupZuZ0A9sJfSLQbWDPDPBnGiJ3Xss71HHfcf9idb9ykqPTkpWwtNqkY9nWTSy1brLGrL1QJP8zToXVnf4ahbniKd1quEZhsMsF9M8eL38BpbvZjYKXuAWcyPIpenvHtgGvbAd1k59DdPQbcskV1sAz_Y_LhUz4RbFaObasDFqEkaDUFyf8BuA=w323-h944-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
+            id: 1,
+            alt: 'img1',
+            title: 'Start with create new personal board...or...',
+            link: 'https://lh3.googleusercontent.com/GII6JT88FbIrFydaf7lsYfNCCtun1i6n7MoPsdsYEAVG6f34PIQCOEaKAB_FMwTbpTfIgovVLfbjs8xBuBI0juyicUA_iaMxrX6BDu9K_tZz5PDrjYh-63YMDD2WGNML1kNRXm_XfxfJf6VoFwr-Aa-3jLWPSNDXbdGEyfyTdoxFb230fSjWaIEHwYCaG6_nBwRCzg9-WSr3PTYalmTnH0G31A0kY9LMi81uvsooIN3NThtCA0Y-Lkj1irbHc_KG9LjsO-vQXzgqz-J2awL2Q7_AkUrxvWQVVwK3C4HB_NfWSdZIYCCakpad9KK0_aTYlbzagrCyfWAfVM-MUGetBDCJ3kDGzVE16yIRtKzstasvgXaGCPrxL_D09POK28iqdN384NXnLCDi9YC7y6CB2ED5L8YF_qaCuVRdv8GpVUwrAdoTfbMxWHiyYm46HLRiKUnxMDcVj5ZrnErl6901CcquK61DG7QUUZrhuebgKFLeS_biOyTs0b2ePsqWM-SdiyWUb_1iLcvJfIdHU7eI6kFTB0RcNHfEd8J5XtZ6sjc9jThGoqg_MZ4RbhtL2zQovPPRMukh5jMkweM_CTDzNqsXsK9dkC4qGrX-ZmFB4o5iLHabAbxNAaSbBy1iVK8WPIRc6iYrJzTk4_6aDuxsDiY-oBMIE5fcVsFSgPNyrGmkDq0P8h2e3g=w1721-h929-no'
         },
         {
-            img: 'https://lh3.googleusercontent.com/J72UHA0HyTV6fLEecWNO_npBQn1-wJToG6JYZQy9m-6rrpwlMabK4H4hwzwtKAh5kPGqAx6FvVZBgj0Tld_Toi4NI1YtFcDR78J5aIyD0VVE6dv8p8Ui7qyPAvmBfb3bfEORAxRqs9UojVZDH0NMJLBb-YFHKVrVxhTQmthgbr3g0aE0--ENmEvgft8uI_EEWUBcim3_IAmWr2yC4CYOIU71HDfyIlB6ptkmwOBMPNlLNSMGfcf-vlYZmNMg6Xh7o5i_tOKA6aTqdY4j6b3cGrDccMxuDw6418RJPRgsrPxHJcaT_0MqAa2C6EjBE2Q2PrGygeq9-nOaEE7QpSAD4kFL3h4LDDemGPA4QFcdAgs6Y6M7P5eRYNoejjPxvFFIPUK_7ZKGzbueKm8kB3hFWuNpBXMpIFL0eVtNcwV4MMADt4HFW_F3gIN3Ai1k2fZJ8UKcT2xd0eu_hV7I2qtqwPpxOHUvVyGjn9ADYx-C_1FwvRZeJPYRv78tJ6lkUWcgoXqjpufWXPiNuT5nlCKkVoy_DzQaaRFUu_dHMEj9TcWplZbU7N-46rEvDwB8xtXiTuBK9V-pfjQEWon1fSIHBbxSTQPgAxjk1Mek3VfoBlXXYtYoyZRwFBIMfY0DJEyQ4c-yJiopis17V8ddSMXql561bnm_wBvEIwum709zsAzeA65iEdfItw=w595-h873-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
-        },
-        {
-            img: 'https://lh3.googleusercontent.com/dH4sUBY3R1vjGsl6yBmL2UQBRjpIQILx_gMHG4gHq8WYVDWn_WQcQ6y1JOM3FDHr7NvRLittKs8IZsL9bXgaSo0pAsmqDUTmCkV06RqacfYAxurXckv0RO5LKDo1VoyLlbhiRIZUaem__3blDgqfzZ_5hJRf27I_wlUwAj1hRE-l8HB_OqBGTlGQWF3619VbLP4NnupNdoJkiZPCMGNNHtDmHdQH8RGLKWWwrhizEbHp-_n52iN9bJ4gqNhb7pSJImsAwsn9ubLmhVx7Pp3npB47n5DUeZvDkyeLy42lMcaRKTcWkgzktBszSppHFP4iErqo8S0DW3yEGUgYECfhhfZXjBDJFnJnfnzCsrEovYsHtUrypcmBuVmqPhlGAFGA-33sC_bSbhjKosiwOqTiPinh39XEphFY2Va2xE37ciRM0c2hM8wW7YcnDqaNocXdOKx4-EBBkP9g0M_TPba1IGo1DrYO3r0wJpVpaq9fJlIKi8gMGDFF0M6I3sIm8EfXWsNSyeOQQSEku7L6GVWtjj8vrmgLHM6twaMgMPik0bP3K8SHIz1mO7QaFgDXovV1U_TwhEzS708NbFZHNgjnybEQEfR2EvhcXrCg2w29HYwrE-2czUp8-FKoudDPasP6ZPSAxYflF_HBNM4uqzr9MqT2vke9uubgh8Yv7NsPui2NiN_J1tE9Bw=w658-h470-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
-        },
-        {
-            img: 'https://lh3.googleusercontent.com/gIpKahz2hBRxySpS8X0xsdkAidZxrW7b6eK7lQkZe3HK8R_X6LmKYFHeX0PrPcBFllyxDtQ-jDHvMTnrEapTCbZTqLdQ5FeJLAMdBtjQ9rTCfnBJtxDwGn3ksgSb1ata7sOgPvFkieDrhvLgeE3DV6YDYMFdfI7hpEvjiRpr_WWz75rrVRB_f3o9b43Sf-yhFxd8ghuw6qW3v6sXa6G7p_DCg_cXsK7JeZ0-ayjvOgKCT8myjWEhUX0BJ-IaU_k8_sEGpfmj05T5H72DxMetTCeIHKO6047DM1t5LfgwMnsRI0ykkATEazS9xMJE7HYrAB_G53chmBAx978ZF3geVkVMY9-fHUCW_b3o3ByWcq66R17qEkyTyCLZI61eXVGUkN-Hwd4khvdtMaDvp3UUhHFxxtXJEohehcITcXFdPGBlki0-8L45fSIEuzfWryxQEhRLSjPTqXwfmh24Nv03oIn3Qks8q2GnOoBaQo2-_KcLiUZfUwdJudYD-Gw79MoakJaFnB1OBQsCXSa2RFsiCH8HolRoxCUCouZWgCTtQMkY317pXibuIqxUTuYhO4U-c_pSWxSdoXoBNqYZjZwIQs_G86AcD7lAi5F16EgJUghDoofCg79j_Lzk7Cp1yKKwmuucXpwq8-l9w0i3mkXI7ncJ7tEgXhuuFtM0DN-PeTv9L6427zy-cA=w766-h940-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
-        },
-        {
-            img: 'https://lh3.googleusercontent.com/X9ptim8qz1Nmvpr9A-wRRFQipAJa8tPJfPZJDSXYj7drtm1v3nSPastxXvX-p--RGrwsui_cqtte69gIbYw78fYzL0nQowJInc1Nt0x-RKG-8_9bemuIBnGbA6244Dro93JJSvREv2gHcwkbQXKkYu0LgOiKr5MiWZU9Ew8sVAL9r1FmCidcE4Ic5IyCQV8dvd3JwEt86pOYF9D4dqbv-BYlCyus4hJQ3nZQLAR9eIjulxZ4QuTVstYu0EJHscvzafjOlyTD41tvfkYA_QBrnRb5U9S3lKvIrY_bw0SBLoL2OKjGOZ-FuqjaGvk3vLf13CRc2iXUpB__YfoRLGkUcekMwPXS6NuMi9Rk4rm73OHhS0YL4N9rwRGG3LlJP7MHUuxLO4TyICWA80oYtYhsLzUvZD0FJsByis6xRBswW-t_3CmyK_Fa1PPExn92UC8yeYREcp25tBWQCpugWojZpZ1jN7d0uwwl0KCVIFVK19glcZf9rfZ4eNLpqxyJkWlvcqRnEj676tIZSjWT3W2cWGCGtHy4FJqs2domkaL4JqdOEw7ficjpYMQjnify7Hb2VdK4TjaagW7KHiDCLdI1kPuX28OnQw5HBqfAuj6qG65jLwff25U713WEfxy7up7TP8T_0jzL0ubeJksuQ2GGUVuIDLDYARYxxE4kryrTuKsATOGXBCrFZA=w1377-h477-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
-        },
-        {
-            img: 'https://lh3.googleusercontent.com/59lQVyM7G_zpp02cL1duX29Vpe4HMWfN-ogFTgUV7B7CBwb7jaYXNIO5THt15VXq2dKpKdZngDhd4NDh864H7XgpYaAKXGNyZC4R9Atc485pnmXnkWltwphhP_w9OZS00YHLAiOtuvkbZ2HEDzDQ1LfJfY2H-gpZl0qK1idso6FO0m_TDox8XjRWCbpfcGjYWGAXXECjL52AS3a0_fkHA-vU9GPHVsea5bnxCxYE2d5YaNuvTYiuD2QCeLGAtF1wwI5I446boJDFHIqxys5pzv_FEY0lPGbV3xKWe3ZI0m_bdpm3ks5XK2jlpUeX5vgRwp9-zR1m3br0BGN1tvzFxJQflncP6kRfFdloJQEnCaaIXrbigetKkLa4ygnrxJ0y0sxRRIy2iL6xREa97_3RtQn5AWqw3m0mWNXJBTEOaXxlwaQuSrjkIJflP8f_oeLrrcXqjbFyICJExXgkKnEykZ-crWXWvVZob98KBkMoGkLHTO3-7_axMJtuh91Ba7mx-NTlmPdoDxyjpGDHTIvXJhwd6b5krvTV1xIWgZgWiy7GH_UYiOWSk9B2q3psB4LrX9BldH-kOSLT25Hg-ysW164ZkzIE0elwWDlzKN1y745A0dNybvDGGewWCu1GNVAEKbQ13XZa_H9mEkU5o6SEHgEy931lIHv0FHbUKv4H6q7pQuUeylAtSg=w640-h477-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
-        },
-        {
-            img: 'https://lh3.googleusercontent.com/E8TsjlwWP6AfZCUvie3a25d_M9Ed9lACrm7hJijR5tYxxFntiRfhykj3m-IZdGTvbq0d0PqhY2PLgIyqK1TdrtRHnH-JBB-uJtfFPhb8Hh1AgSiDa8pmkT4C02hooJi5Iaqx9vUdnQRkIGnrEMZcACIU2LssqVj6PlKxcHL7ivqlJKb3I3X3USkDaHmVS5I9MOjAE1VBVfVsgFfEW5Ox0bax_jm7h706CdlWfheFPMP8pS1tU9_weMCLLgC-ISCWirtdlleZqlqQc7bDoQjXfIsnV-W42qtHuApFQbeiB9_zKFVdzQ6Ka72YsDxf209fOPmSgcqtpng-7Q70m5pl_djSAX4S4Gjt8TrSAsLQvGKY6ESXQxqJzAw4yjF0hBughrNFzrdsBG_FjtYhJx-qE8Qs2LkK-oJ2WYPmnb_TNx__5B-WNVW7b8T-XJrNnE7-3Hgb2drbx9n68kC7zrkOlvEDuv5Zr8dsP_98sdyAjAZPHHAlNEEGECEcRGBs2fl-EiZg2R0qkGLKUtPpq5J7QMKtUJMfkMEtKb2Whn4RgPvRP_88WbK2ze5lkI05s1xBmBjuHrGWZu6cpZ3mSSclot6k5ymMl53Z4HDA84TMlE9BCtPPCrG7fkL-8YVHlhHzdOH1eegHPlDcQA0FftiA0l8q4QrHE8Rvn8q1IzQ7irjxKieXICLNyg=w810-h486-no',
-            title: 'Image1',
-            author: 'author',
-            cols: 2,
-        },
-    ];
+            id: 6,
+            alt: 'img2',
+            title: 'create whole team. :)',
+            link: 'https://lh3.googleusercontent.com/YnSmqP3guMDWlcK4W4pvb5YoE5a6NdorS76gSM1hwRW1XJKWCAovuHZT7UvWMnBDhHH0qKsMzRikCTtnn01F-nnG2s3yqLAxGUU27axFRKOQgx0bg4081PWFWH0mRiVse734dLyEGb6QLpyPwzEVyjpbnueBK0ak1LIZquT8GvT9LDSQzHGxvzTyD2YLS5x5VB6fIvUB_im5cGJrX8qaoOiuGlRQj4cVGqTiv1Li9ysXov84bioZRfPJ86UbPxa2ILNJKvJChxUa_nxdPJmHY7pgzkWsKRl1gk3e9t0rs7TQ-yjev2dnczGnZucHbaYnSom2V9BrPlNKkOX25f1evoxSF3d5ac4kjIvb0Ln9vMK_TkZWW8zUJVZRgLMSY6YGbtod7UxBjs_69fqizsdAjWtravsMfhUlDZDjgm1gukEHraC1E5qLBxwiugt-4mMZoF-h0C3xYqvO6O5HW6v67g6DdeBNzjUe6O_lYtv9d4KexXcgmk1y2ayaQUW-N0vjhn1_QGn_-k8P5h5dn-EzGdgVmrKi5AD9AHXW9JLHLXsmIdUGtLNO7oaE4QseBSr4ejGfBcPz2Y2WHIYXzmG99J_434tejM-nnpZ-LadxBl55rfny3s3rFczE7SeTPiW0A9jntv0Qb1h6I8D8x_ej6rxhuS8est2z3X8dwCiMtoeubbqwoEYZaA=w1721-h929-no'
 
+        },
+        {
+            id: 4,
+            alt: 'img3',
+            title: 'add new board to team...',
+            link: 'https://lh3.googleusercontent.com/71D5RrJ4v8G9uHwKsVb69IakAICTSCaMtzyqGed0f6oVPAVzHLYI3sqJ9CzgAmWk7WCEThrfOngcGUbqhJP3q6K1YfgpeiLNGuziYqhy1V6POxnt36vPsO8WbqfzzbWF0xmrdngGRAPVWHm-6nVIOcadp4ljfT3eFIsQM1DkZsZFOPpaSbgxl2vgx0hZ4TcjZCn6Z3JeqXfKez6-cg-ouBcPSHYx4TUpKS0iWrCygrhisr7f11HfVezMTXUZvG6KgQ1e25dA4LdZpJvoR2QJsVEzDSTOG5lisbAKRyhvZjP7mBu6KCLEGQH1ZW8UlVtamXHKa2VwgKrs213fGhXlkml-FE-NVRvUzb96_P9qmYNKpIKArHlLhU1gPi078y6xrpaqeTj4ZgfgFJVhQa7zmapt-1SqBezDfj8AbkM9s94FtIy_HTcUeg78y-VTjfW0ONIk4xM8xURt_DE007LPIv-XLMikzeqld1KxXEwYeIpVXFSysjrgNcxUSzLxogj6EibMCfvyNkyZME9YTR2QasH-Nms4RILSGXR2ys3dwxQjC0aO8Vvm9GsgbWp_N43qVSLvDxNbh0o5-gsS7VitligEkuIl2Y_ZAyvrLA5yguw4EuRXTQ_LPTs5OlsGwRWuX8SEB017la0oCQ1QlnAYQWHpV4xGPy2cOV7J-LE8zeLCZGVAja18ew=w1721-h929-no',
+        },
+        {
+            id: 5,
+            alt: 'img3',
+            title: 'edit team settings or invite more members...',
+            link: 'https://lh3.googleusercontent.com/_F_942OX2m7Au5QF9r74BJUi7r9F5ti3v6K6At3SF3V4lwMYANA1hXL4JRuosN-__W3X2g8wH0gQtC475TJfBdPSvlP0HL3vYf-_YiiI0y3yIfFnNUIdzDsOVF1IYvnGHtDFK1xovZe_AxyStuK98K5p_CLjyQGcmeM0LMkCIIDzgH5Dx08zUGVVqD901D04_ip0D_KLzTRlt532clRcbbOn0U1qusV2GpC0lL1ejLJahyXol1b3XbU7smPBTo9oOzrdX6c_EOLXhXgtt0GDfcIHcvqH53Ws3C20pSlMWGg72-Jz2jtc9U3JP7RylD5sL4_0_V0HqYmoHohs99f7NTZWF1aDjOZi1D7DFUhKI43dyikJ57VMP0EhI8EnsQkCDEv9byj1bOFQJ4sJNToTPrJ-3qJFf8iX7TYHE3i4JI7NGfz1FCYU5kNi_lKQLs-iz40Xoum8QXmsaMS0BiraoGhizb9MPYMGZGQB7xDKG6l-tqYGmjZECAMJL7SzAvubn78rRuV8jKe5SiJYO9Scz-DzvW4ZAsu0jGUOX2_Qou552iDL-CUbEV19EdCC9WNUPNwneBvbotLrm0ppLw_rdw9QSv0Nv93nEaX4Xi9F43uGxasUAHD6zrbgxqos99RqUTO2iR_mXmH3s0f0qGUJDsHzd8ixAzHLO0lhhMZTYEhxEV8F5snX0w=w1721-h929-no',
+        },
+        {
+            id: 3,
+            alt: 'img4',
+            title: 'create lists...and add some cards...',
+            link: 'https://lh3.googleusercontent.com/8ufvc39vBhM16IUhamWffiMqx1ag5Zd43fSRcEiEcnBTKrHLluiXSeww4JQwpIDhlN-pjdfY2hvSgz5OPe3HdBnAHZZhYvv_A5EmEvTVXmgFRhwki-nKq4Wa8maehHLW5QXkkDnF8XS9tWqehnxO7zEPD5aX_baYRY184BSrg_GAAH4KD8-2xjWdzpMhm110jGghEPiZMdZx8t-x35AeiQ9AJvmmpfpFMvWN_9L7mv4opJAWv-NsMCv9DEfXWAVUxJjlRlG2idJTPC4aHNIQQRhv1dG-3URN2C1ozN66uV7llhSa5pGnqdB8S3Z_QKuS3AzKTdffGuN1dvXUKjW3_8iERckDII-yPCtmHTTOlk6sEydFmcIDSvABCosWlkqlRSQUsJ43eeqQpJVDWwp6MVEhGl76DuKCk25FsaoDyOtDjWtQ5wJ-g335bVyUyDudhrTXyHhwTsGRzzMnHvTFwvKUIPsbKnmZdL7bkcrZIRc-Nn6m8K5OP0WaYfTkX7zmSUsT7B7eYXrMQ81U0Q-yDQV73guAUqjIkIafR9flSmYWMrr3yt3e92mlHNo09kOdYdGzAxBzXpjYVQbl6ADbg-zfb2Ifg6ovyAUkf17HRVs8MY9SnCHSykvFeE6yhk5EF0NuENz5I2nDdDHgq3mO5Xd5tn64w2Omop6hh24I8sLuDi4PWSv5rg=w1721-h929-no',
+        },
+        {
+            id: 2,
+            alt: 'img5',
+            title: 'add more details to your card and enjoy. :)',
+            link: 'https://lh3.googleusercontent.com/FGqv305e1yFSLgPSkQM5q80pKz5GOyrwZvjZcByjxQVMNYvsKrpVWA0oX7wAdC2lvFxxLvd97THweTOsClqpiU8YzSTIoWMqCMbIBjUYR9dvRtBC5Ytixgn-IB4MdAw-VJSMmekrSIN2GeoTm9N7m_z59lgiB2HATcj2pBcVEoPF-LHONqQbVLhXi_VYDmPhJ2pHD86xU22V_yMPBfIK1A_kkTHeji1KS1yU52erdWkIil5dyXacoERbqgjCQCkN6XuLg2F-2VYFzu3TvpbyDH2-1lD7RJugrDiBcxN0_fn5s68P5s3kzop3KTS4aAJmo2hsr_a2ZbO89jaVf7W_zS4Nqgza15QjfzT7FwTVPNFcgFptxqyuubMD18w_dTgCrCtMDnXkpKsHMIaIIgIUv8bhYkeSYYo-EnSAnySBCs0os1Khh4zx1TwTiJoWZNOlCmfjIlFrn58KCHInP6YwVj_x3Tlpb9QcQ2ODU7XB95LRFkBH_9YAeUb4TxoZvqY9QgcNmEJuDrikk0GdaVXLmqGyW7OxGzAPovWl9E2Kf_q9fthrxtgiD6-cJptG942U6h7diuU9xOdrLTO54jK9BLXfl4uivXIOCbMBU1ybkL-k0iUTVb_-QMvOucl56o6dzzqMp0CwtrLtHhXis9hcxquitZO4PHMOqpO6EF3flK4Z-vB2Tm8TsQ=w1721-h929-no',
+        },
+
+
+
+
+    ];
 
     return (
         <div className={classes.root}>
-            <GridList cellHeight={160} className={classes.gridList} cols={3}>
-                {tileData.map(tile => (
-                    <GridListTile key={tile.img} cols={tile.cols || 1}>
-                        <img src={tile.img} alt={tile.title}/>
-                    </GridListTile>
-                ))}
-            </GridList>
+            <div>
+                <Carousel>
+                    {photos.map(photo => (
+                        <div>
+                            <img alt={photo.alt} src={photo.link}/>
+                            <p className="legend">{photo.title}</p>
+                        </div>
+                    ))}
+                </Carousel>
+            </div>
         </div>
     );
 }
