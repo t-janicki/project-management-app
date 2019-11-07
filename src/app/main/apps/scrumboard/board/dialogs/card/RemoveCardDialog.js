@@ -6,7 +6,8 @@ import {
     DialogTitle,
     Icon,
     IconButton,
-    makeStyles, MenuItem,
+    makeStyles,
+    MenuItem,
     Toolbar,
     Typography
 } from '@material-ui/core';
