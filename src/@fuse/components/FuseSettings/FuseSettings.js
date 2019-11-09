@@ -1,5 +1,15 @@
 import React from 'react';
-import {Typography, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, Switch} from '@material-ui/core';
+import {
+    Typography,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    Switch
+} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import * as Actions from '../../../app/store/actions';
 import * as AuthActions from '../../../app/auth/store/actions';
@@ -9,46 +19,45 @@ import clsx from 'clsx';
 import _ from '@lodash';
 
 const useStyles = makeStyles(theme => ({
-    root          : {},
-    formControl   : {
-        margin        : '6px 0',
-        width         : '100%',
+    root: {},
+    formControl: {
+        margin: '6px 0',
+        width: '100%',
         '&:last-child': {
             marginBottom: 0
         }
     },
-    group         : {},
+    group: {},
     formGroupTitle: {
-        position       : 'absolute',
-        top            : -10,
-        left           : 8,
-        fontWeight     : 600,
-        padding        : '0 4px',
+        position: 'absolute',
+        top: -10,
+        left: 8,
+        fontWeight: 600,
+        padding: '0 4px',
         backgroundColor: theme.palette.background.paper
     },
-    formGroup     : {
-        position         : 'relative',
-        border           : '1px solid ' + theme.palette.divider,
-        borderRadius     : 2,
-        padding          : '12px 12px 0 12px',
-        margin           : '24px 0 16px 0',
+    formGroup: {
+        position: 'relative',
+        border: '1px solid ' + theme.palette.divider,
+        borderRadius: 2,
+        padding: '12px 12px 0 12px',
+        margin: '24px 0 16px 0',
         '&:first-of-type': {
             marginTop: 16
         }
     }
 }));
 
-function FuseSettings(props)
-{
+function FuseSettings(props) {
     const dispatch = useDispatch();
     const user = useSelector(({auth}) => auth.user);
+    console.log(user)
     const themes = useSelector(({fuse}) => fuse.settings.themes);
     const settings = useSelector(({fuse}) => fuse.settings.current);
 
     const classes = useStyles(props);
 
-    function handleChange(event)
-    {
+    function handleChange(event) {
 
         const newSettings = _.set(_.merge({}, settings), event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
 
@@ -56,23 +65,18 @@ function FuseSettings(props)
          * If layout style changes,
          * Reset Layout Configuration
          */
-        if ( event.target.name === 'layout.style' && event.target.value !== settings.layout.style )
-        {
+        if (event.target.name === 'layout.style' && event.target.value !== settings.layout.style) {
             newSettings.layout.config = {};
         }
 
-        if ( user.userInfo.role === 'guest' )
-        {
+        if (user.userInfo.role === 'guest') {
             dispatch(Actions.setDefaultSettings(newSettings));
-        }
-        else
-        {
+        } else {
             dispatch(AuthActions.updateUserSettings(newSettings));
         }
     }
 
-    function ThemeSelect({value, name, handleChange})
-    {
+    function ThemeSelect({value, name, handleChange}) {
         return (
             <Select
                 className="w-full"
@@ -86,8 +90,8 @@ function FuseSettings(props)
                         className="m-8 mt-0 rounded-lg"
                         style={{
                             backgroundColor: val.palette.background.default,
-                            color          : val.palette.text.primary,
-                            border         : '1px solid ' + val.palette.divider
+                            color: val.palette.text.primary,
+                            border: '1px solid ' + val.palette.divider
                         }}
                     >
                         {_.startCase(key)}
@@ -133,10 +137,8 @@ function FuseSettings(props)
     const getForm = (form, prefix) => {
         return Object.entries(form).map(([key, formControl]) => {
             const target = prefix ? prefix + '.' + key : key;
-            switch ( formControl.type )
-            {
-                case 'radio':
-                {
+            switch (formControl.type) {
+                case 'radio': {
                     return (
                         <FormControl key={target} component="fieldset" className={classes.formControl}>
                             <FormLabel component="legend" className="text-14">{formControl.title}</FormLabel>
@@ -149,14 +151,14 @@ function FuseSettings(props)
                                 row={formControl.options.length < 4}
                             >
                                 {formControl.options.map((opt) => (
-                                    <FormControlLabel key={opt.value} value={opt.value} control={<Radio/>} label={opt.name}/>
+                                    <FormControlLabel key={opt.value} value={opt.value} control={<Radio/>}
+                                                      label={opt.name}/>
                                 ))}
                             </RadioGroup>
                         </FormControl>
                     );
                 }
-                case 'switch':
-                {
+                case 'switch': {
                     return (
                         <FormControl key={target} component="fieldset" className={classes.formControl}>
                             <FormControlLabel
@@ -171,13 +173,13 @@ function FuseSettings(props)
                                         aria-label={formControl.title}
                                     />
                                 }
-                                label={<FormLabel component="legend" className="text-14">{formControl.title}</FormLabel>}
+                                label={<FormLabel component="legend"
+                                                  className="text-14">{formControl.title}</FormLabel>}
                             />
                         </FormControl>
                     )
                 }
-                case 'group':
-                {
+                case 'group': {
                     return (
                         <div key={target} className={classes.formGroup}>
 
@@ -191,16 +193,14 @@ function FuseSettings(props)
                         </div>
                     );
                 }
-                default:
-                {
+                default: {
                     return ''
                 }
             }
         });
     };
 
-    function LayoutConfig()
-    {
+    function LayoutConfig() {
         const form = FuseLayoutConfigs[settings.layout.style].form;
         return getForm(form);
     }

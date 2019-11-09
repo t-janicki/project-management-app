@@ -14,7 +14,6 @@ class jwtService extends FuseUtils.EventEmitter {
 
     setInterceptors = () => {
         axios.interceptors.response.use(response => {
-
             return response;
         }, err => {
             return new Promise((resolve, reject) => {
@@ -28,10 +27,6 @@ class jwtService extends FuseUtils.EventEmitter {
                     this.emit('onAutoLogout', 'Unauthorized');
                     this.setSession(null);
                 }
-                // else
-                // if (err.response.status === 404) {
-                //     history.push('/not-found');
-                // }
                 throw err;
             });
         });
