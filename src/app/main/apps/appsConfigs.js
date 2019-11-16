@@ -4,6 +4,7 @@ import {TodoAppConfig} from './todo/TodoAppConfig';
 import {CustomersAppConfig} from './e-commerce/customers/CustomersAppConfig';
 import {CalendarAppConfig} from './calendar/CalendarAppConfig';
 import {ScrumboardAppConfig} from './scrumboard/ScrumboardAppConfig';
+import {ChatAppConfig} from './chat/ChatAppConfig';
 import {NotesAppConfig} from './notes/NotesAppConfig';
 import {ProductsAppConfig} from './e-commerce/products/ProductsAppConfig';
 import {OrdersAppConfig} from './e-commerce/orders/OrdersAppConfig';
@@ -20,5 +21,6 @@ export const appsConfigs = [
     // CalendarAppConfig,
     // ECommerceAppConfig,
     ScrumboardAppConfig,
+    ChatAppConfig,
     // NotesAppConfig
 ];

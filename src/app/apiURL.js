@@ -1,10 +1,10 @@
 // LOCAL URL
-export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
-export const BASE_URL = 'http://localhost:8080/api';
+// export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+// export const BASE_URL = 'http://localhost:8080/api';
 
 // REMOTE URL
-// export const OAUTH2_REDIRECT_URI = 'https://stoic-neumann-df94d0.netlify.com/oauth2/redirect';
-// export const BASE_URL = 'https://task-management-api.herokuapp.com/api';
+export const OAUTH2_REDIRECT_URI = 'https://stoic-neumann-df94d0.netlify.com/oauth2/redirect';
+export const BASE_URL = 'https://task-management-api.herokuapp.com/api';
 
 //ACCOUNT
 export const USER_SIGN_IN = BASE_URL + '/auth/login';
